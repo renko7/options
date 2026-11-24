@@ -116,7 +116,7 @@ If rates were 1% instead, the same tree values the put at {{ usd(p1, 3) }}, abov
 
 Dividends push the other way for puts. On the ex-date the stock drops by the dividend, which helps the put, so a put holder usually waits until after the ex-date before exercising. That is why the example is set on {{ exDate }}. Back on {{ longDate(TODAY) }}, with ACME also at $100, waiting for the ex-date was worth {{ usd(D * 100) }} per contract from the dividend drop, more than the {{ usd(interestToEx) }} of interest that exercising three weeks early would have earned; a tree that includes the dividend values the same put at {{ usd(pNov, 3) }} that day, above its intrinsic value, so the holder should wait.
 
-Try it in the pricer below, which values European options (the dividend yield is set to zero because no dividend remains before January's expiration). With the rate at 4% the January 120 put's extrinsic value is negative: the European put is worth less than intrinsic, which is exactly when an American holder would exercise instead. Drag the interest rate down and watch extrinsic value turn positive, the point at which waiting becomes worth more.
+Try it in the pricer below, which values European options (the dividend yield is set to zero because no dividend remains before January's expiration). With the rate at 4% the January 120 put's extrinsic value is negative: the European put is worth less than intrinsic, which is exactly when an American holder would exercise instead. Drag the interest rate down and watch extrinsic value turn positive, roughly the point at which waiting becomes worth more.
 
 ```tool pricer
 { S: 100, K: 120, dte: janDte, iv: sig120, q: 0, type: 'put' }

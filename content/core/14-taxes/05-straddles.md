@@ -34,10 +34,15 @@ const calls = [
   { name: 'March 85', days: 121, K: 85 },
   { name: 'December 2027 110', days: 394, K: 110 },
 ];
+// options with a term of more than 12 (up to 15) months: benchmark from the applicable stock price x 1.08
+const adjAsp = asp * 1.08;
+const lqbLong = (K) => {
+  const top = Math.ceil(adjAsp / 5) * 5 - 5;
+  return Math.max(K > 50 ? top - 5 : top, asp - 10);
+};
 const verdict = (c) => {
   if (c.days <= 30) return ['—', 'No: not more than 30 days to expiration'];
-  if (c.days > 365) return ['—', 'No: written more than 12 months before expiration'];
-  const b = lqb(c.days, c.K);
+  const b = c.days > 365 ? lqbLong(c.K) : lqb(c.days, c.K);
   if (c.K < b) return [usd(b, 0), 'No: deep in the money (strike below the benchmark)'];
   return [usd(b, 0), c.K < asp ? 'Yes, but in the money' : 'Yes'];
 };
@@ -100,13 +105,13 @@ The same deferral applies to spreads. If you close the losing leg of a [[vertica
 Covered calls would almost always be straddles, which would make the most common option strategy a tax tangle. The code carves out an exception.
 
 :::rule Qualified covered calls (as of 2026)
-Stock and a call you write on it are exempt from the straddle loss deferral rules if every offsetting position is a qualified covered call or the stock, and the straddle is not part of a larger straddle. A call is a [[qualified covered call]] only if it is traded on a national securities exchange; is written more than 30 days before expiration; is written not more than 12 months before expiration (unless it meets additional benchmark requirements the IRS has published); is not deep in the money; is written by someone who is not an options dealer acting as a dealer; and produces capital gain or loss.
+Stock and a call you write on it are exempt from the straddle loss deferral rules if every offsetting position is a qualified covered call or the stock, and the straddle is not part of a larger straddle. A year-end rule takes the exemption away: if the call is closed, or the stock is sold, at a loss in one year, the gain on the offsetting position falls in a later year, and you do not keep the other position (the stock or the call) for at least 30 days after that closing or sale, the loss deferral rules apply after all. A call is a [[qualified covered call]] only if it is traded on a national securities exchange; is written more than 30 days before expiration; is written not more than 12 months before expiration (Treasury regulations extend this to 33 months if the benchmark below is computed from a stock price adjusted upward for the longer term); is not deep in the money; is written by someone who is not an options dealer acting as a dealer; and produces capital gain or loss.
 :::
 
 "Deep in the money" has a mechanical definition.
 
 :::rule The lowest qualified benchmark (as of 2026)
-A call is deep in the money if its strike is below the lowest qualified benchmark (LQB). The LQB is the highest available strike below the applicable stock price (generally the previous day's closing price). For a call with more than 90 days to expiration and a strike above $50, it is the second-highest available strike below that price. If the applicable stock price is $150 or less, the LQB is not less than $10 below it; if it is $25 or less, not less than 85% of it.
+A call is deep in the money if its strike is below the lowest qualified benchmark (LQB). The LQB is the highest available strike below the applicable stock price (generally the previous day's closing price). For a call with more than 90 days to expiration and a strike above $50, it is the second-highest available strike below that price. If the applicable stock price is $150 or less, the LQB is not less than $10 below it; if it is $25 or less, not less than 85% of it. For a call written more than 12 months (and not more than 33 months) before expiration, the strikes are counted down from the applicable stock price multiplied by an adjustment factor: 1.08 for a term of more than 12 and up to 15 months, rising in steps to 1.20 for more than 30 and up to 33 months.
 :::
 
 :::example Which ACME covered calls qualify
@@ -116,13 +121,13 @@ You own ACME, which closed at ${{ int(asp) }} yesterday, and consider writing on
 |---|---|---|---|
 {{ calls.map(qccRow).join('\n') }}
 
-The December monthly fails for a reason that catches many writers: 30 days is not *more than* 30 days. The January 95 call qualifies even though it is in the money, while the January 90 call is deep in the money. The longer March expiration allows one more strike, so the March 90 call qualifies where the January 90 does not.
+The December monthly fails for a reason that catches many writers: 30 days is not *more than* 30 days. The January 95 call qualifies even though it is in the money, while the January 90 call is deep in the money. The longer March expiration allows one more strike, so the March 90 call qualifies where the January 90 does not. The December 2027 call has more than 12 months to run, so its strikes are counted down from {{ usd(adjAsp) }}, the $100 price adjusted by 1.08; its 110 strike is well above that benchmark.
 :::
 
 Qualifying is not the end of it if the call is in the money.
 
 :::rule In-the-money qualified covered calls (as of 2026)
-If you write a qualified covered call with a strike below the applicable stock price, the stock's holding period does not include any period during which you are the writer of the call, and any loss on the call is treated as long-term if a gain on the stock would have been long-term at the time the loss was realized. A year-end rule also applies: if the call is closed, or the stock is sold at a loss, in one year, the offsetting gain falls in a later year, and the stock or call was held less than 30 days after that closing or sale, the loss deferral rules apply after all.
+If you write a qualified covered call with a strike below the applicable stock price, the stock's holding period does not include any period during which you are the writer of the call, and any loss on the call is treated as long-term if a gain on the stock would have been long-term at the time the loss was realized.
 :::
 
 ## Constructive sales

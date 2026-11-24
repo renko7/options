@@ -13,6 +13,7 @@ const D = ACME.dividend;
 const callLoss = (112 - 105) * 100;
 const callNet = callLoss - c105bid * 100;
 const shortMaint = Math.max(0.30 * 112 * 100, 5 * 100);
+const shortInit = 0.5 * 105 * 100;
 // short put assigned
 const startEq = 4000;
 const putReq0 = 100 * Math.max(p95bid + 0.20 * 100 - 5, p95bid + 0.10 * 95);
@@ -65,9 +66,14 @@ You sold one ACME December 105 call at {{ usd(c105bid) }}, collecting {{ usd(c10
 
 - Your account now shows **−100 ACME shares**, sold at $105, and {{ usd(105 * 100) }} more cash. The call is gone.
 - At $112 the short shares show a loss of {{ usd(callLoss) }} against the $105 sale price. Net of the premium you kept, you are down {{ usd(callNet) }}, exactly what the call would have cost you at expiration with ACME at $112.
-- Short stock carries its own margin requirement. Under the FINRA maintenance minimum it is the greater of 30% of the market value or $5 a share: {{ usd(shortMaint) }} at $112, and it rises as ACME rises. You also owe any dividend paid while you are short, and your broker may charge a fee to borrow the shares.
+- Short stock carries its own margin requirement (see the Rule Note below). On a short sale at $105, Reg T's initial requirement means {{ usd(shortInit) }} of your own equity on top of the {{ usd(105 * 100) }} proceeds. The FINRA maintenance minimum is {{ usd(shortMaint) }} at $112, and it rises as ACME rises. You also owe any dividend paid while you are short, and your broker may charge a fee to borrow the shares.
 
 The assignment did not hurt your profit and loss: you lost the call's intrinsic value, exactly as you would have at expiration, and the holder who exercised gave up whatever extrinsic value the call had left. What changed is the *form* of the risk: a short call has a fixed expiration; short stock stays open until you buy it back.
+:::
+
+:::rule Margin on short stock (as of 2026)
+- Under Regulation T, a short sale in a margin account needs initial margin of 150% of the sale's value: the proceeds stay in the account and you add 50% of the sale value in equity. This applies to a short position created by assignment as well.
+- Under FINRA Rule 4210, the maintenance minimum on short stock priced at $5 or more is the greater of 30% of its current market value or $5 a share. Brokers may require more.
 :::
 
 :::example A short put assigned, and the cash it needs

@@ -1,7 +1,7 @@
 - term: American-style option
   aka: [American option, American exercise]
   def: >-
-    An option that can be exercised on any business day up to and including its expiration date. All US-listed stock and ETF options are American-style, so their writers can be assigned at any time.
+    An option that can be exercised on any business day up to and including its expiration date. Standard US-listed stock and ETF options are American-style (FLEX options can be European), so their writers can be assigned at any time.
   lesson: core-07-how-exercise-works
 - term: European-style option
   aka: [European option, European exercise]

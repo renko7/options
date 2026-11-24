@@ -19,7 +19,7 @@ Most options are closed in the market, never exercised. But every option you hol
 
 ## Two exercise styles
 
-An [[American-style option]] can be exercised on any business day from the day you buy it up to and including its expiration date. Every US-listed option on a single stock or an ETF is American-style, so every ACME option is.
+An [[American-style option]] can be exercised on any business day from the day you buy it up to and including its expiration date. Every standard US-listed option on a single stock or an ETF is American-style, so every ACME option is. (Customized FLEX options can be European, but you will not meet them on a normal chain.)
 
 A [[European-style option]] can be exercised only at expiration. Most cash-settled index options, including SPX and the Fictional Index HBR, are European.
 
