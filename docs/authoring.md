@@ -27,7 +27,7 @@ Risk-free rate `RATE` = 4.00%. The Course's "today" is **Wednesday, November 18,
 
 ## Course conventions
 
-- **Defined vs undefined risk:** a position is *defined risk* when options you own cap its maximum loss. Any uncovered short option is *undefined risk*, including a naked short put whose worst case (strike minus premium) is finite; state the finite worst case, but classify it as undefined.
+- **Defined vs undefined risk:** a position is *defined risk* when options you own cap its maximum loss. Any uncovered short option is *undefined risk*, including a naked short put whose worst case (strike minus premium) is finite; state the finite worst case, but classify it as undefined. A cash-secured put is still undefined risk; the cash set aside funds its worst case in full, which is why brokers allow it in cash accounts.
 - **Fills:** single legs pay the ask or receive the bid unless a Lesson says otherwise; spreads fill with a limit a little worse than the mid.
 - **Market orders on options** are graded poor in Scenario Exercises; a marketable limit is the alternative.
 

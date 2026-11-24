@@ -43,7 +43,7 @@ The expiration rule has a timing consequence that surprises people at year end: 
 :::example A put that expires worthless
 On {{ longDate(TODAY) }} you buy {{ int(nPut) }} ACME January 95 puts at {{ usd(putAsk) }}, for {{ usd(expLoss) }}. ACME stays above $95 and the puts expire worthless on {{ longDate(expiryDate(58)) }}.
 
-You have a short-term capital loss of **{{ usd(expLoss) }}**, dated {{ longDate(expiryDate(58)) }}, so it belongs on your **2027** return, even though you paid the premium in 2026. If you want the loss in 2026, you have to sell the puts before December 31, for whatever small amount they still fetch.
+You have a short-term capital loss of **{{ usd(expLoss) }}**, dated {{ longDate(expiryDate(58)) }}, so it belongs on your **2027** return, even though you paid the premium in 2026. If you want the loss in 2026, you have to sell the puts no later than December 31 (the trade date is what counts), for whatever small amount they still fetch.
 :::
 
 ## Exercising a call
@@ -116,7 +116,7 @@ For an option you buy, the premium is basis. Selling it gives a capital gain or 
       Neither: an option that expires worthless gives no deductible loss
   answer: 1
   explain: >-
-    An expired option is treated as sold on its expiration date, so the loss falls in 2027. Paying the premium is not a deductible event. Selling the puts for a few cents before December 31 would move the loss into 2026. The loss is a genuine capital loss, not disallowed.
+    An expired option is treated as sold on its expiration date, so the loss falls in 2027. Paying the premium is not a deductible event. Selling the puts for a few cents by December 31 would move the loss into 2026. The loss is a genuine capital loss, not disallowed.
 - q: >-
     You held a LEAPS call for 18 months, then exercised it and sold the shares a week later at a gain. Is the gain on the shares long-term?
   choices:

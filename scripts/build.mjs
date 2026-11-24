@@ -28,6 +28,8 @@ const marked = new Marked({ gfm: true, breaks: false });
 
 // ---------- math ----------
 function renderMath(tex, display, where) {
+  // A bare % in TeX starts a comment; in this Course it always means "percent" (often from {{ pct() }}).
+  tex = tex.replace(/(^|[^\\])%/g, '$1\\%');
   try {
     return katex.renderToString(tex, { displayMode: display, output: 'mathml', throwOnError: true, strict: 'ignore' });
   } catch (e) {
