@@ -37,7 +37,7 @@ This Scenario follows one directional trade from the choice of strike to the fin
 
 ```scenario
 setup: >-
-  It is {{ longDate(TODAY) }} and ACME is at $100. ACME holds a product launch on December 10, and you expect the stock to trade up to about $110 by the December expiration on {{ longDate(expiryDate(30)) }}. You want exposure to about 200 shares and are willing to lose the premium if you are wrong. The December calls are offered at: 95 strike {{ usd(ask(95)) }}, 100 strike {{ usd(ask(100)) }}, 105 strike {{ usd(ask(105)) }}, 110 strike {{ usd(ask(110)) }}.
+  It is {{ longDate(TODAY) }} and ACME is at $100. ACME holds a product launch on December 3, and you expect the stock to trade up to about $110 by the December expiration on {{ longDate(expiryDate(30)) }}. You want exposure to about 200 shares and are willing to lose the premium if you are wrong. The December calls are offered at: 95 strike {{ usd(ask(95)) }}, 100 strike {{ usd(ask(100)) }}, 105 strike {{ usd(ask(105)) }}, 110 strike {{ usd(ask(110)) }}.
 steps:
   - prompt: >-
       Which two calls do you buy?

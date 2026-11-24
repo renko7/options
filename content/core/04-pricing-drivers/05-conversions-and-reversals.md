@@ -66,7 +66,7 @@ The total is \(K\) in both cases. A position worth a certain \(K\) at time \(T\)
 :::example A conversion at quoted prices
 ACME is quoted $99.99 bid, $100.01 ask. On the December chain, 30 days out, the 100 call is {{ usd(r100.call.bid) }} bid, {{ usd(r100.call.ask) }} ask and the 100 put is {{ usd(r100.put.bid) }} bid, {{ usd(r100.put.ask) }} ask.
 
-**Fair value.** The conversion pays $100 in 30 days, worth \(100\,e^{-rT}\) = {{ usd(kPv, 3) }} today, plus dividends worth about {{ usd(divPv, 3) }} today. Total: {{ usd(fair, 3) }} per share.
+**Fair value.** The conversion pays $100 in 30 days, worth \(100\,e^{-rT}\) = {{ usd(kPv, 3) }} today, plus the dividends, which the Course's 2% yield values at about {{ usd(divPv, 3) }} today. Total: {{ usd(fair, 3) }} per share.
 
 **Cost at the market.** You buy the stock at the ask, buy the put at the ask and sell the call at the bid:
 
@@ -139,7 +139,7 @@ A conversion (long stock, long put, short call) and a reversal (short stock, sho
       Your short call is assigned and you sell 100 shares at $100
   answer: 1
   explain: >-
-    Below the strike the call expires worthless and you exercise the put, selling your shares at $100. That is the point of a conversion: you sell at the strike whatever happens. The short call is assigned only when ACME finishes above $100, so the third choice describes the other half of the outcome, not this one.
+    Below the strike the call expires worthless and you exercise the put, selling your shares at $100. That is the point of a conversion: you sell at the strike whatever happens. The short call is assigned only when ACME finishes above $100, so the answer about the call being assigned describes the other half of the outcome, not this one.
 - q: >-
     A stock is hard to borrow and its puts trade well above parity with its calls. Why does a reversal usually not capture that gap?
   choices:
@@ -151,7 +151,7 @@ A conversion (long stock, long put, short call) and a reversal (short stock, sho
       Because parity does not apply to stocks that are hard to borrow
   answer: 1
   explain: >-
-    A reversal is short stock, short put, long call. It sells the rich put and buys the cheap call, which looks attractive, but it also needs a short sale, and the borrow fee is exactly the cost the market priced into the put. Parity still applies; it just needs the borrow fee counted like an extra dividend yield. The first choice has the put leg backwards.
+    A reversal is short stock, short put, long call. It sells the rich put and buys the cheap call, which looks attractive, but it also needs a short sale, and the borrow fee is exactly the cost the market priced into the put. Parity still applies; it just needs the borrow fee counted like an extra dividend yield. The answer saying a reversal buys puts has the put leg backwards.
 - q: >-
     Using the December 100 quotes in this Lesson, a conversion at market prices costs {{ usd(convCost) }} for a payoff worth {{ usd(fair, 3) }}. What explains most of the loss?
   choices:

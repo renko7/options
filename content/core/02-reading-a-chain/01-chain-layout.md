@@ -140,7 +140,7 @@ A chain shows one expiration at a time: strikes down the middle, calls on the le
       Up about {{ usd(d100 * 100) }} a share
   answer: 0
   explain: >-
-    Delta is the approximate change in the option's per-share price for a $1 move in the stock: about {{ usd(d100) }}, which is {{ usd(d100 * 100) }} on a 100-share contract. A $1.00 change is what the stock does, or a delta-1 option. The third choice applies the multiplier to a per-share figure.
+    Delta is the approximate change in the option's per-share price for a $1 move in the stock: about {{ usd(d100) }}, which is {{ usd(d100 * 100) }} on a 100-share contract. A $1.00 change is what the stock does, or a delta-1 option. {{ usd(d100 * 100) }} a share applies the multiplier to a per-share figure.
 - q: >-
     On the December chain, the 90 put has an IV of {{ ivs(90, 'put') }} and the 110 call has an IV of {{ ivs(110, 'call') }}. What does that tell you?
   choices:

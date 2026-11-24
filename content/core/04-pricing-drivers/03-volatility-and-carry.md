@@ -18,9 +18,10 @@ const L = (o) => bs.price({ S: 100, K: 100, T: T394, r: RATE, q: ACME.q, sigma: 
 const lc = L({ type: 'call' }), lp = L({ type: 'put' });
 const hc = L({ type: 'call', q: ACME.q + 0.03 }), hp = L({ type: 'put', q: ACME.q + 0.03 });
 const Fhtb = bs.forward({ S: 100, T: T394, r: RATE, q: ACME.q + 0.03 });
+const div30 = 100 * (1 - Math.exp(-ACME.q * T30));
 ```
 
-Of the six inputs, three are about the stock's future and the contract (spot, strike, time) and are easy to read off a screen. This Lesson covers the other three. Volatility is the input that makes options difficult. Rates and dividends are the inputs that make options on the same stock differ from one expiration to the next, through a single number called the forward price.
+Of the six inputs, three are about the stock and the contract (spot, strike, time) and are easy to read off a screen. This Lesson covers the other three. Volatility is the input that makes options difficult. Rates and dividends are the inputs that make options on the same stock differ from one expiration to the next, through a single number called the forward price.
 
 ## What a volatility number means
 
@@ -99,7 +100,7 @@ Short sellers must borrow the shares they sell, and for most large stocks the fe
 
 ## Real dividends are discrete
 
-ACME actually pays $0.50 a share four times a year. This Course prices that as a 2% continuous yield, which is accurate enough for most purposes. Professional pricing models use the actual dividend dates and amounts, because what matters is whether an [[ex-dividend date]] falls before expiration. If one does, the stock is expected to drop by the dividend on that day, so calls are cheaper and puts dearer: by nearly the full dividend for deep in-the-money options, by less for the others. If no ex-dividend date falls before expiration, the dividend does not affect the option at all. A dividend just before expiration can also make it worth exercising an in-the-money call early, which [Exercise, assignment and expiration](#core-07) covers.
+ACME actually pays $0.50 a share four times a year. This Course prices that as a 2% continuous yield, which spreads the dividends evenly over the year. That is a simplification: it is close over long periods but not over a single month. ACME's next $0.50 dividend goes ex on December 10, inside the December expiration, while the 2% yield credits only about {{ usd(div30) }} over those 30 days. The Course keeps the 2% yield everywhere so that every Lesson agrees with the chain; a desk pricing the December options would use the actual dividend. Professional pricing models use the actual dividend dates and amounts, because what matters is whether an [[ex-dividend date]] falls before expiration. If one does, the stock is expected to drop by the dividend on that day, so calls are cheaper and puts dearer: by nearly the full dividend for deep in-the-money options, by less for the others. If no ex-dividend date falls before expiration, the dividend does not affect the option at all. A dividend just before expiration can also make it worth exercising an in-the-money call early, which [Exercise, assignment and expiration](#core-07) covers.
 
 :::rule How listed options treat dividends (as of 2026)
 The OCC does not change the terms of a listed equity option for ordinary, regular cash dividends; holders of calls simply do not receive them, and the expected dividends are reflected in the premium. For special or non-ordinary cash dividends above a minimum size, the OCC generally adjusts the contract (typically by reducing the strike by the dividend amount). Whether a given distribution counts as ordinary is decided by the OCC case by case and announced in an information memo.

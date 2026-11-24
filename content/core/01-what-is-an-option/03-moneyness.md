@@ -78,7 +78,7 @@ Only one moment makes moneyness final: the close on expiration day. An option th
 
 - **In dollars.** The 110 call is $10 out of the money.
 - **In percent of the stock price.** The 110 call is {{ pct((110 - S) / S, 0) }} out of the money; the 90 put is also {{ pct((S - 90) / S, 0) }} out of the money. Percent lets you compare a $20 stock with a $2,000 one.
-- **By delta.** A number between 0 and 1 for calls (0 and −1 for puts) that every chain shows. Deep ITM options have deltas near 1, ATM near 0.5, far OTM near 0. Traders say "the 30-delta call" instead of naming a strike. [Reading an options chain](#core-02) introduces the column and [The Greeks in practice](#core-05) explains it fully.
+- **By [[delta]].** A number between 0 and 1 for calls (0 and −1 for puts) that every chain shows. Deep ITM options have deltas near 1, ATM near 0.5, far OTM near 0. Traders say "the 30-delta call" instead of naming a strike. [Reading an options chain](#core-02) introduces the column and [The Greeks in practice](#core-05) explains it fully.
 
 Distance matters because it decides how likely the option is to finish in the money. Option prices themselves imply a rough probability for this. For the December options, they put the chance of the 90 call finishing in the money at about {{ pct(pITM(90, 'call'), 0) }}, the 100 call at about {{ pct(pITM(100, 'call'), 0) }}, and the 110 call at about {{ pct(pITM(110, 'call'), 0) }}. These are market-implied figures, not forecasts, and [What drives an option's price](#core-04) explains where they come from. The pattern is what matters here: the further out of the money, the less likely, and the cheaper.
 
@@ -152,5 +152,5 @@ A call is in the money when the stock is above the strike; a put is in the money
       Calls with higher strikes always have higher implied volatility
   answer: 1
   explain: >-
-    Both expire on the same day, so time is not the difference. The 90 call contains $10 a share of value right now plus some time value; the 110 call is only a bet that ACME rises above $110, which the market prices at roughly a {{ pct(pITM(110, 'call'), 0) }} chance. Implied volatility does vary by strike, but on ACME it is actually slightly lower at 110 than at 90, so it cannot explain the gap.
+    Both expire on the same day, so time is not the difference. The 90 call contains $10 a share of value right now plus some time value; the 110 call is only a bet that ACME rises above $110, which the market prices at roughly a {{ pct(pITM(110, 'call'), 0) }} chance. Implied volatility does vary by strike, but on ACME it is actually lower at 110 than at 90, so it cannot explain the gap.
 ```

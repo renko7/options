@@ -133,7 +133,7 @@ Size every trade so that a bad outcome costs a small, preset fraction of the acc
       {{ int(Math.floor(budget / 100)) }}
   answer: 0
   explain: >-
-    Each call can lose its whole premium, {{ usd(callRisk) }}. The budget of {{ usd(budget, 0) }} divided by {{ usd(callRisk) }}, rounded down, is {{ int(nCall) }}. The second answer is how many calls the whole account could buy, which is sizing by affordability. The third divides by $100 per contract, which has nothing to do with the loss.
+    Each call can lose its whole premium, {{ usd(callRisk) }}. The budget of {{ usd(budget, 0) }} divided by {{ usd(callRisk) }}, rounded down, is {{ int(nCall) }}. {{ int(Math.floor(account / (callPrem * 100))) }} is how many calls the whole account could buy, which is sizing by affordability. {{ int(Math.floor(budget / 100)) }} divides the budget by $100 per contract, which has nothing to do with the loss.
 - q: >-
     Why is broker margin a poor basis for sizing naked short puts?
   choices:

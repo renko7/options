@@ -24,7 +24,7 @@ Two index options with the same strike and the same expiration date can settle o
 
 [[PM settlement]] uses the index's official closing value on the expiration day. Options keep trading until the close (4:00 p.m. ET for expiring SPXW and XSP), and the settlement value is essentially the last index level you watched. If you are still holding at the close, you know your result.
 
-All SPX weekly and daily options (the SPXW series), end-of-month options and XSP options are PM-settled.
+All SPXW series (SPX weekly, daily and end-of-month options) and all XSP options are PM-settled. Not every SPX option that expires outside the third Friday is, though: see the Rule Note below.
 
 ## AM settlement: the special opening quotation
 
@@ -34,7 +34,8 @@ All SPX weekly and daily options (the SPXW series), end-of-month options and XSP
 - Standard monthly SPX options are AM-settled. Their last trading day is the business day before expiration (usually a Thursday); trading in them ends that day.
 - The exercise settlement value (published under the symbol SET) is calculated from the opening price of each S&P 500 component on the expiration morning. Each component enters at its first trade of the day, whenever that occurs, so the value can include stocks that opened late.
 - Because each stock's opening trade happens at a slightly different time, the SOQ is not a level the index ever printed in real time, and it can differ noticeably from both the prior close and the index level shortly after the open.
-- SPXW series and XSP options are PM-settled, using the closing index value on expiration day. Cboe has at times listed AM-settled series in other expirations as well; check the settlement type in the contract details.
+- SPXW series and XSP options are PM-settled, using the closing index value on expiration day.
+- Since November 2026 Cboe also lists AM-settled SPX options in some non-monthly expirations under a separate symbol, SPXO (at first, Wednesday expirations that coincide with VIX settlement). They work like the standard monthlies: trading ends the business day before, and they settle on the opening quotation. Check the symbol and settlement type in the contract details.
 :::
 
 AM settlement is a historical convention that remains because large institutions value a settlement price that is set by opening auctions across hundreds of stocks, rather than by the closing minutes of one trading day, and because futures and other products settle the same way. For the individual trader it has one large consequence: between Thursday's close and Friday's opening prices, the option cannot be traded, but its value can change completely.
@@ -67,7 +68,7 @@ If a short AM-settled position is near the money on Thursday afternoon, decide b
 
 - **For short-dated trades and anything you might manage on expiration day**, PM settlement lets you trade until the end and settle on a number you can watch.
 - **AM-settled monthlies** are mainly used by institutions and in strategies linked to futures and volatility products that settle the same way. If you trade them, plan to be flat or fully hedged by Thursday's close, or accept the gap.
-- **Check the symbol.** On most platforms the AM-settled monthly SPX options trade under SPX and the PM-settled series under SPXW. The expiration date alone does not tell you which you are looking at, because both can expire on the same third Friday.
+- **Check the symbol.** On most platforms the AM-settled monthly SPX options trade under SPX, the AM-settled non-monthly series under SPXO, and the PM-settled series under SPXW. The expiration date alone does not tell you which you are looking at, because an AM-settled and a PM-settled series can expire on the same day.
 
 Both kinds are cash-settled and European. Neither can be assigned early or leave you with a stock position. The question is only *when* the settlement value is fixed.
 

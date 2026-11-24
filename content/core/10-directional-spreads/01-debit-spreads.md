@@ -120,7 +120,7 @@ A debit spread buys one option and sells a further out-of-the-money option in th
       Max profit {{ usd((10 - 3) * 100) }}, max loss {{ usd(300) }}, break-even {{ usd(110 - 3) }}
   answer: 0
   explain: >-
-    The width is $10, so max profit is ($10 − $3) × 100 = {{ usd((10 - 3) * 100) }}, max loss is the {{ usd(300) }} debit, and break-even is the long strike plus the debit, {{ usd(100 + 3) }}. {{ usd(10 * 100) }} forgets to subtract the debit; {{ usd(110 - 3) }} subtracts the debit from the short strike, which is the break-even rule for a credit spread, not a debit spread.
+    The width is $10, so max profit is ($10 − $3) × 100 = {{ usd((10 - 3) * 100) }}, max loss is the {{ usd(300) }} debit, and break-even is the long strike plus the debit, {{ usd(100 + 3) }}. {{ usd(10 * 100) }} forgets to subtract the debit; {{ usd(110 - 3) }} subtracts the debit from the short strike; a debit spread's break-even is measured from the long strike, the one you paid for.
 - q: >-
     You hold the December 100/105 bull call spread bought for {{ usd(bcFill) }}. Ten days in, ACME is at $105. Why is your position worth less than the {{ usd(bcs.maxProfit) }} max profit?
   choices:

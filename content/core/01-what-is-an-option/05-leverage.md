@@ -30,7 +30,7 @@ Options are often sold to new traders as "leverage": control 100 shares for a fr
 You think ACME, now $100, will rise over the next month. You can buy the shares or buy a call.
 
 - **100 shares** cost {{ usd(stockCost) }}.
-- **One December 100 call**, offered at {{ usd(prem) }}, costs {{ usd(cost) }} and moves with the same 100 shares.
+- **One December 100 call**, offered at {{ usd(prem) }}, costs {{ usd(cost) }} and covers the same 100 shares.
 
 The call costs {{ pct(cost / stockCost) }} of the stock position. That ratio is the leverage: every dollar of call premium gives you the upside of about {{ num(stockCost / cost, 0) }} dollars of stock.
 
@@ -77,7 +77,7 @@ Before buying calls, ask how many shares' worth of exposure you want and buy tha
 
 ## Leverage before expiration
 
-The table above is at expiration. Before then, the call's price responds to the stock immediately, but by less than a dollar for each dollar the stock moves. The chain shows the December 100 call's delta as {{ num(delta) }}, meaning a $1 rise in ACME adds roughly {{ usd(delta) }} a share, {{ usd(delta * 100) }} per contract. On a {{ usd(prem) }} option that is a {{ pct(delta / prem) }} gain for a 1% move in the stock. The same $1 move is a 1% gain on the shares. [The Greeks in practice](#core-05) works through this properly; the point here is that the percentage swings in an option are many times those of the stock, in both directions, every day you hold it.
+The table above is at expiration. Before then, the call's price responds to the stock immediately, but by less than a dollar for each dollar the stock moves. The chain shows the December 100 call's [[delta]] as {{ num(delta) }}, meaning a $1 rise in ACME adds roughly {{ usd(delta) }} a share, {{ usd(delta * 100) }} per contract. On a {{ usd(prem) }} option that is a {{ pct(delta / prem) }} gain for a 1% move in the stock. The same $1 move is a 1% gain on the shares. [The Greeks in practice](#core-05) works through this properly; the point here is that the percentage swings in an option are many times those of the stock, in both directions, every day you hold it.
 
 Leverage also works against you through time. The shares cost nothing to hold (and pay you ACME's dividend). The call loses extrinsic value every day, as the previous Lesson showed. A stockholder can wait a year for a thesis to work. An option holder is paying for each day of waiting.
 

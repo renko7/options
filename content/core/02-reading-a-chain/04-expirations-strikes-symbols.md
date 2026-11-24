@@ -41,7 +41,7 @@ The 100 call costs {{ m(a2) }} for 2 days, {{ m(a30) }} for 30 days, {{ m(a121) 
 Quadrupling the time from 30 to 121 days does not quadruple the price: it goes from {{ m(a30) }} to {{ m(a121) }}, a factor of {{ num(a121 / a30) }}. The cost per day of holding the option falls the longer you buy: about {{ usd(a30 / 30, 3) }} a day for the December option against {{ usd(a394 / 394, 3) }} a day for the LEAPS. Short-dated options are cheap in dollars and expensive per day. [What drives an option's price](#core-04) explains why value grows roughly with the square root of time.
 :::
 
-The choice of expiration is a trade-off you will make on every trade. Short-dated options are cheap and react sharply to the stock, but they decay fast and leave no room for being early. Long-dated options cost more up front but give a thesis time to work. Most directional option buyers give themselves more time than they think they need.
+The choice of expiration is a trade-off you will make on every trade. Short-dated options are cheap and react sharply to the stock, but they decay fast and leave no room for being early. Long-dated options cost more up front but give a thesis time to work. Experienced directional option buyers usually give themselves more time than they think they need.
 
 :::rule Expiration cycles (as of 2026)
 - Standard monthly equity options expire on the third Friday of the month; if that Friday is an exchange holiday, they expire on the preceding business day.

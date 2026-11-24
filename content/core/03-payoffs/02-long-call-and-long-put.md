@@ -79,7 +79,7 @@ On a fall to $90 the short stock makes more, {{ usd(1000) }} against {{ usd(payo
 The short seller also has to borrow the shares (paying a fee that can be high for hard-to-borrow stocks), pays the dividend to the lender, needs a margin account, and can be forced to buy back at a bad moment. The put holder has none of these problems. The price is the premium and the deadline.
 
 :::rule Short selling stock (as of 2026)
-Selling stock short requires a margin account. Under the SEC's Regulation SHO, your broker must have located shares that can be borrowed before it accepts a short sale, and the short seller owes the lender any dividends paid while the position is open. Buying a put involves none of this; an account approved for buying options is enough.
+Selling stock short requires a margin account. Under the SEC's Regulation SHO, your broker must have borrowed the shares, arranged to borrow them, or have reasonable grounds to believe they can be borrowed (the "locate") before it accepts a short sale. Separately, under the terms of the stock loan, the short seller owes the lender a payment equal to any dividend paid while the position is open. Buying a put involves none of this; an account approved for buying options is enough.
 :::
 
 ## The four basic numbers, compared

@@ -91,7 +91,7 @@ Theta is the change in an option's price per calendar day with everything else f
       {{ usd(-c100.theta * 3) }}
   answer: 1
   explain: >-
-    Theta is per share per day. Three contracts cover 300 shares, so the loss is {{ usd(-c100.theta, 4) }} × 300 = {{ usd(-c100.theta * 300) }}. The other answers forget the contract multiplier (and, in the first case, the number of contracts).
+    Theta is per share per day. Three contracts cover 300 shares, so the loss is {{ usd(-c100.theta, 4) }} × 300 = {{ usd(-c100.theta * 300) }}. {{ usd(-c100.theta * 3) }} forgets the contract multiplier, and {{ usd(-c100.theta, 3) }} forgets both the multiplier and the number of contracts.
 - q: >-
     Which ACME call loses the largest *percentage* of its value per day?
   choices:

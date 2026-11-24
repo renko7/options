@@ -23,8 +23,9 @@ const pps = payoff.summary(pp);
 const cost = (ch, kp, kc) => r(ch, kp).put.ask - r(ch, kc).call.bid;
 const netTxt = (x) => (x > 0.005 ? `${usd(x)} debit` : x < -0.005 ? `${usd(-x)} credit` : 'even');
 const T = 58 / 365;
-const flatPut = bs.price({ S: 100, K: 95, T, r: RATE, q: ACME.q, sigma: 0.30, type: 'put' });
-const flatCall = bs.price({ S: 100, K: 105, T, r: RATE, q: ACME.q, sigma: 0.30, type: 'call' });
+const atmJ = smileIV(ACME, 100, T);
+const flatPut = bs.price({ S: 100, K: 95, T, r: RATE, q: ACME.q, sigma: atmJ, type: 'put' });
+const flatCall = bs.price({ S: 100, K: 105, T, r: RATE, q: ACME.q, sigma: atmJ, type: 'call' });
 ```
 
 The [protective put](#core-09-protective-put) Lesson ended with a problem: insurance is expensive if you keep buying it. A [[collar]] pays for the put by selling a call. You give up the stock's upside above one strike in exchange for protection below another. If the call brings in as much as the put costs, the protection is "free", and the structure is called a zero-cost collar.
@@ -62,7 +63,7 @@ The symmetric collars, $5 or $10 either side, are close to zero cost. Keeping mo
 
 ## How skew prices a collar
 
-Equity puts trade at higher implied volatility than calls the same distance away (the [[volatility skew]]). In January, the 95 put is priced at {{ pct(p95.iv, 1) }} implied volatility and the 105 call at {{ pct(c105.iv, 1) }}. If both were priced at a flat 30%, the put would be worth {{ usd(flatPut) }} and the call {{ usd(flatCall) }}; with the skew, their theoretical values are {{ usd(p95.theo) }} and {{ usd(c105.theo) }}. The skew makes the protection you buy dearer and the upside you sell cheaper, so a zero-cost collar has to give up more upside than it would in a market without skew. The call still comes out slightly ahead here because ACME's forward price sits above $100 (the interest rate is higher than the dividend yield), which makes calls a little more valuable than puts equally far from spot.
+Equity puts trade at higher implied volatility than calls the same distance away (the [[volatility skew]]). In January, the 95 put is priced at {{ pct(p95.iv, 1) }} implied volatility and the 105 call at {{ pct(c105.iv, 1) }}. If both were priced at the January at-the-money volatility of {{ pct(atmJ, 1) }}, the put would be worth {{ usd(flatPut) }} and the call {{ usd(flatCall) }}; with the skew, their theoretical values are {{ usd(p95.theo) }} and {{ usd(c105.theo) }}. The skew makes the protection you buy dearer and the upside you sell cheaper, so a zero-cost collar has to give up more upside than it would in a market without skew. The call still comes out slightly ahead here because ACME's forward price sits above $100 (the interest rate is higher than the dividend yield), which makes calls a little more valuable than puts equally far from spot.
 
 :::warning "Zero cost" is not free
 A zero-cost collar costs no cash, but it is paid for: you have sold every dollar of ACME above $105 until January. If ACME rallies to $125, the collar makes {{ usd(payoff.pnlAtExpiry(col, 125)) }} where the shares alone would make $2,500. Whether that is a good trade depends on how much you value the protection, not on the cash price of zero.
@@ -89,7 +90,7 @@ Collars are the standard hedge for concentrated stock positions: an executive wh
 ```
 
 :::rule Collars and taxes (as of 2026)
-A collar with a very narrow band between the strikes can be treated as a constructive sale of appreciated stock under section 1259 of the Internal Revenue Code, triggering the tax on the gain as if you had sold. The IRS has not issued final regulations saying how narrow is too narrow. The short call can also affect the stock's holding period unless it meets the qualified covered call rules. This is not tax advice; see [US taxes](#core-14).
+A collar with a very narrow band between the strikes can be treated as a constructive sale of appreciated stock under section 1259 of the Internal Revenue Code, triggering the tax on the gain as if you had sold. The IRS has not issued final regulations saying how narrow is too narrow. Stock held with a long put is a tax straddle whatever the call, so losses can be deferred, and the put can restart the holding period of shares held one year or less (see [The protective put](#core-09-protective-put)); the qualified covered call exception does not cover a collar. This is not tax advice; see [US taxes](#core-14).
 :::
 
 :::key

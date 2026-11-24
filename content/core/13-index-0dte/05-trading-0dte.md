@@ -145,7 +145,7 @@ The position builder holds the iron condor at mid prices. The tool's shortest ex
       {{ usd(25 * 100) }}
   answer: 1
   explain: >-
-    The short 4,975 put settles 50 points in the money, $5,000, offset by the {{ usd(strCredit * 100) }} credit: {{ usd(strLoss) }}. {{ usd(strCredit * 100) }} is what you collected, not what you lose. {{ usd(25 * 100) }} would be the most an iron condor with 25-point wings could lose, but a strangle has no long options to cap the loss.
+    The short 4,975 put settles 50 points in the money, $5,000, offset by the {{ usd(strCredit * 100) }} credit: {{ usd(strLoss) }}. {{ usd(strCredit * 100) }} is what you collected, not what you lose. {{ usd(25 * 100) }} is the width of an iron condor's 25-point wings, which caps its loss (less the credit), but a strangle has no long options to cap the loss.
 - q: >-
     Your daily loss budget is {{ usd(budget, 0) }}. One same-day HBR iron condor has a maximum loss of {{ usd(icMaxLoss) }} and a probability of profit of about {{ pct(pWin, 0) }}. How many should you trade?
   choices:

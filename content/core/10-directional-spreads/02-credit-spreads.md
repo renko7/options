@@ -169,7 +169,7 @@ A credit spread sells the more valuable option and buys a cheaper one further ou
       About $5.00
   answer: 0
   explain: >-
-    The call spread's debit plus the put spread's credit must equal the width discounted to today, {{ usd(dfW, 3) }}. So the put spread should bring in about {{ usd(dfW, 3) }} − {{ usd(bullCallMid, 3) }} = {{ usd(dfW - bullCallMid, 2) }}. If both brought in the same amount, buying one and selling the other would lock in a riskless profit.
+    The call spread's debit plus the put spread's credit must equal the width discounted to today, {{ usd(dfW, 3) }}. So the put spread should bring in about {{ usd(dfW, 3) }} − {{ usd(bullCallMid, 3) }} = {{ usd(dfW - bullCallMid, 2) }}. If the put spread were priced like the call spread, at about {{ usd(bullCallMid, 2) }}, you could buy the call spread and also buy the put spread (the 100/105 bear put) for well under the width; together they pay exactly $5 at expiration wherever ACME ends, a riskless profit.
 - q: >-
     Which statement about a credit spread and a debit spread on the same two strikes and expiration is true?
   choices:

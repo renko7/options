@@ -15,8 +15,8 @@ const wk30 = px(100, 30) - px(100, 23);
 const wk9 = px(100, 9) - px(100, 2);
 const wk121 = px(100, 121) - px(100, 114);
 const otm9 = px(105, 9), otm2 = px(105, 2);
-const dec = Number(px(100, 30).toFixed(2)), decAfter = px(100, 9);
-const mar = Number(px(100, 121).toFixed(2)), marAfter = px(100, 100);
+const dec = Number(px(100, 30).toFixed(2)), decAfter = Number(px(100, 9).toFixed(2));
+const mar = Number(px(100, 121).toFixed(2)), marAfter = Number(px(100, 100).toFixed(2));
 ```
 
 An option's price has two parts. One part you could collect right now by exercising. The other part is the market's price for whatever might still happen before expiration. The second part shrinks every day, and it shrinks faster the closer you get to the end. Every option buyer is fighting that shrinkage and every option seller is collecting it, so you need a feel for its shape.
@@ -77,7 +77,7 @@ The loss of time value as days pass, with nothing else changing, is called [[tim
 - from 30 to 23 days: {{ usd(wk30) }}
 - from 9 to 2 days: {{ usd(wk9) }}
 
-The same seven days cost about {{ num(wk9 / wk121, 1) }} times as much in the last week as they do four months out.
+The same seven days cost about {{ num(Number(wk9.toFixed(2)) / Number(wk121.toFixed(2)), 1) }} times as much in the last week as they do four months out.
 
 For out-of-the-money options the end is even more abrupt. The December 105 call is $5 out of the money. With 9 days left it is worth {{ usd(otm9) }}; with 2 days left, if ACME has not moved, it is worth {{ usd(otm2) }}. It lost almost all of its value in one week, because there is too little time left for a $5 move to be likely.
 
@@ -92,7 +92,7 @@ Both are valued at 30% volatility so that only time differs. Suppose you are wro
 - The December call has 9 days left and is worth {{ usd(decAfter) }}. You lost {{ usd((dec - decAfter) * 100) }} per contract, {{ pct((dec - decAfter) / dec, 0) }} of what you paid.
 - The March call has 100 days left and is worth {{ usd(marAfter) }}. You lost {{ usd((mar - marAfter) * 100) }} per contract, {{ pct((mar - marAfter) / mar, 0) }} of what you paid.
 
-The March call cost more up front, but three weeks of waiting cost it far less, in dollars and as a share of the premium. The December call is the cheaper ticket and the faster-melting one. Neither is "better": the December call gains more per contract if the rally comes quickly, and the March call gives the idea time to work.
+The March call cost more up front, but three weeks of waiting cost it far less, in dollars and as a share of the premium. The December call is the cheaper ticket and the faster-melting one. Neither is "better": the December call gains more for each dollar paid if the rally comes quickly, and the March call gives the idea time to work.
 :::
 
 :::warning Cheap options are expensive per day

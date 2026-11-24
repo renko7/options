@@ -9,6 +9,7 @@ const T = 30 / 365;
 const c100 = row(30, 100).call;
 const g0 = bs.greeks({ S: 100, K: 100, T, r: RATE, q: ACME.q, sigma: c100.iv, type: 'call' });
 const up1 = bs.price({ S: 101, K: 100, T, r: RATE, q: ACME.q, sigma: c100.iv, type: 'call' });
+const p0 = Number(g0.price.toFixed(2)), d0 = Number(g0.delta.toFixed(2)), up1r = Number(up1.toFixed(2));
 const strikes = [85, 90, 95, 100, 105, 110, 115];
 const dtes = [121, 30, 9, 2];
 const hedge = Math.round(c100.delta * 10 * 100);
@@ -41,7 +42,7 @@ All of them are quoted per share, like premiums. Multiply by 100 for one contrac
 :::example The December 100 call
 ACME is at $100. The December 100 call, 30 days out, is worth {{ usd(g0.price) }} and has a delta of {{ num(g0.delta, 3) }}.
 
-If ACME rises to $101, delta predicts the call gains about {{ usd(g0.delta) }}, to {{ usd(g0.price + g0.delta) }}. Repricing at $101 gives {{ usd(up1) }}, a gain of {{ usd(up1 - g0.price) }}. The prediction is close but a little low, because delta itself grew as the stock rose. That growth is gamma, the subject of the [next Lesson](#core-05-gamma).
+If ACME rises to $101, delta predicts the call gains about {{ usd(d0) }}, to {{ usd(p0 + d0) }}. Repricing at $101 gives {{ usd(up1r) }}, a gain of {{ usd(up1r - p0) }}. The prediction is close but a little low, because delta itself grew as the stock rose. That growth is gamma, the subject of the [next Lesson](#core-05-gamma).
 
 Per contract, a delta of {{ num(g0.delta, 3) }} means one call gains or loses about {{ usd(g0.delta * 100) }} per $1 move in ACME, the same as holding {{ int(g0.delta * 100) }} shares.
 :::
@@ -129,7 +130,7 @@ Delta is the change in an option's price per $1 move in the underlying: between 
       $200
   answer: 1
   explain: >-
-    Each call gains about delta × move = {{ num(c100.delta, 3) }} × $0.50 = {{ usd(c100.delta * 0.5, 3) }} per share. Four contracts cover 400 shares, so the position gains about {{ usd(c100.delta * 0.5 * 400) }}. The first answer forgets the contracts and multiplier. $200 would be the gain on 400 *shares*; the calls move only about half as much.
+    Each call gains about delta × move = {{ num(c100.delta, 3) }} × $0.50 = {{ usd(c100.delta * 0.5, 3) }} per share. Four contracts cover 400 shares, so the position gains about {{ usd(c100.delta * 0.5 * 400) }}. The {{ usd(c100.delta * 0.5) }} answer forgets the contracts and multiplier. $200 would be the gain on 400 *shares*; the calls move only about half as much.
 - q: >-
     You are short 5 ACME December 100 calls with a delta of {{ num(c100.delta, 3) }}. How many shares do you buy to be delta-neutral?
   choices:

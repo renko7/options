@@ -87,7 +87,7 @@ The builder below shows the December 100 call. Change the strike to 90, then 110
 ```
 
 :::key
-In-the-money options cost more, break even sooner, pay off in more outcomes and behave like the stock. Out-of-the-money options cost less, need a bigger move, usually expire worthless and pay the most when they do pay. Choose by naming your target and timeframe, look for strikes below a bullish target (above a bearish one), and check what happens if you are only half right.
+In-the-money options cost more, break even closer to today's price, pay off in more outcomes and behave like the stock. Out-of-the-money options cost less, need a bigger move, usually expire worthless and pay the most when they do pay. Choose by naming your target and timeframe, look for strikes below a bullish target (above a bearish one), and check what happens if you are only half right.
 :::
 
 ```quiz

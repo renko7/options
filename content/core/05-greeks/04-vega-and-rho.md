@@ -99,7 +99,7 @@ Vega is the change in price per one-point rise in implied volatility. It is posi
       Nothing: puts lose value when volatility rises because the stock is less likely to fall
   answer: 1
   explain: >-
-    Vega is per share per vol point: {{ usd(row(30, 100).put.vega, 4) }} × 4 points × 1,000 shares = {{ usd(row(30, 100).put.vega * 4000) }}. Long puts are long vega just like long calls, because higher volatility makes large moves in either direction more likely and the put holder's loss is capped. The first answer forgets the 10 contracts and the multiplier.
+    Vega is per share per vol point: {{ usd(row(30, 100).put.vega, 4) }} × 4 points × 1,000 shares = {{ usd(row(30, 100).put.vega * 4000) }}. Long puts are long vega just like long calls, because higher volatility makes large moves in either direction more likely and the put holder's loss is capped. The {{ usd(row(30, 100).put.vega * 4) }} answer forgets the 10 contracts and the multiplier.
 - q: >-
     Which ACME option has the largest vega?
   choices:
@@ -113,17 +113,17 @@ Vega is the change in price per one-point rise in implied volatility. It is posi
   explain: >-
     Vega is largest for long-dated, at-the-money options: the 394-day 100 call's vega is {{ usd(row(394, 100).call.vega, 4) }}, against {{ usd(row(9, 100).call.vega, 4) }} for the 9-day 100 call. The 30-day 80 call is deep in the money, mostly intrinsic value, so its vega is only {{ usd(row(30, 80).call.vega, 4) }}.
 - q: >-
-    Rates are cut by a quarter point. Which position is affected most?
+    Rates are cut by a quarter point and nothing else changes. Which position loses the most?
   choices:
     - >-
       Long 10 ACME December 100 calls
     - >-
       Long 10 ACME 394-day 100 calls
     - >-
-      Long 10 ACME 394-day 100 puts, which lose value
+      Long 10 ACME 394-day 100 puts
   answer: 1
   explain: >-
-    Rho grows roughly in proportion to time, so the LEAPS call is hit hardest: about {{ usd(-leapC.rho * 0.25 * 1000) }} for 10 contracts, against {{ usd(-decC.rho * 0.25 * 1000) }} for the December calls. The LEAPS puts are affected too, but they *gain* from a rate cut (put rho is negative), by about {{ usd(-leapP.rho * 0.25 * 1000) }}, so "lose value" is the wrong direction.
+    Rho grows roughly in proportion to time, so the LEAPS calls lose the most: about {{ usd(-leapC.rho * 0.25 * 1000) }} for 10 contracts, against {{ usd(-decC.rho * 0.25 * 1000) }} for the December calls. The LEAPS puts move by even more, but they *gain* from a rate cut (put rho is negative), by about {{ usd(-leapP.rho * 0.25 * 1000) }}, so they do not lose at all.
 - q: >-
     ACME's stock is unchanged, but its implied volatility falls 3 points overnight. You own 5 March 100 calls. What explains your loss?
   choices:

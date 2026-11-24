@@ -72,7 +72,7 @@ steps:
           Buy back the December 110 calls and sell January 115 calls for a similar credit.
         grade: acceptable
         feedback: >-
-          Rolling up and out removes this week's gamma risk and starts a new trade with more time and a strike further away. That can be reasonable, but it is a new position and should be judged on its own merits, not as a way to recover the loss on the puts.
+          Rolling up and out removes this week's gamma risk and starts a new trade with more time and a strike further away. That can be reasonable, but it is a new position and should be judged on its own merits, not as a way to recover the loss on the puts. Note that the January expiration contains ACME's earnings report on January 12, so the new short calls would be short the earnings move too.
 wrap: >-
   The strangle started as a small, nearly delta-neutral position that earned {{ signedUsd(g0.theta) }} a day. Short gamma turned it into a large long-stock position as ACME fell, and short vega added to the loss as volatility rose. Theta never came close to paying for either. At each step the position Greeks described what the trade had become before the P&L did: a delta of {{ int(g1.delta) }} shares on a falling stock, then heavy gamma near the strike in the final week. Reading them, and acting when the risk they show is out of proportion to the premium left, is the core skill of managing option positions. [Managing trades](#core-12) develops it further.
 ```

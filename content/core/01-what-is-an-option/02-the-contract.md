@@ -45,7 +45,7 @@ The ACME December 100 call is offered at {{ usd(prem) }}.
 
 - **Premium.** Buying one contract costs {{ usd(prem) }} × 100 = **{{ usd(prem * 100) }}**, paid in full when the trade settles. Five contracts cost {{ usd(prem * 100 * 5) }}.
 - **Exercise.** If you exercise, you pay the strike for 100 shares: $100 × 100 = **{{ usd(100 * 100) }}**, and 100 ACME shares arrive in your account. The premium you already paid is not refunded or credited toward this.
-- **Exposure.** The contract moves with 100 shares' worth of stock, {{ usd(ACME.spot * 100) }} at today's price, even though you paid {{ usd(prem * 100) }} for it.
+- **Exposure.** The contract is a claim on 100 shares' worth of stock, {{ usd(ACME.spot * 100) }} at today's price, even though you paid {{ usd(prem * 100) }} for it. Before expiration its price does not move dollar for dollar with those shares; how much it does move is the subject of [Leverage versus owning the stock](#core-01-leverage).
 
 The same arithmetic works for puts. The December 105 put is offered at {{ usd(p105.ask) }}, so one contract costs {{ usd(p105.ask * 100) }}. Exercising it would deliver 100 shares out of your account and pay you $105 × 100 = {{ usd(105 * 100) }}.
 :::

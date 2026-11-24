@@ -43,7 +43,7 @@ ACME is at $100. You sell the December 95 put at {{ usd(prem1) }} and set aside 
 
 **Path B: ACME rallies to ${{ int(rally) }}.** The put expires worthless and you keep {{ usd(prem1 * 100) }}. Someone who simply bought 100 shares at $100 made {{ usd((rally - 100) * 100) }}. The wheel never owned the stock, so it caught none of the rally. You can sell another put, now at a higher strike, buying in at a higher price.
 
-**Path C: ACME falls to $80.** You are assigned and own 100 shares at $95, an effective price of {{ usd(eff) }}. Your shares are worth $8,000, so you are down {{ usd(-stockLoss80) }}. A buyer of the stock at $100 is down $2,000. The lower entry price and the premium together saved you {{ usd(-2000 - stockLoss80) }} of that; the rest of the fall is yours.
+**Path C: ACME falls to $80.** You are assigned and own 100 shares at $95, an effective price of {{ usd(eff) }}. Your shares are worth $8,000, so you are down {{ usd(-stockLoss80) }}. A buyer of the stock at $100 is down $2,000. The lower entry price and the premium together saved you {{ usd(stockLoss80 + 2000) }} of that; the rest of the fall is yours.
 :::
 
 Path C is where the wheel's reputation is made or lost. You now have to sell covered calls on a stock trading $15 below your strike. Here is what the next month's calls pay with ACME at $80:

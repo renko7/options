@@ -66,7 +66,7 @@ ACME is at $100. The December options expire in 30 days. The right-hand side of 
 
 So the 100 call should be worth {{ usd(sPv - kPv, 3) }} more than the 100 put. At ACME's 30% volatility the two are worth {{ usd(c100, 3) }} and {{ usd(p100, 3) }}, a difference of {{ usd(c100 - p100, 3) }}, exactly as parity says.
 
-On the chain the 100 call's mid is {{ usd(r100.call.mid, 3) }} and the put's mid is {{ usd(r100.put.mid, 3) }}, a difference of {{ usd(midDiff, 3) }}. That is within a couple of cents of the parity value, which is as close as quotes rounded to the nearest cent and a [[bid-ask spread]] of {{ usd(r100.call.ask - r100.call.bid) }} allow.
+On the chain the 100 call's mid is {{ usd(r100.call.mid, 3) }} and the put's mid is {{ usd(r100.put.mid, 3) }}, a difference of {{ usd(midDiff, 3) }}. That is within a couple of cents of the parity value, which is as close as quotes in five-cent increments and a [[bid-ask spread]] of {{ usd(r100.call.ask - r100.call.bid) }} allow.
 :::
 
 Notice what the equation did not need: volatility. Parity is model-free. Whatever volatility the market uses to price the call, it must use the same one for the put at that strike, or parity breaks. This is why a call and a put at the same strike always show nearly the same [[implied volatility]] on a chain.
@@ -104,7 +104,7 @@ Their profit or loss at expiration, counting only the stock and the options:
 | $105 | {{ usd(payoff.pnlAtExpiry(cc, 105)) }} | {{ usd(payoff.pnlAtExpiry(sp, 105)) }} |
 | $115 | {{ usd(payoff.pnlAtExpiry(cc, 115)) }} | {{ usd(payoff.pnlAtExpiry(sp, 115)) }} |
 
-The two columns differ by the same {{ usd(gap) }} at every price. That gap is carry, which the table leaves out. The put seller earns about {{ usd(intK) }} of interest on the $10,500 in bills; the stock owner collects about {{ usd(divS) }} of dividends. The interest minus the dividends is {{ usd(intK - divS) }}, which is the gap to within the rounding of the premiums. Count both and the two Learners have made the same trade.
+The two columns differ by the same {{ usd(gap) }} at every price. That gap is carry, which the table leaves out. The put seller earns about {{ usd(intK) }} of interest on the $10,500 in bills; the stock owner collects dividends, which the 2% yield used to price these options values at about {{ usd(divS) }}. The interest minus the dividends is {{ usd(intK - divS) }}, which is the gap to within the rounding of the premiums. Count both and the two Learners have made the same trade.
 :::
 
 This is more than a curiosity. When two positions are the same, you choose between them on cost: which has the tighter bid-ask spreads, fewer commissions, lower margin, simpler taxes. Professionals compare synthetics all the time; a beginner who thinks a covered call is "safer" than a short put has not yet seen this table. [Income and hedging strategies](#core-09) uses it again.
@@ -165,7 +165,7 @@ Put-call parity, \(C - P = S\,e^{-qT} - K\,e^{-rT}\), holds because a call plus 
       The put is overpriced, so it is a good sale
   answer: 1
   explain: >-
-    A difference of a cent or two is smaller than the bid-ask spread on either option, so you could not trade it: buying at the ask and selling at the bid would cost far more than the gap. The quotes agree with parity as closely as cent-rounded prices can. The next Lesson shows what an arbitrage trade would have to earn to be worth doing.
+    A difference of a cent or two is smaller than the bid-ask spread on either option, so you could not trade it: buying at the ask and selling at the bid would cost far more than the gap. The quotes agree with parity as closely as prices quoted in five-cent steps can. The next Lesson shows what an arbitrage trade would have to earn to be worth doing.
 - q: >-
     A colleague says a covered call is safer than a cash-secured put at the same strike because "you own the stock." What is the best reply?
   choices:

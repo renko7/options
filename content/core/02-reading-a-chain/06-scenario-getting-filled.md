@@ -106,7 +106,7 @@ steps:
           Sell to close with a limit at {{ usd(exitPx) }}, near the mid, stepping down toward the bid if needed
         grade: best
         feedback: >-
-          Filled at {{ usd(exitPx) }}, you make ({{ usd(exitPx) }} − {{ usd(fill) }}) × 100 × 5 = {{ signedUsd(pnl(exitPx)) }}. Working the exit as carefully as the entry is where many traders leave money on the table.
+          Filled at {{ usd(exitPx) }}, you make ({{ usd(exitPx) }} − {{ usd(fill) }}) × 100 × 5 = {{ signedUsd(pnl(exitPx)) }}. Many traders work the entry carefully and then leave money on the table on the exit; working both saves the spread twice.
       - text: >-
           Sell to close at market
         grade: acceptable

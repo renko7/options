@@ -28,7 +28,7 @@ const budget = 0.01 * acct;
 const strCredit = p4975.bid + c5025.bid;
 const S1 = 4970;
 const icLater = fair(S1, 4975, T1, 'put') - fair(S1, 4950, T1, 'put') + fair(S1, 5025, T1, 'call') - fair(S1, 5050, T1, 'call');
-const closeLoss = (icLater - credit) * 100;
+const closeLoss = (Number(icLater.toFixed(2)) - credit) * 100;
 const lowPnl = (credit - 25) * 100;
 const recPnl = (credit - 0) * 100;
 const gam = bs.greeks({ S: S1, K: 4975, T: T1, r: RATE, q: HBR.q, sigma: iv(4975, T1), type: 'put' }).gamma;
@@ -75,7 +75,7 @@ steps:
           One complex order at the natural price, {{ num(icNat) }}, to be sure of a fill.
         grade: acceptable
         feedback: >-
-          You avoid legging risk and will be filled at once, but you give up {{ num(icMid - icNat) }} points, {{ usd((icMid - icNat) * 100) }}, of a {{ usd(credit * 100) }} credit at the start. Done every day, that cost alone can turn a reasonable strategy into a losing one.
+          You avoid legging risk and will be filled at once, but you give up {{ num(icMid - icNat) }} points, {{ usd(Number((icMid - icNat).toFixed(2)) * 100) }}, of a {{ usd(credit * 100) }} credit at the start. Done every day, that cost alone can turn a reasonable strategy into a losing one.
   - prompt: >-
       You are filled at {{ num(credit) }}. At 1:30 p.m. HBR has dropped to {{ int(S1) }}, five points below your short put, with 2.5 hours left. The condor would cost about {{ num(icLater) }} points to close: a loss of {{ usd(closeLoss) }} if you close now. The short 4,975 put's gamma is {{ num(gam, 4) }} per point. Your plan says to close a same-day spread once its loss exceeds twice the credit. What do you do?
     choices:

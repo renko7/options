@@ -22,7 +22,7 @@ const stats = (legs) => {
     if (v > 0) { pw += f; win += f * v; } else { pl += f; loss += f * v; }
     if (v <= mx.maxLoss + 0.01) pMaxLoss += f;
   }
-  return { ev, pop: pw, avgWin: win / pw, avgLoss: loss / pl, pMaxLoss };
+  return { ev, pop: pw, pl, avgWin: win / pw, avgLoss: loss / pl, pMaxLoss };
 };
 const condor = (lp, sp, sc, lc) => {
   const mid = R(sp).put.mid + R(sc).call.mid - R(lp).put.mid - R(lc).call.mid;
@@ -89,7 +89,7 @@ Iron condors are often sold on their probability of profit. Here is that number,
 - **Average result when it wins**: {{ usd(ic.st.avgWin) }}. Most wins are the full credit, some are partial.
 - **Average result when it loses**: {{ usd(ic.st.avgLoss) }}.
 - **Chance of the full {{ usd(-ic.s.maxLoss) }} loss** (ACME beyond a wing): {{ pct(ic.st.pMaxLoss, 0) }}.
-- **Expected P&L**: {{ pct(ic.st.pop, 0) }} × {{ usd(ic.st.avgWin) }} + {{ pct(1 - ic.st.pop, 0) }} × ({{ usd(ic.st.avgLoss) }}) = **{{ signedUsd(ic.st.ev) }}** per condor, which is the cost of trading a little worse than the mid. Commissions on four legs make it more negative.
+- **Expected P&L**: the wins contribute {{ usd(ic.st.pop * ic.st.avgWin) }} (about a {{ pct(ic.st.pop, 0) }} chance of an average {{ usd(ic.st.avgWin) }}) and the losses {{ usd(ic.st.pl * ic.st.avgLoss) }} (about a {{ pct(ic.st.pl, 0) }} chance of an average {{ usd(ic.st.avgLoss) }}): **{{ signedUsd(ic.st.ev) }}** per condor, which is the cost of trading a little worse than the mid. Commissions on four legs make it more negative.
 :::
 
 The condor wins most of the time and still has an expected value of about zero, because its losses are larger than its wins. This is not a flaw in the iron condor; it is how fair prices work. A seller who collects {{ usd(ic.fill * 100) }} with a {{ pct(ic.st.pop, 0) }} chance of keeping something is being paid exactly what the risk is worth at the market's odds.

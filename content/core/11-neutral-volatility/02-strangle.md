@@ -122,7 +122,7 @@ A strangle is an out-of-the-money put plus an out-of-the-money call. Long, it is
       {{ usd(payoff.pnlAtExpiry(lstr.legs, 103)) }}
   answer: 0
   explain: >-
-    At $103 both options are out of the money, so the strangle is worthless and you lose the full {{ usd(lsg.fill * 100) }}. The second answer treats the $3 gain above $100 as if you owned a call struck at $100; the third is the straddle's result, whose call would be worth $3.
+    At $103 both options are out of the money, so the strangle is worthless and you lose the full {{ usd(lsg.fill * 100) }}. {{ usd(payoff.pnlAtExpiry(lsg.legs, 103) + 300) }} treats the $3 gain above $100 as if you owned a call struck at $100; {{ usd(payoff.pnlAtExpiry(lstr.legs, 103)) }} is the result of the 100 straddle, whose call would be worth $3.
 - q: >-
     You expect a moderate move in ACME, about $10 either way, by December expiration. Which long position makes more if you are right?
   choices:

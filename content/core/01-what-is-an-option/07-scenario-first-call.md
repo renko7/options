@@ -15,8 +15,8 @@ const legs = [{ kind: 'call', qty: 1, strike: 100, premium: prem }];
 const bigLegs = [{ kind: 'call', qty: n, strike: 100, premium: prem }];
 const otmLegs = [{ kind: 'call', qty: 10, strike: 115, premium: c115 }];
 const be115 = payoff.breakevens(otmLegs)[0];
-// ten days later
-const later = chain(ACME, { dte: 20, spot: 105 });
+// twelve days later (Monday, 18 days left)
+const later = chain(ACME, { dte: 18, spot: 105 });
 const lrow = later.rows.find((r) => r.strike === 100).call;
 const bid = lrow.bid;
 const extr = bid - 5;
@@ -58,7 +58,7 @@ steps:
         feedback: >-
           Ten contracts is 1,000 shares of exposure for {{ usd(c115 * 1000) }}, and every one of those calls is $15 out of the money. ACME has to rise above {{ usd(be115) }}, more than {{ pct((be115 - 100) / 100, 0) }}, in a month just to break even. A "cheap" option is cheap because it usually expires worthless.
   - prompt: >-
-      You bought one December 100 call at {{ usd(prem) }}. Ten days later ACME is at $105, with 20 days left. The call is bid at {{ usd(bid) }}. You like ACME even more now and decide you would rather own 100 shares outright than hold the call. ACME shares cost $105.
+      You bought one December 100 call at {{ usd(prem) }}. Twelve days later, on Monday {{ longDate(expiryDate(12)) }}, ACME is at $105, with 18 days left. The call is bid at {{ usd(bid) }}. You like ACME even more now and decide you would rather own 100 shares outright than hold the call. ACME shares cost $105.
     choices:
       - text: >-
           Exercise the call: pay {{ usd(10000) }} and receive 100 shares
@@ -82,7 +82,7 @@ steps:
           Do nothing; it will expire
         grade: poor
         feedback: >-
-          It will not expire: it is {{ usd(s3 - 105) }} in the money, and the OCC auto-exercises anything a cent or more in the money. On Monday you would own 100 ACME shares bought for {{ usd(10500) }} with {{ usd(2000) }} in the account, which means a margin call, and you would carry the weekend risk of {{ usd(s3 * 100) }} of stock to collect {{ usd((s3 - 105) * 100) }} of intrinsic value.
+          If ACME closes where it is now, the call will not expire: it is {{ usd(s3 - 105) }} in the money, and the OCC auto-exercises anything a cent or more in the money. On Monday you would own 100 ACME shares bought for {{ usd(10500) }} with {{ usd(2000) }} in the account, which means a margin call, and you would carry the weekend risk of {{ usd(s3 * 100) }} of stock to collect {{ usd((s3 - 105) * 100) }} of intrinsic value.
       - text: >-
           Sell the call to close at {{ usd(l105.bid) }}
         grade: best

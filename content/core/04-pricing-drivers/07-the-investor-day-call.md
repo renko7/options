@@ -15,7 +15,8 @@ const B = [{ kind: 'call', qty: 3, strike: 100, premium: dec100, dte: 30, iv: 0.
 const C = [{ kind: 'call', qty: 2, strike: 100, premium: jan100, dte: 58, iv: 0.30 }];
 const D = [{ kind: 'call', qty: 2, strike: 100, premium: jan100, dte: 58, iv: 0.30 }, { kind: 'put', qty: -2, strike: 100, premium: jan100p, dte: 58, iv: 0.30 }];
 const at = (legs, S) => payoff.pnlAt(legs, S, 14, env);
-const janNow = bs.price({ S: 103, K: 100, T: 44 / 365, r: RATE, q: ACME.q, sigma: 0.27, type: 'call' });
+const janNow = Number(bs.price({ S: 103, K: 100, T: 44 / 365, r: RATE, q: ACME.q, sigma: 0.27, type: 'call' }).toFixed(2));
+const janGain = (janNow - jan100) * 200;
 const holdExp = payoff.pnlAtExpiry(C, 103);
 const be = payoff.breakevens(C)[0];
 ```
@@ -43,20 +44,20 @@ steps:
           Buy 2 January 100 calls at {{ usd(jan100) }}, for {{ usd(2 * jan100 * 100) }}.
         grade: best
         feedback: >-
-          Fewer contracts, but each one has 58 days of life, so it decays slowly and still has 44 days left after the event. If ACME is at $103 on December 2 with volatility at 27%, you are up {{ usd(at(C, 103)) }}; if ACME is unchanged at $100, you are down {{ usd(-at(C, 100)) }}, a smaller loss than the December calls, and you still have time for the idea to work. Your risk is capped at what you paid.
+          Fewer contracts, but each one has 58 days of life, so it decays slowly and still has 44 days left after the event. If ACME is at $103 on December 2 with volatility at 27%, you are up {{ usd(janGain) }}; if ACME is unchanged at $100, you are down {{ usd(-at(C, 100)) }}, a smaller loss than the December calls, and you still have time for the idea to work. Your risk is capped at what you paid.
       - text: >-
           Buy 2 January 100 calls and sell 2 January 100 puts at {{ usd(jan100p) }}. The puts pay for most of the calls, so the trade costs only {{ usd(2 * (jan100 - jan100p) * 100) }}.
         grade: poor
         feedback: >-
           By put-call parity, long call plus short put at the same strike is synthetic long stock: this is the same as owning 200 shares. It makes the most if ACME rallies (up {{ usd(at(D, 103)) }} at $103), but if the investor day disappoints and ACME falls to $90, you are down {{ usd(-at(D, 90)) }}, far beyond your $1,000 limit. A small up-front cost is not the same as a small risk.
   - prompt: >-
-      You bought the 2 January 100 calls. On December 2, the investor day is over. ACME has risen to $103, but implied volatility has fallen from 30% to 27% and 14 days have passed. Each call is worth {{ usd(janNow) }}, so you are up only {{ usd(at(C, 103)) }} on a 3% rally. What now?
+      You bought the 2 January 100 calls. On December 2, the investor day is over. ACME has risen to $103, but implied volatility has fallen from 30% to 27% and 14 days have passed. Each call is worth {{ usd(janNow) }}, so you are up only {{ usd(janGain) }} on a 3% rally. What now?
     choices:
       - text: >-
           Sell both calls and take the profit.
         grade: best
         feedback: >-
-          The reason for the trade, the investor day, has passed, and the calls still hold {{ usd(janNow - 3) }} a share of time value that will decay from here on. Selling locks in {{ usd(at(C, 103)) }}. The small gain is not a failure; it is what three inputs moving at once look like. The stock helped, but two weeks of time decay and a three-point drop in volatility took most of it back.
+          The reason for the trade, the investor day, has passed, and the calls still hold {{ usd(janNow - 3) }} a share of time value that will decay from here on. Selling locks in {{ usd(janGain) }}. The small gain is not a failure; it is what three inputs moving at once look like. The stock helped, but two weeks of time decay and a three-point drop in volatility took most of it back.
       - text: >-
           Sell one call and keep the other with a clear exit plan.
         grade: acceptable

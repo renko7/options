@@ -34,7 +34,7 @@ The S&P 500 has three option products that most US traders choose between: SPX o
 | Last trading on expiration day | Expiring SPXW and XSP stop at 4:00 p.m. ET; AM-settled SPX stop trading on the business day before (usually Thursday) | 4:00 p.m. ET | Generally 4:00 p.m. ET; check your broker |
 | US tax treatment | Generally Section 1256 contracts | Generally Section 1256 contracts | Ordinary equity option rules |
 
-Exchange specifications change; check Cboe's product pages for the current version. Brokers decide which of the extended sessions (curb, Global Trading Hours, pre-market) their customers can use. Cboe has also listed AM-settled series outside the standard monthly, so always check the settlement type of the series you trade.
+Exchange specifications change; check Cboe's product pages for the current version. Brokers decide which of the extended sessions (curb, Global Trading Hours, pre-market) their customers can use. Since November 2026 Cboe has also listed AM-settled SPX options outside the standard monthly, under the symbol SPXO, so always check the settlement type of the series you trade.
 :::
 
 ## Size

@@ -9,7 +9,7 @@ const row = (k) => q.rows.find((r) => r.strike === k);
 const buy = row(100).call.ask;
 const sell = row(100).call.bid;
 const legs = [{ kind: 'call', qty: 1, strike: 100, premium: buy }];
-const later = chain(ACME, { dte: 20, spot: 105 });
+const later = chain(ACME, { dte: 18, spot: 105 });
 const anaBid = later.rows.find((r) => r.strike === 100).call.bid;
 const anaPnl = (anaBid - buy) * 100;
 const benPnl = payoff.pnlAtExpiry(legs, 98);
@@ -36,7 +36,9 @@ This is how most options positions end, for both holders and writers, because it
 
 ## Ending 2: expire worthless
 
-If an option is out of the money at the close on expiration day, nobody will exercise it. It simply ceases to exist. The holder loses the premium they paid; the writer keeps the premium they received and has no further obligation. No trade, no commission, no action needed.
+If an option is out of the money at the close on expiration day, it is not exercised automatically, and normally nobody exercises it. It simply ceases to exist. The holder loses the premium they paid; the writer keeps the premium they received and has no further obligation. No trade, no commission, no action needed.
+
+One caveat for writers: holders may still exercise until the evening cut-off in the Rule Note below, so if news moves the stock after the close, an option that closed barely out of the money can still be exercised, and its writer assigned. [Exercise, assignment and expiration](#core-07) covers this pin risk.
 
 ## Ending 3: exercise and assignment
 
@@ -63,7 +65,7 @@ Because ACME options are American-style, a holder can also exercise early, on an
 :::example Four traders, one December 100 call
 On {{ longDate(TODAY) }}, with ACME at $100, three traders each buy one ACME December 100 call at the ask, {{ usd(buy) }}, paying {{ usd(buy * 100) }}. A fourth, Dan, sells one to open at the bid, {{ usd(sell) }}, collecting {{ usd(sell * 100) }}.
 
-**Ana closes early.** Ten days later ACME is at $105. The call now bids {{ usd(anaBid) }}. Ana sells to close and makes ({{ usd(anaBid) }} − {{ usd(buy) }}) × 100 = **{{ signedUsd(anaPnl) }}**. The trade is over; nothing happens to her at expiration.
+**Ana closes early.** Twelve days later, on Monday {{ longDate(expiryDate(12)) }}, ACME is at $105. The call now bids {{ usd(anaBid) }}. Ana sells to close and makes ({{ usd(anaBid) }} − {{ usd(buy) }}) × 100 = **{{ signedUsd(anaPnl) }}**. The trade is over; nothing happens to her at expiration.
 
 **Ben lets it expire.** ACME closes at $98 on expiration day. The call is out of the money and expires worthless. Ben loses **{{ usd(-benPnl) }}**, the whole premium.
 

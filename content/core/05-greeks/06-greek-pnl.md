@@ -18,6 +18,7 @@ const bgTot = bg.d + bg.gm + bg.th + bg.v;
 const bgFull = payoff.pnlAt(strad, 112, 1, { ...env, ivShift: 0.05 });
 const beMove = Math.sqrt(-2 * g.theta / g.gamma);
 const dailySd = 100 * c.iv / Math.sqrt(365);
+const tradingSd = 100 * c.iv / Math.sqrt(252);
 const hedged = [...strad, { kind: 'stock', qty: -Math.round(g.delta), price: 100 }];
 const hedgedPnl = (S) => payoff.pnlAt(hedged, S, 1, env);
 ```
@@ -93,7 +94,7 @@ Black-Scholes links the two Greeks. When the rate and dividend yield are small, 
 Gamma cancels. The break-even move is one day's standard deviation at the implied volatility.
 :::
 
-At {{ pct(c.iv, 0) }} implied volatility on a $100 stock, one day's standard deviation is \(30\% \times 100 / \sqrt{365}\) = {{ usd(dailySd) }}, within a fraction of a cent of the {{ usd(beMove) }} computed from the Greeks.
+At {{ pct(c.iv, 0) }} implied volatility on a $100 stock, one day's standard deviation is \(30\% \times 100 / \sqrt{365}\) = {{ usd(dailySd) }}, within a fraction of a cent of the {{ usd(beMove) }} computed from the Greeks. That is per calendar day, the unit theta uses. The stock moves only on trading days, about 252 a year, and the weekend's theta has to be earned on them, so on a typical trading day the move needed is closer to \(\sigma S/\sqrt{252}\) = {{ usd(tradingSd) }}, the daily move from [Volatility, rates and dividends](#core-04).
 
 This is the most important idea in options trading, so state it plainly. **Buying options and hedging the delta is a bet that the stock will move more than its implied volatility says. Selling options and hedging is a bet that it will move less.** Theta is the price of gamma, and the implied volatility sets that price. Whether you profit depends on the volatility the stock actually delivers, which is called realized volatility and is the starting point of [Implied volatility](#core-06).
 
@@ -132,7 +133,7 @@ For moderate moves, P&L ≈ \(\Delta\,dS + \tfrac12\Gamma\,dS^2 + \Theta\,dt + \
       +$130
   answer: 1
   explain: >-
-    Delta gives 50 × 1 = +$50, gamma ½ × 20 × 1² = +$10, theta −$40, vega 0. Total +$20. +$50 counts delta only, +$30 forgets the gamma term, and +$130 adds a vega gain that did not happen.
+    Delta gives 50 × 1 = +$50, gamma ½ × 20 × 1² = +$10, theta −$40, vega 0. Total +$20. +$50 counts delta only, +$30 drops the ½ from the gamma term, and +$130 adds a vega gain that did not happen.
 - q: >-
     A delta-hedged position has gamma +40 shares per $1 and theta −$80 a day. What daily move does it need to break even?
   choices:

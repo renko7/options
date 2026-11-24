@@ -87,7 +87,7 @@ Long puts carry no assignment risk; only option writers can be assigned. If you 
 ```
 
 :::rule Puts and the holding period of your shares (as of 2026)
-Under IRS rules, buying a put on stock you have held for one year or less is generally treated like a short sale: the stock's holding period is wiped out and starts again only when the put is sold, exercised or expires. A married put, where you buy the stock and the put on the same day and identify the stock as the shares to be delivered on exercise, is an exception: the put's cost is added to the stock's basis. This is not tax advice; see [US taxes](#core-14).
+Under IRS rules, buying a put on stock you have held for one year or less is generally treated like a short sale: the stock's holding period is wiped out and starts again only when the put is sold, exercised or expires. A married put, where you buy the stock and the put on the same day and identify the stock as the shares to be delivered on exercise, is an exception; if that put expires unexercised, its cost is added to the stock's basis. This is not tax advice; see [US taxes](#core-14).
 :::
 
 :::key

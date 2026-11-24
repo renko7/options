@@ -29,13 +29,18 @@ const janDte = 58 - 21;
 const c80 = mk(80, janDte);
 const c90 = mk(90, janDte);
 const d90 = mk(90, 30 - 21);
-const T58 = 58 / 365;
-const sig130 = smileIV(ACME, 130, T58);
-const putAt = (r, american) => binomial.price({ S: 100, K: 130, T: T58, r, q: ACME.q, sigma: sig130, type: 'put', american, steps: 800 }).price;
+// Put example: Thu Dec 10, after ACME has gone ex-dividend; no further dividend before Jan 15.
+const T37 = janDte / 365;
+const sig120 = smileIV(ACME, 120, T37);
+const putAt = (r, american) => binomial.price({ S: 100, K: 120, T: T37, r, q: 0, sigma: sig120, type: 'put', american, steps: 800 }).price;
 const p4 = putAt(RATE, true);
-const p4eu = bs.price({ S: 100, K: 130, T: T58, r: RATE, q: ACME.q, sigma: sig130, type: 'put' });
+const p4eu = bs.price({ S: 100, K: 120, T: T37, r: RATE, q: 0, sigma: sig120, type: 'put' });
 const p1 = putAt(0.01, true);
-const interest130 = 13000 * (Math.exp(RATE * T58) - 1);
+const interest120 = 12000 * (Math.exp(RATE * T37) - 1);
+// The same put on Nov 18 (58 days), with the $0.50 Dec 10 dividend still ahead.
+const T58 = 58 / 365;
+const pNov = binomial.price({ S: 100, K: 120, T: T58, r: RATE, q: 0, sigma: smileIV(ACME, 120, T58), type: 'put', american: true, steps: 800, dividends: [{ t: 21.5 / 365, amount: D }] }).price;
+const interestToEx = 12000 * (Math.exp(RATE * 21.5 / 365) - 1);
 ```
 
 An American option gives you the right to exercise any day. Owning a right is never bad, but using it early almost always is. This Lesson shows why, and then the two exceptions every options trader has to know: calls just before a dividend, and deep in-the-money puts when interest rates are high.
@@ -99,22 +104,22 @@ Since US stocks moved to T+1 settlement on May 28, 2024, the ex-dividend date is
 
 Exercising a put gives you the strike in cash *now* instead of at expiration. Cash earns interest. If the put is so deep in the money that it has almost no chance of finishing out of the money, its remaining extrinsic value (the protection against a rebound above the strike) can be worth less than the interest on the strike.
 
-:::example The January 130 put
-ACME is at $100. You hold the January 130 put, 58 days from expiration, $30 in the money.
+:::example The January 120 put
+It is Thursday, {{ exDate }}. ACME went ex-dividend this morning and is at $100; its next dividend falls after January's expiration. You hold the January 120 put, {{ int(janDte) }} days from expiration, $20 in the money.
 
-- Exercising today pays you $13,000 for 100 shares worth $10,000. Over 58 days, $13,000 earns about {{ usd(interest130) }} at the 4% rate.
-- A European version of this put is worth only {{ usd(p4eu, 3) }} today, *less* than its $30 intrinsic value, because the holder has to wait 58 days for the money.
+- Exercising today pays you $12,000 for 100 shares worth $10,000. Over {{ int(janDte) }} days, $12,000 earns about {{ usd(interest120) }} at the 4% rate.
+- A European version of this put is worth only {{ usd(p4eu, 3) }} today, *less* than its $20 intrinsic value, because the holder has to wait {{ int(janDte) }} days for the money.
 - The American put, valued with a binomial tree that allows early exercise, is worth {{ usd(p4, 3) }}: exactly its intrinsic value. The best use of the right is to exercise now.
 
 If rates were 1% instead, the same tree values the put at {{ usd(p1, 3) }}, above its intrinsic value, and the holder should wait. Higher rates make early put exercise more common.
 :::
 
-Dividends push the other way for puts. On the ex-date the stock drops by the dividend, which helps the put, so a put holder usually waits until after the ex-date before exercising.
+Dividends push the other way for puts. On the ex-date the stock drops by the dividend, which helps the put, so a put holder usually waits until after the ex-date before exercising. That is why the example is set on {{ exDate }}. Back on {{ longDate(TODAY) }}, with ACME also at $100, waiting for the ex-date was worth {{ usd(D * 100) }} per contract from the dividend drop, more than the {{ usd(interestToEx) }} of interest that exercising three weeks early would have earned; a tree that includes the dividend values the same put at {{ usd(pNov, 3) }} that day, above its intrinsic value, so the holder should wait.
 
-Try it in the pricer below, which values European options. With the rate at 4% the January 130 put's extrinsic value is negative: the European put is worth less than intrinsic, which is exactly when an American holder would exercise instead. Drag the interest rate down and watch extrinsic value turn positive, the point at which waiting becomes worth more.
+Try it in the pricer below, which values European options (the dividend yield is set to zero because no dividend remains before January's expiration). With the rate at 4% the January 120 put's extrinsic value is negative: the European put is worth less than intrinsic, which is exactly when an American holder would exercise instead. Drag the interest rate down and watch extrinsic value turn positive, the point at which waiting becomes worth more.
 
 ```tool pricer
-{ S: 100, K: 130, dte: 58, iv: sig130, type: 'put' }
+{ S: 100, K: 120, dte: janDte, iv: sig120, q: 0, type: 'put' }
 ```
 
 ## Selling below intrinsic value
@@ -169,7 +174,7 @@ Exercise captures only intrinsic value, so exercising an option that still has e
   explain: >-
     From put-call parity, the call's extrinsic value is \( P + K(1 - e^{-rT}) \). Deep in the money, the put with the same strike is far out of the money and worth almost nothing, leaving roughly the interest on the strike. Implied volatility does not need to fall; even at normal volatility the put is tiny. Quotes still exist, though they may be wide.
 - q: >-
-    You hold the ACME January 130 put with ACME at $100. With rates at 4% a tree values it at {{ usd(p4, 3) }}; at 1% it values it at {{ usd(p1, 3) }}. What should you conclude at the 4% rate?
+    On {{ exDate }}, after ACME has gone ex-dividend, you hold the ACME January 120 put with ACME at $100. With rates at 4% a tree values it at {{ usd(p4, 3) }}; at 1% it values it at {{ usd(p1, 3) }}. What should you conclude at the 4% rate?
   choices:
     - >-
       Exercise now: the put is worth no more than its intrinsic value, and the cash can earn interest
@@ -179,5 +184,5 @@ Exercise captures only intrinsic value, so exercising an option that still has e
       Hold until the next ex-dividend date to collect the dividend
   answer: 0
   explain: >-
-    When an American option's value equals its intrinsic value, the right to wait is worth nothing, so exercising now (and earning interest on the $13,000) is optimal. At 1% the interest is smaller than the put's remaining extrinsic value, so waiting wins. Dividends do not reward a put holder for waiting to collect them: put holders do not receive dividends, although the ex-date price drop helps the put, which is a reason to wait only when an ex-date is imminent.
+    When an American option's value equals its intrinsic value, the right to wait is worth nothing, so exercising now (and earning interest on the $12,000) is optimal. At 1% the interest is smaller than the put's remaining extrinsic value, so waiting wins. Dividends do not reward a put holder for waiting to collect them: put holders do not receive dividends, although the ex-date price drop helps the put, which is a reason to wait only when an ex-date is imminent.
 ```

@@ -16,7 +16,7 @@
 - term: Theta
   aka: [theta decay]
   def: >-
-    The change in an option's price when one calendar day passes with everything else unchanged. It is negative for long options and positive for short ones, and at the money it grows steeply into expiration.
+    The change in an option's price when one calendar day passes with everything else unchanged. It is almost always negative for long options and positive for short ones, and at the money it grows steeply into expiration.
   lesson: core-05-theta
 - term: Vega
   aka: [kappa]

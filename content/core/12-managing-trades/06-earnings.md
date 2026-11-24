@@ -151,5 +151,5 @@ Before an earnings announcement, the at-the-money straddle prices the expected m
       {{ int(Math.floor(account * 0.2 / -icS.maxLoss)) }}
   answer: 0
   explain: >-
-    {{ usd(budget, 0) }} divided by the {{ usd(-icS.maxLoss) }} max loss, rounded down, gives {{ int(nIC) }}. Dividing by the credit sizes the trade by what it can make. The third answer risks 20% of the account on one report, which the gap will eventually collect.
+    {{ usd(budget, 0) }} divided by the {{ usd(-icS.maxLoss) }} max loss, rounded down, gives {{ int(nIC) }}. Dividing by the credit sizes the trade by what it can make. {{ int(Math.floor(account * 0.2 / -icS.maxLoss)) }} condors would risk 20% of the account on one report, which the gap will eventually collect.
 ```

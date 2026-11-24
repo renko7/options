@@ -39,6 +39,8 @@ At $110 you lose {{ usd(-payoff.pnlAtExpiry(sc, 110)) }}. If ACME jumps to $130 
 
 For a short call with strike \(K\) sold for \(c\): max profit \(100c\), break-even \(K + c\), max loss unlimited.
 
+These numbers are for expiration, but ACME options are American-style, so a writer can be assigned on any business day before then, most often when the option is deep in the money or, for a call, just before an ex-dividend date. [Exercise, assignment and expiration](#core-07) covers when that happens.
+
 ## The short put
 
 Writing a put means you must buy 100 shares at the strike if assigned. You profit if the stock stays above the strike, or falls only a little below it.
