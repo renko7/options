@@ -1,0 +1,14 @@
+{
+  "name": "options-course",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"src/**/*.test.js\"",
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "katex": "0.16.11",
+    "marked": "14.1.4",
+    "yaml": "2.6.1"
+  }
+}

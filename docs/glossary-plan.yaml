@@ -1,0 +1,16 @@
+# Which Module defines each Glossary term. Link to any term with [[term]]; define only your own.
+# A module's terms go in content/glossary/<module-id>.yaml.
+core-01: [Option, Call, Put, Underlying, Strike price, Expiration date, Premium, Contract multiplier, Holder, Writer, Exercise, Assignment, Moneyness, In the money, At the money, Out of the money, Intrinsic value, Extrinsic value, Options Clearing Corporation, Buy to open, Sell to open, Buy to close, Sell to close, Open position]
+core-02: [Options chain, Bid, Ask, Bid-ask spread, Mid price, Last price, Volume, Open interest, OCC symbol, Weekly option, Monthly option, LEAPS, Days to expiration, Liquidity, Strike interval]
+core-03: [Payoff diagram, Break-even, Long call, Long put, Short call, Short put, Max profit, Max loss, Naked option, Defined risk, Undefined risk, Profit and loss]
+core-04: [Put-call parity, Arbitrage, Risk-free rate, Volatility, Forward price, Synthetic position, Conversion, Reversal, Black-Scholes model, Time decay, Carry]
+core-05: [Greeks, Delta, Gamma, Theta, Vega, Rho, Delta-neutral, Position delta, Share-equivalent delta, Dollar gamma]
+core-06: [Implied volatility, Realized volatility, IV rank, IV percentile, Volatility skew, Volatility smile, Term structure, Volatility crush, Expected move, VIX]
+core-07: [American-style option, European-style option, Early exercise, Exercise by exception, Physical settlement, Cash settlement, Pin risk, Contract adjustment, Dividend risk, Ex-dividend date, Do-not-exercise instruction, Settlement value]
+core-08: [Options approval level, Margin account, Reg T margin, Buying power, Pattern day trader, Limit order, Market order, Stop order, Complex order, Legging, Fill, Slippage, Portfolio margin, Good-til-canceled order]
+core-09: [Covered call, Cash-secured put, The wheel, Protective put, Collar, Married put, Buy-write, Call away]
+core-10: [Vertical spread, Bull call spread, Bear put spread, Bull put spread, Bear call spread, Debit spread, Credit spread, Risk reversal, Ratio spread, Backspread, Spread width]
+core-11: [Straddle, Strangle, Iron condor, Iron butterfly, Butterfly spread, Calendar spread, Diagonal spread, Wings, Short premium, Long premium]
+core-12: [Position sizing, Rolling, Adjustment, Profit target, Stop-loss, Earnings announcement, Probability of profit, Risk of ruin, Trading plan]
+core-13: [Index option, SPX, SPY, XSP, AM settlement, PM settlement, Special opening quotation, 0DTE, Notional value, Index multiplier]
+core-14: [Section 1256 contract, 60/40 rule, Wash sale, Tax straddle, Constructive sale, Holding period, Mark-to-market, Qualified covered call, Capital gain, Form 6781]
