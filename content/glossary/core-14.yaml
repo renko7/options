@@ -1,0 +1,46 @@
+- term: Capital gain
+  aka: [capital loss, short-term capital gain, long-term capital gain]
+  def: >-
+    The profit from selling or closing a capital asset, such as a stock or an option held as an investment, for more than its basis; a capital loss is the reverse. US tax treats it as short-term or long-term depending on the holding period.
+  lesson: core-14-tax-basics
+- term: Holding period
+  def: >-
+    How long you have held an asset for tax purposes, counted from the day after you acquired it through the day you disposed of it. More than one year makes a capital gain or loss long-term; special rules can restart or suspend it.
+  lesson: core-14-tax-basics
+- term: Wash sale
+  aka: [wash sale rule]
+  def: >-
+    Selling stock or securities at a loss and, within 30 days before or after, acquiring substantially identical stock or securities or an option to acquire them. The loss is disallowed for now and added to the basis of the replacement.
+  lesson: core-14-wash-sales
+- term: Tax straddle
+  def: >-
+    For US tax purposes, holding offsetting positions in actively traded property, such as stock with a protective put or two option legs of a spread. Losses on one leg are deferred to the extent of unrecognized gains on the other, and holding periods can be reset.
+  lesson: core-14-straddles
+- term: Qualified covered call
+  aka: [QCC]
+  def: >-
+    An exchange-traded call written on stock you hold that has more than 30 days to expiration when written and is not deep in the money under the IRS benchmark rules. Stock plus a qualified covered call is exempt from most of the tax straddle rules.
+  lesson: core-14-straddles
+- term: Constructive sale
+  def: >-
+    A transaction that locks in the gain on an appreciated stock position without selling it, such as a short sale of the same stock. The tax law treats the position as sold at its market value that day, so the gain is taxed immediately.
+  lesson: core-14-straddles
+- term: Section 1256 contract
+  aka: [1256 contract]
+  def: >-
+    A category of contracts under the US tax code that includes regulated futures and nonequity options, such as listed broad-based index options like SPX. Gains and losses get 60/40 treatment and open positions are marked to market at year end.
+  lesson: core-14-section-1256
+- term: 60/40 rule
+  aka: [60/40 treatment]
+  def: >-
+    The rule that treats any gain or loss on a Section 1256 contract as 60% long-term and 40% short-term, however long the position was held.
+  lesson: core-14-section-1256
+- term: Mark-to-market
+  aka: [marked to market]
+  def: >-
+    Treating an open position as if it were sold at its fair market value on a given date. Section 1256 contracts still open at year end are marked to market on the last business day of the year, and the gain or loss is taxed for that year.
+  lesson: core-14-section-1256
+- term: Form 6781
+  def: >-
+    The IRS form on which individuals report gains and losses from Section 1256 contracts (split 60/40) and from tax straddles, and on which they make the Section 1256 loss carryback election.
+  lesson: core-14-section-1256

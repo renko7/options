@@ -156,5 +156,5 @@ A call is the right to buy at the strike; a put is the right to sell at the stri
       Buy to close the call
   answer: 1
   explain: >-
-    You hold the call, so you close by selling it ("sell to close"). Most options are closed this way rather than exercised. Exercising throws away whatever time value the option still has (covered in the next Lesson) and needs the cash to buy 100 shares. "Buy to close" is how a *writer* exits.
+    You hold the call, so you close by selling it ("sell to close"). Most options are closed this way rather than exercised. Exercising throws away whatever time value the option still has (see [Intrinsic and extrinsic value](#core-01-intrinsic-and-extrinsic)) and needs the cash to buy 100 shares. "Buy to close" is how a *writer* exits.
 ```

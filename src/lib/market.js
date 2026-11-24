@@ -61,6 +61,8 @@ export function chain(u = ACME, { dte = 30, strikes, spot = u.spot, r = RATE } =
     const sigma = smileIV({ ...u, spot: S }, K, T);
     const side = (type) => {
       const g = bs.greeks({ S, K, T, r, q: u.q, sigma, type });
+      // American options (ACME) can never trade below intrinsic value; European index options can.
+      if (u.style !== 'european') g.price = Math.max(g.price, bs.intrinsic({ S, K, type }));
       const half = Math.max(0.01, g.price * 0.02) + (u === HBR ? 0.2 : 0.02);
       const t = tick(g.price);
       const bid = Math.max(0, Math.floor((g.price - half) / t) * t);
@@ -91,7 +93,7 @@ export const TODAY = '2026-11-18';
 
 /** Listed ACME expirations as days to expiry; monthly ones are third Fridays. */
 export const EXPIRATIONS = Object.freeze([
-  { dte: 2, date: '2026-11-20', type: 'weekly' },
+  { dte: 2, date: '2026-11-20', type: 'monthly' },
   { dte: 9, date: '2026-11-27', type: 'weekly' },
   { dte: 30, date: '2026-12-18', type: 'monthly' },
   { dte: 58, date: '2027-01-15', type: 'monthly' },

@@ -1,0 +1,38 @@
+- term: Covered call
+  aka: [covered write, overwrite]
+  def: >-
+    Owning 100 shares of a stock and selling one call against them. You keep the premium and give up gains above the strike; by put-call parity the payoff equals a short put on the same strike.
+  lesson: core-09-covered-call
+- term: Cash-secured put
+  aka: [CSP, cash-covered put]
+  def: >-
+    A short put backed by enough cash to buy the shares if assigned (the strike times 100). If assigned, the effective purchase price is the strike minus the premium received.
+  lesson: core-09-cash-secured-put
+- term: The wheel
+  aka: [wheel strategy]
+  def: >-
+    A repeating cycle of selling cash-secured puts until assigned, then selling covered calls on the shares until they are called away. At every stage it is equivalent to a short put, so it is a short-volatility strategy that suffers in sharp declines.
+  lesson: core-09-the-wheel
+- term: Protective put
+  aka: [put hedge]
+  def: >-
+    A long put held against shares you own, setting a floor at the strike. The most you can lose is the distance from your entry to the strike plus the premium; the combination pays like a long call.
+  lesson: core-09-protective-put
+- term: Married put
+  def: >-
+    A protective put bought on the same day as the shares it protects. The payoff is the same as any protective put; US tax rules treat it differently from a put bought on shares already held.
+  lesson: core-09-protective-put
+- term: Collar
+  aka: [zero-cost collar, costless collar]
+  def: >-
+    Long stock plus a long out-of-the-money put plus a short out-of-the-money call. Losses are capped below the put strike and gains above the call strike; when the call pays for the put it is called a zero-cost collar.
+  lesson: core-09-collar
+- term: Buy-write
+  def: >-
+    Buying shares and selling a call against them in a single order at one net price, opening a covered call without ever holding either leg alone.
+  lesson: core-09-choosing-the-call
+- term: Call away
+  aka: [called away]
+  def: >-
+    To have your shares taken from you at the strike price because a call you sold was exercised and assigned to you.
+  lesson: core-09-covered-call

@@ -77,7 +77,7 @@ The loss of time value as days pass, with nothing else changing, is called [[tim
 - from 30 to 23 days: {{ usd(wk30) }}
 - from 9 to 2 days: {{ usd(wk9) }}
 
-The same seven days cost nearly {{ num(wk9 / wk121, 0) }} times as much in the last week as they do four months out.
+The same seven days cost about {{ num(wk9 / wk121, 1) }} times as much in the last week as they do four months out.
 
 For out-of-the-money options the end is even more abrupt. The December 105 call is $5 out of the money. With 9 days left it is worth {{ usd(otm9) }}; with 2 days left, if ACME has not moved, it is worth {{ usd(otm2) }}. It lost almost all of its value in one week, because there is too little time left for a $5 move to be likely.
 

@@ -1,0 +1,53 @@
+- term: Vertical spread
+  aka: [vertical]
+  def: >-
+    A long option and a short option of the same type and expiration at different strikes. Its maximum profit and loss are both capped, and together they add up to the width between the strikes.
+  lesson: core-10-debit-spreads
+- term: Bull call spread
+  aka: [call debit spread, long call spread]
+  def: >-
+    A long call plus a short call at a higher strike in the same expiration, opened for a debit. It profits from a rise; max loss is the debit and max profit is the width minus the debit.
+  lesson: core-10-debit-spreads
+- term: Bear put spread
+  aka: [put debit spread, long put spread]
+  def: >-
+    A long put plus a short put at a lower strike in the same expiration, opened for a debit. It profits from a fall; max loss is the debit and max profit is the width minus the debit.
+  lesson: core-10-debit-spreads
+- term: Bull put spread
+  aka: [put credit spread, short put spread]
+  def: >-
+    A short put plus a long put at a lower strike in the same expiration, opened for a credit. It profits if the stock stays above the short strike; max profit is the credit and max loss is the width minus the credit.
+  lesson: core-10-credit-spreads
+- term: Bear call spread
+  aka: [call credit spread, short call spread]
+  def: >-
+    A short call plus a long call at a higher strike in the same expiration, opened for a credit. It profits if the stock stays below the short strike; max profit is the credit and max loss is the width minus the credit.
+  lesson: core-10-credit-spreads
+- term: Debit spread
+  def: >-
+    A spread that costs money to open because the option bought is worth more than the option sold. The debit is the most you can lose.
+  lesson: core-10-debit-spreads
+- term: Credit spread
+  def: >-
+    A spread that pays you to open because the option sold is worth more than the option bought. The credit is the most you can make; by put-call parity it is equivalent to the debit spread on the same strikes.
+  lesson: core-10-credit-spreads
+- term: Risk reversal
+  aka: [combo]
+  def: >-
+    A short out-of-the-money option on one side paired with a long out-of-the-money option on the other, such as a short put and a long call. Its cost measures the volatility skew, and it is often quoted as the 25-delta call's implied volatility minus the 25-delta put's.
+  lesson: core-10-risk-reversals
+- term: Ratio spread
+  aka: [front spread, 1x2 spread]
+  def: >-
+    A spread that sells more options than it buys, such as long one call and short two at a higher strike. It pays most at the short strike and carries an uncovered tail beyond it.
+  lesson: core-10-ratio-spreads-and-backspreads
+- term: Backspread
+  aka: [ratio backspread]
+  def: >-
+    A spread that buys more options than it sells, such as short one call and long two at a higher strike. It loses most at the long strike and profits from a large move; it is long gamma and vega.
+  lesson: core-10-ratio-spreads-and-backspreads
+- term: Spread width
+  aka: [width]
+  def: >-
+    The distance between the strikes of a vertical spread. Max profit plus max loss always equals the width (times the multiplier).
+  lesson: core-10-debit-spreads

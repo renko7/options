@@ -6,6 +6,7 @@ summary: Classify any call or put as in, at or out of the money, and explain why
 ```calc
 const T = 30 / 365;
 const S = ACME.spot;
+const m = (x) => usd(x, Math.abs(x * 100 - Math.round(x * 100)) < 1e-6 ? 2 : 3);
 const q = chain(ACME, { dte: 30 });
 const row = (k) => q.rows.find((r) => r.strike === k);
 const pITM = (K, type) => bs.probITM({ S, K, T, r: RATE, q: ACME.q, sigma: smileIV(ACME, K, T), type });
@@ -15,7 +16,7 @@ const status = (K, type, s = S) => {
   return itm ? 'in the money' : 'out of the money';
 };
 const tableRows = [85, 90, 95, 100, 105, 110, 115].map((K) =>
-  `| ${status(K, 'call')} | ${usd(row(K).call.mid)} | **$${K}** | ${usd(row(K).put.mid)} | ${status(K, 'put')} |`
+  `| ${status(K, 'call')} | ${m(row(K).call.mid)} | **$${K}** | ${m(row(K).put.mid)} | ${status(K, 'put')} |`
 ).join('\n');
 const S2 = 107;
 ```
@@ -51,7 +52,7 @@ ACME is at $100. Here are the December midpoint prices (the average of the bid a
 
 Read across any row. At the 90 strike the call is in the money (the right to buy at $90 a stock worth $100) and the put is out of the money (the right to sell at $90 a stock you could sell for $100). At 110 it is the other way round. At 100 both are at the money.
 
-Now look at the prices. The ITM 90 call costs {{ usd(row(90).call.mid) }}; the OTM 110 call costs {{ usd(row(110).call.mid) }}. Puts run the other way: the OTM 90 put is {{ usd(row(90).put.mid) }} and the ITM 110 put is {{ usd(row(110).put.mid) }}. In-the-money options are expensive because they already contain value you could take by exercising. Out-of-the-money options are cheap because they hold nothing but the chance that the stock gets there.
+Now look at the prices. The ITM 90 call costs {{ m(row(90).call.mid) }}; the OTM 110 call costs {{ m(row(110).call.mid) }}. Puts run the other way: the OTM 90 put is {{ m(row(90).put.mid) }} and the ITM 110 put is {{ m(row(110).put.mid) }}. In-the-money options are expensive because they already contain value you could take by exercising. Out-of-the-money options are cheap because they hold nothing but the chance that the stock gets there.
 :::
 
 Notice that at any one strike, the call and the put are always on opposite sides. If the call is in the money, the put at the same strike is out of the money, and the other way round. Only at the money are both in the same state.

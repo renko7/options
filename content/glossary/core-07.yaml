@@ -1,0 +1,57 @@
+- term: American-style option
+  aka: [American option, American exercise]
+  def: >-
+    An option that can be exercised on any business day up to and including its expiration date. All US-listed stock and ETF options are American-style, so their writers can be assigned at any time.
+  lesson: core-07-how-exercise-works
+- term: European-style option
+  aka: [European option, European exercise]
+  def: >-
+    An option that can be exercised only at expiration. Most cash-settled index options, such as SPX, are European-style, so their writers cannot be assigned early.
+  lesson: core-07-how-exercise-works
+- term: Early exercise
+  def: >-
+    Exercising an American-style option before its expiration date. It captures only intrinsic value, so it usually loses money compared with selling the option; the main exceptions are deep in-the-money calls just before an ex-dividend date and deep in-the-money puts when interest rates are high.
+  lesson: core-07-early-exercise
+- term: Exercise by exception
+  aka: [automatic exercise, auto-exercise]
+  def: >-
+    The OCC procedure that automatically exercises expiring options that are in the money by at least a threshold amount ($0.01 per share as of 2026) unless the holder instructs otherwise.
+  lesson: core-07-expiration-day
+- term: Physical settlement
+  aka: [physical delivery]
+  def: >-
+    Settlement of an exercised option by delivering the underlying itself: for a standard stock or ETF option, 100 shares bought or sold at the strike price.
+  lesson: core-07-how-exercise-works
+- term: Cash settlement
+  aka: [cash-settled]
+  def: >-
+    Settlement of an exercised option by a cash payment equal to its in-the-money amount times the multiplier, calculated from an official settlement value. No shares change hands. Index options are cash-settled.
+  lesson: core-07-how-exercise-works
+- term: Pin risk
+  def: >-
+    The risk, for the writer of an option whose underlying closes very near the strike at expiration, of not knowing whether they will be assigned, and so of starting the next business day with an unexpected stock position or without an expected one.
+  lesson: core-07-expiration-day
+- term: Contract adjustment
+  aka: [adjusted option, non-standard option, non-standard deliverable]
+  def: >-
+    A change the OCC makes to the terms of existing options after a split, special dividend, merger, spin-off or similar event, so that the event itself does not benefit or harm either side. Adjusted contracts often deliver something other than 100 shares and trade under a changed root symbol.
+  lesson: core-07-contract-adjustments
+- term: Dividend risk
+  def: >-
+    The risk that a short in-the-money call is assigned the day before an ex-dividend date, leaving the writer short stock on the ex-date and owing the dividend. It is highest when the dividend exceeds the call's remaining extrinsic value.
+  lesson: core-07-assignment
+- term: Ex-dividend date
+  aka: [ex-date]
+  def: >-
+    The first trading day on which a stock trades without the right to its next dividend; the price typically drops by about the dividend amount at the open. Under T+1 settlement it is normally the same day as the record date, so a call must be exercised by the business day before to collect the dividend.
+  lesson: core-07-early-exercise
+- term: Do-not-exercise instruction
+  aka: [DNE, contrary exercise advice, contrary exercise instruction]
+  def: >-
+    An instruction from an option holder, passed by the broker to the OCC, not to exercise an option that would otherwise be exercised automatically at expiration. The same mechanism can be used to exercise an option that would otherwise expire.
+  lesson: core-07-expiration-day
+- term: Settlement value
+  aka: [exercise settlement value]
+  def: >-
+    The official index level used to calculate the cash paid on exercised index options at expiration. It is either the closing value (PM settlement) or a value computed from the opening prices of the components (AM settlement).
+  lesson: core-07-how-exercise-works

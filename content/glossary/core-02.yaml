@@ -1,0 +1,74 @@
+- term: Options chain
+  aka: [option chain, chain]
+  def: >-
+    The table of every listed option on one underlying for one expiration: strikes down the middle, calls on one side and puts on the other, with each contract's bid, ask, volume, open interest and other data.
+  lesson: core-02-chain-layout
+- term: Bid
+  aka: [bid price]
+  def: >-
+    The highest price anyone is currently willing to pay for an option. A sell order at market fills at the bid.
+  lesson: core-02-bid-ask-and-spread
+- term: Ask
+  aka: [offer, ask price, offer price]
+  def: >-
+    The lowest price anyone is currently willing to sell an option at. A buy order at market fills at the ask.
+  lesson: core-02-bid-ask-and-spread
+- term: Bid-ask spread
+  aka: [bid-ask, quoted spread]
+  def: >-
+    The difference between the ask and the bid. It is a real cost of trading, paid in part on every trade that crosses it, and is best compared across options as a percentage of the mid price.
+  lesson: core-02-bid-ask-and-spread
+- term: Mid price
+  aka: [mid, midpoint]
+  def: >-
+    The average of the bid and the ask: a reference estimate of an option's current value, and the usual starting point for a limit order. It is not itself a quote anyone is offering.
+  lesson: core-02-bid-ask-and-spread
+- term: Last price
+  aka: [last, last trade]
+  def: >-
+    The price of the most recent trade in an option. Because individual options can trade rarely, it may be hours or days old and is not a reliable guide to where the option can be traded now.
+  lesson: core-02-bid-ask-and-spread
+- term: Volume
+  aka: [option volume]
+  def: >-
+    The number of contracts of an option traded so far today. Every trade counts once, whether it opened or closed positions, and the count resets each day.
+  lesson: core-02-volume-and-open-interest
+- term: Open interest
+  aka: [OI]
+  def: >-
+    The number of contracts of an option that are currently open: bought to open and not yet closed, exercised, assigned or expired. The OCC updates it overnight; it rises when both sides of a trade open and falls when both close.
+  lesson: core-02-volume-and-open-interest
+- term: OCC symbol
+  aka: [OSI symbol, option symbol]
+  def: >-
+    The standard 21-character identifier of a listed US option: a root of up to six characters padded with spaces, the expiration as YYMMDD, C or P, and the strike times 1,000 as eight digits.
+  lesson: core-02-expirations-strikes-symbols
+- term: Weekly option
+  aka: [weeklies, weekly options, short-term option]
+  def: >-
+    A short-dated option series that expires on a day other than the standard third-Friday monthly expiration, most often another Friday of the month.
+  lesson: core-02-expirations-strikes-symbols
+- term: Monthly option
+  aka: [monthly options, standard monthly]
+  def: >-
+    An option in the standard monthly series, which expires on the third Friday of the month (or the business day before, if that Friday is a holiday).
+  lesson: core-02-expirations-strikes-symbols
+- term: LEAPS
+  aka: [LEAP, long-term equity anticipation securities, long-dated option]
+  def: >-
+    Long-term listed options, with more than a year and up to about three years to expiration. Traditionally they expire in January.
+  lesson: core-02-expirations-strikes-symbols
+- term: Days to expiration
+  aka: [DTE]
+  def: >-
+    The number of calendar days left until an option expires, shown next to each expiration on a chain.
+  lesson: core-02-chain-layout
+- term: Liquidity
+  def: >-
+    How easily and cheaply an option can be traded in reasonable size without moving its price. Liquid contracts have tight bid-ask spreads, steady volume and high open interest.
+  lesson: core-02-bid-ask-and-spread
+- term: Strike interval
+  aka: [strike spacing, strike increment]
+  def: >-
+    The gap between consecutive listed strikes, set by exchange listing rules. It generally widens as the share price rises and is narrower in actively traded names and near-term series.
+  lesson: core-02-expirations-strikes-symbols

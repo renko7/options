@@ -1,0 +1,42 @@
+- term: Trading plan
+  aka: [trade plan]
+  def: >-
+    A written statement, made before entering a trade, of the thesis, the structure, the entry price, the exits (profit, loss, invalidation and time), the size, and what would prove the thesis wrong.
+  lesson: core-12-trading-plan
+- term: Position sizing
+  aka: [sizing]
+  def: >-
+    Choosing how many contracts to trade so that the loss you would take in a bad outcome is a set, small fraction of the account. For defined-risk trades the bad outcome is the max loss; for undefined-risk trades it is a stress loss in an extreme but plausible move.
+  lesson: core-12-position-sizing
+- term: Risk of ruin
+  def: >-
+    The probability that a sequence of trades reduces an account to a level from which it cannot practically recover, such as half its starting value. It depends mostly on how much of the account each trade risks, not only on whether the strategy has an edge.
+  lesson: core-12-risk-of-ruin
+- term: Profit target
+  aka: [take-profit]
+  def: >-
+    A planned exit that closes a winning position once it has earned a set amount, for example buying back a credit spread when half the credit has been earned.
+  lesson: core-12-profit-targets
+- term: Probability of profit
+  aka: [POP]
+  def: >-
+    The probability that a position ends with any profit at all. It says nothing about how large the wins and losses are, so a high probability of profit can coexist with a negative expected value.
+  lesson: core-12-profit-targets
+- term: Stop-loss
+  def: >-
+    A planned exit that closes a losing position at a preset level. It can be defined on the option's price, the position's P&L, or the underlying's price; on options, the underlying's price is usually the more reliable trigger.
+  lesson: core-12-losing-trades
+- term: Rolling
+  aka: [roll]
+  def: >-
+    Closing an option position and opening a similar one with a later expiration, a different strike, or both, usually as one order. It is two trades: the closing trade realizes the P&L to date and the new position carries new risk.
+  lesson: core-12-losing-trades
+- term: Adjustment
+  def: >-
+    Changing an open position by adding or removing legs, for example adding a call spread to a short put spread, instead of closing it. An adjustment is only sound if you would open the resulting position as a new trade today.
+  lesson: core-12-losing-trades
+- term: Earnings announcement
+  aka: [earnings, earnings report]
+  def: >-
+    A company's scheduled release of its quarterly results. The stock often gaps on the news, so options expiring after the date carry extra implied volatility that collapses once the news is out.
+  lesson: core-12-earnings

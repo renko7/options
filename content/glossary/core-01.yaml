@@ -1,0 +1,113 @@
+- term: Option
+  aka: [options contract, listed option]
+  def: >-
+    A contract that gives its holder the right, but not the obligation, to buy (a call) or sell (a put) a fixed quantity of an underlying at a fixed price until a fixed date. The holder pays a premium for the right; the writer receives it and takes on the obligation.
+  lesson: core-01-calls-and-puts
+- term: Call
+  aka: [call option]
+  def: >-
+    An option that gives its holder the right to buy the underlying (100 shares for a standard equity option) at the strike price on or before the expiration date.
+  lesson: core-01-calls-and-puts
+- term: Put
+  aka: [put option]
+  def: >-
+    An option that gives its holder the right to sell the underlying (100 shares for a standard equity option) at the strike price on or before the expiration date.
+  lesson: core-01-calls-and-puts
+- term: Underlying
+  aka: [underlying asset, underlying security]
+  def: >-
+    The stock, ETF or index that an option gives the right to buy or sell, or whose value it settles against.
+  lesson: core-01-calls-and-puts
+- term: Strike price
+  aka: [strike, exercise price]
+  def: >-
+    The price per share at which the holder of an option may buy (call) or sell (put) the underlying. Listed strikes come at standard intervals set by the exchange.
+  lesson: core-01-calls-and-puts
+- term: Expiration date
+  aka: [expiration, expiry]
+  def: >-
+    The last day an option exists. Standard monthly US equity options expire on the third Friday of the month; weekly and long-dated series expire on other dates.
+  lesson: core-01-the-contract
+- term: Premium
+  aka: [option premium]
+  def: >-
+    The price of an option. It is quoted per share, so a standard equity option's dollar cost is the quoted premium times the 100-share multiplier. The buyer pays it and the writer keeps it whatever happens next.
+  lesson: core-01-calls-and-puts
+- term: Contract multiplier
+  aka: [multiplier]
+  def: >-
+    The number that converts a quoted option price into dollars per contract. For standard US equity and ETF options it is 100, because one contract covers 100 shares.
+  lesson: core-01-the-contract
+- term: Holder
+  aka: [option buyer, long the option]
+  def: >-
+    The owner of an option: the party who paid the premium and has the right to exercise. Also described as being long the option.
+  lesson: core-01-calls-and-puts
+- term: Writer
+  aka: [option seller, short the option]
+  def: >-
+    The party who sold an option to open: they received the premium and must fulfil the contract if assigned. Also described as being short the option.
+  lesson: core-01-calls-and-puts
+- term: Exercise
+  aka: [exercising]
+  def: >-
+    Using the right an option gives: buying the underlying at the strike (call) or selling it at the strike (put), or, for a cash-settled option, receiving its intrinsic value in cash.
+  lesson: core-01-calls-and-puts
+- term: Assignment
+  aka: [assigned, assignment notice]
+  def: >-
+    The notice that a writer must fulfil an option because a holder exercised it. An assigned call writer sells the underlying at the strike; an assigned put writer buys it at the strike. The OCC allocates assignments at random among clearing firms.
+  lesson: core-01-life-of-an-option
+- term: Moneyness
+  def: >-
+    Where an option's strike stands relative to the current price of the underlying: in the money, at the money or out of the money. It is measured in dollars, in percent of the stock price, or by delta.
+  lesson: core-01-moneyness
+- term: In the money
+  aka: [ITM]
+  def: >-
+    A call whose strike is below the underlying price, or a put whose strike is above it. An in-the-money option has intrinsic value and is normally exercised if it is still in the money at expiration.
+  lesson: core-01-moneyness
+- term: At the money
+  aka: [ATM]
+  def: >-
+    An option whose strike equals the underlying price; in practice, the strike nearest to it. At-the-money options carry the most extrinsic value of any strike.
+  lesson: core-01-moneyness
+- term: Out of the money
+  aka: [OTM]
+  def: >-
+    A call whose strike is above the underlying price, or a put whose strike is below it. An out-of-the-money option has no intrinsic value; its whole premium is extrinsic, and it expires worthless if it is still out of the money at expiration.
+  lesson: core-01-moneyness
+- term: Intrinsic value
+  def: >-
+    What an option would be worth if it expired now: the amount by which it is in the money, max(S − K, 0) for a call and max(K − S, 0) for a put, and never less than zero.
+  lesson: core-01-intrinsic-and-extrinsic
+- term: Extrinsic value
+  aka: [time value]
+  def: >-
+    The part of an option's premium above its intrinsic value: what is paid for the time left and the chance of a favorable move. It is largest at the money and falls to zero at expiration.
+  lesson: core-01-intrinsic-and-extrinsic
+- term: Options Clearing Corporation
+  aka: [OCC]
+  def: >-
+    The central clearinghouse that issues and guarantees every US exchange-listed option. It stands between buyer and seller, processes exercises and assigns them to writers.
+  lesson: core-01-calls-and-puts
+- term: Buy to open
+  def: >-
+    An order that buys an option to start or add to a long position, making you a holder.
+  lesson: core-01-calls-and-puts
+- term: Sell to open
+  def: >-
+    An order that sells an option you do not hold, starting or adding to a short position and making you a writer with the obligation to deliver if assigned.
+  lesson: core-01-calls-and-puts
+- term: Buy to close
+  def: >-
+    An order that buys back an option you previously wrote, ending or reducing your short position and your obligation.
+  lesson: core-01-calls-and-puts
+- term: Sell to close
+  def: >-
+    An order that sells an option you hold, ending or reducing your long position.
+  lesson: core-01-calls-and-puts
+- term: Open position
+  def: >-
+    An option you hold or have written that has not yet been closed, exercised, assigned or expired. Every open long option is matched by an open short option somewhere in the market.
+  lesson: core-01-life-of-an-option

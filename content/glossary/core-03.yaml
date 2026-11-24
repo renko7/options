@@ -1,0 +1,56 @@
+- term: Payoff diagram
+  aka: [payoff chart, P&L diagram, risk graph]
+  def: >-
+    A chart of a position's profit or loss at expiration (vertical axis) against the price of the underlying at expiration (horizontal axis). For options and stock it is made of straight lines that bend only at strikes.
+  lesson: core-03-payoff-diagrams
+- term: Break-even
+  aka: [break-even price, breakeven]
+  def: >-
+    An underlying price at expiration at which a position neither makes nor loses money. A long call breaks even at strike plus premium; a long put at strike minus premium.
+  lesson: core-03-payoff-diagrams
+- term: Long call
+  def: >-
+    A position that holds a call. It profits if the underlying finishes above the strike plus the premium; the maximum loss is the premium and the maximum profit is unlimited.
+  lesson: core-03-long-call-and-long-put
+- term: Long put
+  def: >-
+    A position that holds a put. It profits if the underlying finishes below the strike minus the premium; the maximum loss is the premium and the maximum profit is the strike minus the premium, times 100, reached if the underlying goes to zero.
+  lesson: core-03-long-call-and-long-put
+- term: Short call
+  def: >-
+    A position that has written a call. The maximum profit is the premium received; above the strike plus the premium it loses money, without limit if the call is naked.
+  lesson: core-03-short-call-and-short-put
+- term: Short put
+  def: >-
+    A position that has written a put. The maximum profit is the premium received; below the strike minus the premium it loses money, up to the strike minus the premium, times 100, if the underlying goes to zero.
+  lesson: core-03-short-call-and-short-put
+- term: Max profit
+  aka: [maximum profit]
+  def: >-
+    The largest profit a position can make at expiration over all possible underlying prices. It can be unlimited, as for a long call.
+  lesson: core-03-long-call-and-long-put
+- term: Max loss
+  aka: [maximum loss]
+  def: >-
+    The largest loss a position can suffer at expiration over all possible underlying prices. For a long option it is the premium paid; for a naked short call it is unlimited.
+  lesson: core-03-long-call-and-long-put
+- term: Naked option
+  aka: [uncovered option, naked call, naked put]
+  def: >-
+    A short option not offset by a position in the underlying or by a long option that limits its risk. Writing naked options requires a high approval level and margin.
+  lesson: core-03-short-call-and-short-put
+- term: Defined risk
+  aka: [limited risk]
+  def: >-
+    A position whose maximum loss is known and finite when it is opened, such as any long option or a spread in which every short option is covered by a long one.
+  lesson: core-03-short-call-and-short-put
+- term: Undefined risk
+  aka: [unlimited risk]
+  def: >-
+    A position whose maximum loss is unlimited or not meaningfully capped, such as a naked short call. Brokers require higher approval levels and margin for it.
+  lesson: core-03-short-call-and-short-put
+- term: Profit and loss
+  aka: [P&L, PnL]
+  def: >-
+    The gain or loss on a position: its current or final value minus what it cost to open (or, for short positions, what was received minus what it costs to close).
+  lesson: core-03-payoff-diagrams

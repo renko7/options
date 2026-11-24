@@ -1,0 +1,55 @@
+- term: Put-call parity
+  aka: [parity]
+  def: >-
+    The no-arbitrage relationship between a European call and put with the same strike and expiration: call minus put equals the stock price discounted for dividends minus the strike discounted at the risk-free rate, \(C - P = S\,e^{-qT} - K\,e^{-rT}\).
+  lesson: core-04-put-call-parity
+- term: Arbitrage
+  aka: [riskless arbitrage]
+  def: >-
+    A set of trades that locks in a profit with no risk and no net money put up, usually by buying something and selling an equivalent for more. Competition among professional traders keeps prices close to levels where no arbitrage is possible.
+  lesson: core-04-put-call-parity
+- term: Risk-free rate
+  aka: [interest rate]
+  def: >-
+    The interest rate on a loan with no default risk, in practice the yield on short-term US Treasury bills. It is one of the six inputs to an option's price: higher rates raise call prices and lower put prices.
+  lesson: core-04-volatility-and-carry
+- term: Volatility
+  aka: [vol, sigma]
+  def: >-
+    How widely an underlying's price swings, measured as the annualized standard deviation of its returns. Over a period of \(T\) years a typical move is about \(\sigma\sqrt{T}\); higher volatility raises the price of both calls and puts.
+  lesson: core-04-volatility-and-carry
+- term: Forward price
+  aka: [forward]
+  def: >-
+    The price, agreed today, at which an asset will be bought on a future date with both sides committed. No arbitrage fixes it at \(F = S\,e^{(r-q)T}\), the spot price grown by the cost of carry; options are priced around the forward rather than around spot.
+  lesson: core-04-volatility-and-carry
+- term: Synthetic position
+  aka: [synthetic, synthetics, synthetic stock]
+  def: >-
+    A combination of options, stock and cash that reproduces the payoff of another position, found by rearranging put-call parity. For example, a long call plus a short put at the same strike and expiration is synthetic long stock.
+  lesson: core-04-put-call-parity
+- term: Conversion
+  aka: [conversion trade]
+  def: >-
+    Long stock, long put and short call at the same strike and expiration. Whatever happens, the stock is sold at the strike at expiration, so the position is worth a fixed amount and its fair cost is set by put-call parity.
+  lesson: core-04-conversions-and-reversals
+- term: Reversal
+  aka: [reverse conversion]
+  def: >-
+    Short stock, short put and long call at the same strike and expiration: the mirror image of a conversion. Whatever happens, the stock is bought back at the strike at expiration; it requires borrowing the shares.
+  lesson: core-04-conversions-and-reversals
+- term: Black-Scholes model
+  aka: [Black-Scholes, Black-Scholes-Merton, BSM]
+  def: >-
+    The standard option-pricing formula, which values a European option from spot, strike, time, volatility, the risk-free rate and the dividend yield. It assumes constant volatility, continuous price moves and frictionless trading, and is used by the market as a translator between prices and implied volatilities.
+  lesson: core-04-black-scholes
+- term: Time decay
+  aka: [option decay]
+  def: >-
+    The loss of an option's time value as expiration approaches, with nothing else changing. Because time value grows with the square root of time, decay is slow far from expiration and fastest in the final weeks.
+  lesson: core-04-time-value
+- term: Carry
+  aka: [cost of carry]
+  def: >-
+    The net cost or benefit of holding an asset over time: the interest the money tied up in it could have earned, minus the dividends (or other income) it pays, plus any borrowing fees for a short position. Carry sets the forward price.
+  lesson: core-04-volatility-and-carry

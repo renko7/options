@@ -1,0 +1,64 @@
+- term: Options approval level
+  aka: [options trading level, options level, approval tier]
+  def: >-
+    The set of option strategies a broker has approved an account to trade, assigned after reviewing the customer's experience, finances and objectives. Typical tiers run from covered calls, to long options, to spreads, to naked options; the tiers are set by each broker.
+  lesson: core-08-approval-and-accounts
+- term: Margin account
+  def: >-
+    A brokerage account in which the customer can borrow against securities and carry option positions secured by a margin requirement rather than by the full amount at risk. It requires a margin agreement, at least $2,000 of equity under FINRA rules, and lets the broker liquidate positions if equity falls short.
+  lesson: core-08-approval-and-accounts
+- term: Reg T margin
+  aka: [Regulation T, Reg T, strategy-based margin]
+  def: >-
+    The strategy-based margin system set by the Federal Reserve's Regulation T together with FINRA and exchange rules: fixed formulas for each strategy, such as full payment for short-dated long options, a percentage of the underlying for naked options and the strike width for spreads.
+  lesson: core-08-option-margin
+- term: Buying power
+  def: >-
+    The dollar value of new positions a broker will let an account open at the moment, given its cash, positions and margin already in use. For options it is roughly one dollar per dollar of excess equity, because short-dated options cannot be bought on margin.
+  lesson: core-08-buying-power-day-trading
+- term: Pattern day trader
+  aka: [PDT, pattern day trader rule, PDT rule]
+  def: >-
+    Under FINRA's former day-trading rule, a margin customer who made four or more day trades within five business days, required to keep at least $25,000 of equity. FINRA replaced the rule with intraday margin standards effective June 4, 2026, with brokers allowed to phase them in until October 20, 2027.
+  lesson: core-08-buying-power-day-trading
+- term: Limit order
+  def: >-
+    An order to buy at no more than, or sell at no less than, a stated price. It may fill at that price or better, partly, or not at all. The standard way to trade options.
+  lesson: core-08-order-types
+- term: Market order
+  def: >-
+    An order to buy or sell immediately at the best available price. On options it pays the full bid-ask spread and can fill much worse in fast or thin markets.
+  lesson: core-08-order-types
+- term: Stop order
+  aka: [stop-limit order]
+  def: >-
+    An order that stays inactive until a trigger price is reached and then becomes a market order (a stop-limit order becomes a limit order instead). On options, what triggers it varies by broker, and wide momentary quotes can set it off.
+  lesson: core-08-order-types
+- term: Good-til-canceled order
+  aka: [GTC, GTC order]
+  def: >-
+    An order that keeps working across trading days until it is filled, canceled, the option expires or the broker's maximum duration passes. A day order, by contrast, expires at the end of the session.
+  lesson: core-08-order-types
+- term: Complex order
+  aka: [spread order, multi-leg order, combo order]
+  def: >-
+    A single order for two or more option legs (and sometimes stock) at one net price, filled all together or not at all.
+  lesson: core-08-spread-orders-and-costs
+- term: Legging
+  aka: [legging in, legging out, legging risk]
+  def: >-
+    Entering or exiting the legs of a spread as separate orders. The market can move between the legs, so the final net price may be worse than a single complex order would have achieved.
+  lesson: core-08-spread-orders-and-costs
+- term: Fill
+  aka: [execution]
+  def: >-
+    The execution of an order, or of part of it: the price and quantity actually traded.
+  lesson: core-08-spread-orders-and-costs
+- term: Slippage
+  def: >-
+    The difference between the price at which an order fills and the mid price when it was sent; for a buy, the fill minus the mid. It is the most direct measure of what crossing the bid-ask spread cost.
+  lesson: core-08-spread-orders-and-costs
+- term: Portfolio margin
+  def: >-
+    A risk-based margin method that sets the requirement from the worst loss of the whole portfolio across a range of price moves, instead of fixed strategy formulas. It requires broker approval and large account equity (at least $100,000 under FINRA's minimum where the broker monitors intraday, and often more).
+  lesson: core-08-approval-and-accounts

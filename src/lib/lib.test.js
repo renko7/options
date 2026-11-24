@@ -170,6 +170,7 @@ test('chain is deterministic, has sane quotes and obeys parity on theo values', 
     }
   }
   assert.equal(a.rows.length, 13);
+  for (const row of a.rows) assert.ok(row.put.theo >= Math.max(row.strike - 100, 0) && row.call.theo >= Math.max(100 - row.strike, 0), `American floor at ${row.strike}`);
   assert.equal(chain(HBR, { dte: 7 }).rows[6].strike, 5000);
 });
 

@@ -77,12 +77,12 @@ Now change one input at a time, leaving the others at those values:
 Read the table for sizes, not just signs:
 
 - A $5 rise in the stock adds {{ usd(bS.c - b0.c) }} to the call. The call is now {{ usd(intr105) }} in the money, so {{ usd(intr105) }} of its {{ usd(bS.c) }} is [[intrinsic value]].
-- Five points of volatility moves both options by about the same amount, {{ usd(bV.c - b0.c) }} on the call and {{ usd(bV.p - b0.p) }} on the put. For [[at the money]] options, volatility is as powerful as a several-dollar move in the stock.
+- Five points of volatility moves both options by about the same amount, {{ usd(bV.c - b0.c) }} on the call and {{ usd(bV.p - b0.p) }} on the put. For [[at the money]] options, five points of volatility is worth about as much as a $1 move in the stock, and volatility can move five points in a day around news.
 - Almost doubling the time to expiration does *not* double the price: the call goes from {{ usd(b0.c) }} to {{ usd(bT.c) }}. Time value grows more slowly than time, a fact the next Lesson, [Time value and decay](#core-04-time-value), builds on.
 - A full percentage point on the rate or the dividend yield moves a 30-day option by only a few cents.
 :::
 
-The last point changes with time. Rates and dividends act on the option through the whole life of the contract, so their effect grows with \(T\). For the 394-day [[LEAPS]] 100 call, the same move from 4% to 5% lifts the price from {{ usd(leap.c) }} to {{ usd(leapR.c) }}, a change of {{ usd(leapR.c - leap.c) }}. On a one-month option you can ignore rates; on a two-year option you cannot.
+The last point changes with time. Rates and dividends act on the option through the whole life of the contract, so their effect grows with \(T\). For the 394-day [[LEAPS]] 100 call, the same move from 4% to 5% lifts the price from {{ usd(leap.c) }} to {{ usd(leapR.c) }}, a change of {{ usd(leapR.c - leap.c) }}. On a one-month option you can ignore rates; on a LEAPS you cannot.
 
 ## Which inputs matter day to day
 
@@ -142,7 +142,7 @@ An option's price is set by six inputs: spot, strike, time, volatility, the risk
       The 394-day call, because the rate acts over the whole life of the option
   answer: 2
   explain: >-
-    Rates affect an option through the interest earned or paid over its life, so the effect grows with time. The LEAPS call moves by {{ usd(leapR.c - leap.c) }}, the 30-day call by only {{ usd(bR.c - b0.c) }}. Short-dated options do react faster to the *stock* (that is gamma, covered in Module 5), but not to rates.
+    Rates affect an option through the interest earned or paid over its life, so the effect grows with time. The LEAPS call moves by {{ usd(leapR.c - leap.c) }}, the 30-day call by only {{ usd(bR.c - b0.c) }}. Short-dated options do react faster to the *stock* (that is gamma, covered in [The Greeks in practice](#core-05)), but not to rates.
 - q: >-
     Of the six inputs, which one can nobody observe at the time of the trade?
   choices:

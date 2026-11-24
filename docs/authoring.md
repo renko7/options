@@ -23,7 +23,7 @@ The **Learner** has bought and sold stocks through a broker and has never traded
 | Dividend | $0.50 quarterly; priced as 2% continuous yield (`ACME.q`) | 1.5% yield (`HBR.q`) |
 | Style / settlement | American, physical (100 shares) | European, cash ($100 × index) |
 
-Risk-free rate `RATE` = 4.00%. The Course's "today" is **Wednesday, November 18, 2026** (`TODAY`). Listed ACME expirations (`EXPIRATIONS`): 2 DTE (Nov 20), 9 DTE (Nov 27), **30 DTE (Dec 18, the December monthly)**, 58 DTE (Jan 15, 2027), 121 DTE (Mar 19), 212 DTE (Jun 18), 394 DTE (Dec 17, 2027, LEAPS). Prefer these expirations in examples. Strikes are $5 apart for ACME ($1 near the money is fine for weeklies if you say so), 25 points for HBR.
+Risk-free rate `RATE` = 4.00%. The Course's "today" is **Wednesday, November 18, 2026** (`TODAY`). Listed ACME expirations (`EXPIRATIONS`): 2 DTE (Nov 20, the November monthly), 9 DTE (Nov 27), **30 DTE (Dec 18, the December monthly)**, 58 DTE (Jan 15, 2027), 121 DTE (Mar 19), 212 DTE (Jun 18), 394 DTE (Dec 17, 2027, LEAPS). Prefer these expirations in examples. Strikes are $5 apart for ACME ($1 near the money is fine for weeklies if you say so), 25 points for HBR.
 
 ## Files
 

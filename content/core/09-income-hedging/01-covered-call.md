@@ -26,7 +26,7 @@ const calledRet = (105 - 100 + prem) / 100;
 
 You own 100 shares of ACME at $100. You like the company, you plan to hold it, and you would not mind selling it at $105. Right now that willingness earns you nothing. A [[covered call]] turns it into cash: you sell a call against the shares and keep the premium, whatever happens.
 
-The call is "covered" because you already own the shares you might have to deliver. If the call is exercised against you, your broker hands over your 100 shares at the strike; you never have to buy stock in the market at a higher price. That is what separates it from the [[naked option|naked]] short call in [Payoffs at expiration](#core-03), whose loss has no limit.
+The call is "covered" because you already own the shares you might have to deliver. If the call is exercised against you, your broker hands over your 100 shares at the strike; you never have to buy stock in the market at a higher price. That is what separates it from the [[naked|naked option]] short call in [Payoffs at expiration](#core-03), whose loss has no limit.
 
 ## The position
 
@@ -38,8 +38,8 @@ You own 100 ACME at $100. The December 105 call, expiring {{ longDate(exp) }}, i
 At expiration:
 
 - **ACME at or below $105.** The call expires worthless. You keep your shares and the {{ usd(prem * 100) }}. At exactly $100, your profit is {{ usd(payoff.pnlAtExpiry(cc, 100)) }}: the premium.
-- **ACME above $105.** The call is exercised and your shares are [[call away|called away]] at $105. You collect $500 of gain on the stock plus the premium: {{ usd(s.maxProfit) }}, the [[max profit]]. It is the same at $106 as at $160.
-- **ACME falls.** The premium offsets the first {{ usd(prem) }} of the decline, so you [[break-even|break even]] at {{ usd(s.breakevens[0]) }}. Below that you lose dollar for dollar, like any shareholder. If ACME went to zero you would lose {{ usd(-s.maxLoss) }}.
+- **ACME above $105.** The call is exercised and your shares are [[called away|call away]] at $105. You collect $500 of gain on the stock plus the premium: {{ usd(s.maxProfit) }}, the [[max profit]]. It is the same at $106 as at $160.
+- **ACME falls.** The premium offsets the first {{ usd(prem) }} of the decline, so you [[break even|break-even]] at {{ usd(s.breakevens[0]) }}. Below that you lose dollar for dollar, like any shareholder. If ACME went to zero you would lose {{ usd(-s.maxLoss) }}.
 :::
 
 Written as a formula, with \(S_T\) the stock price at expiration, \(S_0\) what you paid for the shares and \(c\) the premium:
@@ -108,7 +108,7 @@ At the moment you open the trade, with ACME at $100:
 | [[Position delta]] | {{ num(g.delta, 0) }} shares | You now behave like {{ num(g.delta, 0) }} shares, not 100. The short call took away about {{ num(100 - g.delta, 0) }}. |
 | [[Theta]] | {{ signedUsd(g.theta) }} a day | Time passing pays you. |
 | [[Vega]] | {{ signedUsd(g.vega) }} per vol point | A rise in implied volatility costs you, because you are short an option. |
-| [[Gamma]] | {{ signed(g.gamma, 2) }} | As ACME rises, your delta falls toward zero; as it falls, delta rises toward 100. |
+| [[Gamma]] | {{ signed(g.gamma, 2) }} shares per $1 | As ACME rises, your delta falls toward zero; as it falls, delta rises toward 100. |
 
 That last line is the covered call in one sentence: the position gets less long as the stock goes up and more long as it goes down. See [The Greeks in practice](#core-05) if any of these are unfamiliar.
 

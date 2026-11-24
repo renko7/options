@@ -1,0 +1,50 @@
+- term: Greeks
+  aka: [the Greeks, option Greeks]
+  def: >-
+    The sensitivities of an option's price to its inputs: delta and gamma (the underlying's price), theta (time), vega (implied volatility) and rho (interest rates). Traders add them across legs to see a position's risks.
+  lesson: core-05-delta
+- term: Delta
+  aka: [hedge ratio]
+  def: >-
+    The change in an option's price for a $1 move in the underlying: between 0 and 1 for calls, between −1 and 0 for puts. Times 100, it is the number of shares one contract behaves like.
+  lesson: core-05-delta
+- term: Gamma
+  aka: [convexity]
+  def: >-
+    The change in an option's delta for a $1 move in the underlying. It is positive for every long option, largest at the money and near expiration, and makes holders gain more on big moves than delta alone predicts.
+  lesson: core-05-gamma
+- term: Theta
+  aka: [theta decay]
+  def: >-
+    The change in an option's price when one calendar day passes with everything else unchanged. It is negative for long options and positive for short ones, and at the money it grows steeply into expiration.
+  lesson: core-05-theta
+- term: Vega
+  aka: [kappa]
+  def: >-
+    The change in an option's price for a one-percentage-point rise in implied volatility. It is the same for a call and a put at the same strike, largest at the money, and grows with the square root of time to expiration.
+  lesson: core-05-vega-and-rho
+- term: Rho
+  aka: [interest rate sensitivity]
+  def: >-
+    The change in an option's price for a one-percentage-point rise in the risk-free rate: positive for calls, negative for puts. It grows roughly in proportion to time and matters mainly for long-dated options.
+  lesson: core-05-vega-and-rho
+- term: Delta-neutral
+  aka: [flat delta]
+  def: >-
+    Having a total position delta of zero, so the position neither gains nor loses on the next small move in the underlying. It must be maintained by re-hedging, because gamma changes delta as the price moves.
+  lesson: core-05-delta
+- term: Position delta
+  aka: [net delta]
+  def: >-
+    The sum of the deltas of every leg of a position, each multiplied by its number of contracts and the multiplier (shares count one delta each). It is usually expressed in shares.
+  lesson: core-05-position-greeks
+- term: Share-equivalent delta
+  aka: [share equivalents, delta shares]
+  def: >-
+    A position's delta expressed as the number of shares of the underlying that would gain or lose the same for a small move. Multiplied by the share price, it gives dollar delta.
+  lesson: core-05-position-greeks
+- term: Dollar gamma
+  aka: [cash gamma]
+  def: >-
+    Gamma expressed in dollars so positions on different underlyings can be compared, usually as the change in dollar delta for a 1% move in the underlying (position gamma × S² ÷ 100). Some desks quote instead the profit from gamma on a 1% move, which is smaller; check the convention.
+  lesson: core-05-gamma
