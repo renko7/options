@@ -125,7 +125,7 @@ Realized volatility is the annualized standard deviation of daily log returns: d
       About {{ pct(0.02 * 252, 0) }}
   answer: 1
   explain: >-
-    Annualize with the square root of trading days: 2.0% × \(\sqrt{252}\) = 2.0% × {{ num(Math.sqrt(252), 2) }} = {{ pct(0.02 * Math.sqrt(252), 1) }}. {{ pct(0.02 * 252, 0) }} multiplies by 252 instead of its square root, as if moves added up in proportion to time. {{ pct(0.02 * 12, 0) }} is 2.0% × 12, which would be right for monthly returns, not daily ones.
+    Annualize with the square root of trading days: 2.0% × \(\sqrt{252}\) = 2.0% × {{ num(Math.sqrt(252), 2) }} = {{ pct(0.02 * Math.sqrt(252), 1) }}. {{ pct(0.02 * 252, 0) }} multiplies by 252 instead of its square root, as if moves added up in proportion to time. {{ pct(0.02 * 12, 0) }} is 2.0% × 12, which scales by the number of months in a year; a daily standard deviation scales by the square root of the number of trading days.
 - q: >-
     ACME's options trade at {{ pct(iv, 0) }} implied volatility and its realized volatility over the past month is {{ pct(rv, 1) }}. Which statement is correct?
   choices:

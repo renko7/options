@@ -79,7 +79,7 @@ steps:
           Hold the calls to expiration to get the full move
         grade: acceptable
         feedback: >-
-          If ACME finishes at $110 you make {{ signedUsd(pnl(100, 110)) }}, only {{ usd(pnl(100, 110) - closePnl) }} more than closing now, and if it slips back below $100 you lose {{ usd(ask(100) * 200) }}. Holding is not wrong, but you are risking most of a large gain for a small extra amount.
+          If ACME finishes at $110 you make {{ signedUsd(pnl(100, 110)) }}, only {{ usd(pnl(100, 110) - closePnl) }} more than closing now, and if it slips back below $100 you lose {{ usd(ask(100) * 200) }}. Holding is not wrong, but you are risking most of a large gain for a small extra amount. Holding through December 10 also brings an ex-dividend decision: these deep in-the-money calls carry only about {{ usd(m100.mid - 8) }} a share of extrinsic value, less than the $0.50 dividend, so exercising them the day before the ex-dividend date is worth more than holding through it ([Exercise, assignment and expiration](#core-07) explains).
       - text: >-
           Buy four more December 100 calls; the launch is working
         grade: poor

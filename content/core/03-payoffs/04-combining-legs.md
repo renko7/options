@@ -86,7 +86,7 @@ That is a synthetic long stock, a [[synthetic position]]. The fact that a call, 
 - **P&L adds, at every price.** Value each leg at expiration, subtract or add its premium, multiply by its quantity and 100, and sum.
 - **Premiums net.** Pay for some legs, collect for others; the net is a debit (you pay) or a credit (you receive). Your maximum profit and loss both include it.
 - **Slopes add.** Sum each leg's slope region by region to get the shape before you compute anything.
-- **Short legs can be covered by long ones.** A short call's unlimited risk is capped by owning the shares or by a long call that expires no earlier: at a lower strike the long call covers it completely, at a higher strike it limits the loss to the gap between the strikes. Check every short leg: if any region slopes downward without limit, the position has undefined risk.
+- **Short legs can be covered by long ones.** A short call's unlimited risk is capped by owning the shares or by a long call that expires no earlier: at a lower strike the long call covers it completely, at a higher strike it limits the loss to the gap between the strikes. Check every short leg: a short option not covered by shares or a long option makes the position undefined risk, and if any region slopes downward without limit, its loss has no ceiling at all.
 
 :::practice Trade combinations as one order
 Legs that belong together should be entered as a single multi-leg order with a net limit price. Entering them one at a time ("legging in") exposes you to the stock moving between fills, and can leave you holding a naked short leg if the second order never fills. [Accounts and orders](#core-08) shows how complex orders work.
@@ -101,7 +101,7 @@ The builder below holds the 100/110 bull call spread. Change the short strike to
 ```
 
 :::key
-The P&L of a combination at expiration is the sum of its legs' P&L at each price, and the slope of its diagram in each region is the sum of the legs' slopes. Sketch the shape from slopes, then pin it with one or two computed values. Check every short leg for cover: a region that slopes down without limit means undefined risk.
+The P&L of a combination at expiration is the sum of its legs' P&L at each price, and the slope of its diagram in each region is the sum of the legs' slopes. Sketch the shape from slopes, then pin it with one or two computed values. Check every short leg for cover: an uncovered short option means undefined risk, and a region that slopes down without limit means unlimited loss.
 :::
 
 ```quiz

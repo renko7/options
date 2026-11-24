@@ -18,7 +18,7 @@ const startEq = 4000;
 const putReq0 = 100 * Math.max(p95bid + 0.20 * 100 - 5, p95bid + 0.10 * 95);
 const cashAfter = startEq + p95bid * 100 - 9500;
 const eqAfter = cashAfter + 88 * 100;
-const halfStock = 0.5 * 88 * 100;
+const halfStock = 0.5 * 9500;
 // dividend risk: decision at the close on Wed Dec 9, ACME opens ex-dividend Thu Dec 10
 const exDate = longDate(ACME_EX_DIVIDEND);
 const decDay = longDate(expiryDate(21));
@@ -44,7 +44,7 @@ When a holder exercises, the [[Options Clearing Corporation]] does not trace the
 
 :::rule Allocation of assignments (as of 2026)
 - The OCC assigns exercise notices to clearing members' accounts on a random basis.
-- FINRA Rule 2360 requires each broker to have fixed procedures for allocating assignments to its customers, on a first-in-first-out basis, by automated random selection, or by another fair method permitted by the rule, and to tell customers which method it uses. Your broker's options agreement or website describes its method.
+- FINRA Rule 2360 requires each broker to have fixed procedures for allocating assignments to its customers, on a first-in-first-out basis, by automated random selection, or by manual random selection, and to tell customers which method it uses. Your broker's options agreement or website describes its method.
 :::
 
 Two consequences follow. First, how long you have been short does not protect you; under a random method a position opened this morning can be assigned tonight. Second, assignment can be partial: if you are short ten contracts, you might be assigned on three.
@@ -67,7 +67,7 @@ You sold one ACME December 105 call at {{ usd(c105bid) }}, collecting {{ usd(c10
 - At $112 the short shares show a loss of {{ usd(callLoss) }} against the $105 sale price. Net of the premium you kept, you are down {{ usd(callNet) }}, exactly what the call would have cost you at expiration with ACME at $112.
 - Short stock carries its own margin requirement. Under the FINRA maintenance minimum it is the greater of 30% of the market value or $5 a share: {{ usd(shortMaint) }} at $112, and it rises as ACME rises. You also owe any dividend paid while you are short, and your broker may charge a fee to borrow the shares.
 
-The assignment did not change your profit and loss: the call was deep enough in the money to behave like short stock already. What changed is the *form* of the risk: a short call has a fixed expiration; short stock stays open until you buy it back.
+The assignment did not hurt your profit and loss: you lost the call's intrinsic value, exactly as you would have at expiration, and the holder who exercised gave up whatever extrinsic value the call had left. What changed is the *form* of the risk: a short call has a fixed expiration; short stock stays open until you buy it back.
 :::
 
 :::example A short put assigned, and the cash it needs
@@ -78,7 +78,7 @@ At expiration ACME closes at $88 and you are assigned: you buy 100 shares at $95
 - Cash: {{ usd(startEq) }} + {{ usd(p95bid * 100) }} premium − {{ usd(9500) }} = **{{ usd(cashAfter) }}**, a margin loan.
 - Stock: 100 shares worth {{ usd(88 * 100) }}. Equity: {{ usd(eqAfter) }}.
 
-Your account was sized for a {{ usd(putReq0) }} option requirement and now holds an {{ usd(88 * 100) }} stock position. Reg T expects roughly half of a new stock purchase to be paid for with your own money, about {{ usd(halfStock) }} here, more than your equity. Expect a margin call: deposit cash or sell shares, usually within a few days. The exact amount and deadline depend on your broker.
+Your account was sized for a {{ usd(putReq0) }} option requirement and now holds an {{ usd(88 * 100) }} stock position. Reg T expects half of a new stock purchase to be paid for with your own money: half of the {{ usd(9500) }} you just paid, or {{ usd(halfStock) }}, more than your equity. Expect a margin call: deposit cash or sell shares, usually within a few days. The exact amount and deadline depend on your broker.
 :::
 
 :::warning Assignment can arrive at the worst moment
@@ -87,7 +87,7 @@ Assignment happens overnight and you learn about it the next morning. A short ca
 
 ## Assignment inside a spread
 
-If you hold a spread, only the short leg can be assigned. Your long leg is still there and still protects you: the spread's maximum loss at expiration has not changed. What changes is the cash and margin: for a night you hold stock plus an option instead of two options, and your broker margins it that way.
+If you hold a spread, only the short leg can be assigned. Your long leg is still there and still protects you: the spread's maximum loss at expiration has not changed, apart from any dividend or borrow fee you owe while you are short stock (see dividend risk below). What changes is the cash and margin: for a night you hold stock plus an option instead of two options, and your broker margins it that way.
 
 The usual fixes are to buy (or sell) the shares in the market to flatten the stock, keeping the long option for its remaining value, or to exercise the long option to deliver against the assignment. Compare the long option's extrinsic value with the cost of the stock trade: exercising throws away extrinsic value; buying shares costs a bid-ask spread.
 
@@ -106,7 +106,7 @@ Now multiply it. A trader short {{ int(spreads) }} of these calls, as the short 
 The defence is simple and must happen before the close on the day before the ex-date:
 
 1. List every short call that is in the money.
-2. For each, estimate the extrinsic value it will have after the ex-date (its ask minus intrinsic value, minus the dividend, is a quick approximation).
+2. For each, estimate the extrinsic value it will have after the ex-date: the ask of the put with the same strike and expiration, plus the interest on the strike until expiration (the parity result from the previous Lesson).
 3. If that is less than the dividend, buy the call back (or roll it to a later or higher strike) before the close.
 
 Covered call writers face the same arithmetic in a gentler form: if assigned, the shares are called away the day before the ex-date and you do not receive the dividend you may have been counting on.

@@ -128,10 +128,10 @@ Monthly options expire on the third Friday, weeklies on other days, and LEAPS a 
     - >-
       {{ longDate('2027-01-15') }}
     - >-
-      {{ longDate('2027-12-17') }}, because it is the furthest out
+      None of them; monthly options expire on the last Friday of the month
   answer: 1
   explain: >-
-    January 15, 2027 is the third Friday of January, the standard monthly expiration. November 27 is the fourth Friday of November, so it is a weekly. December 17, 2027 is also a third Friday, but at more than a year away it is classed as a LEAPS; distance alone does not make an option a monthly.
+    January 15, 2027 is the third Friday of January, the standard monthly expiration. November 27 is the fourth (and last) Friday of November, so it is a weekly. Monthlies expire on the third Friday, not the last one, so "none of them" is wrong.
 - q: >-
     The ACME 100 call costs {{ m(a30) }} for 30 days and {{ m(a121) }} for 121 days. Which statement is right?
   choices:

@@ -109,9 +109,9 @@ steps:
           Filled at {{ usd(exitPx) }}, you make ({{ usd(exitPx) }} − {{ usd(fill) }}) × 100 × 5 = {{ signedUsd(pnl(exitPx)) }}. Many traders work the entry carefully and then leave money on the table on the exit; working both saves the spread twice.
       - text: >-
           Sell to close at market
-        grade: acceptable
+        grade: poor
         feedback: >-
-          You are out immediately at the bid, {{ usd(ex.bid) }}, for a profit of {{ signedUsd(pnl(ex.bid)) }}. That is {{ usd(pnl(exitPx) - pnl(ex.bid)) }} less than a fill near the mid, the cost of impatience. If the market were moving fast against you, speed might be worth it; here it is not.
+          A market order names no price. In this quiet market it would probably fill at the bid, {{ usd(ex.bid) }}, for a profit of {{ signedUsd(pnl(ex.bid)) }}, already {{ usd(pnl(exitPx) - pnl(ex.bid)) }} less than a fill near the mid; if the quote moves or thins before the order arrives, it fills lower still. Even when you need out fast, a limit order to sell at the bid (or a tick through it) gets out just as fast without handing the market an unknown price.
 wrap: >-
   Reading a chain is about turning a view into a specific contract and a fair price. Choose an expiration that fits your timetable, a strike near the money, and a contract with a tight spread and real open interest. Then trade only with limit orders: start near the mid, step in small increments, re-anchor when the stock moves, and treat the last price as history. The spread you save on the way in and on the way out is real money on every trade you make.
 ```

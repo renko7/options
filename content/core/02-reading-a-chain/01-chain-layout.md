@@ -94,7 +94,7 @@ Most traders keep a compact default view: bid, ask, volume, open interest, IV an
 
 ## Try it
 
-The chain Tool below shows the ACME chain. Switch expiration tabs and watch how the prices and the range of deltas change: short-dated chains have deltas near 0 or 1 everywhere except right at the money, while long-dated chains spread them out. Switch to the Greeks view to see the mid, delta and the other Greeks.
+The chain Tool below shows the ACME chain. Switch expiration tabs and watch how the prices and the range of deltas change: short-dated chains have deltas near 0 or ±1 everywhere except right at the money, while long-dated chains spread them out. Switch to the Greeks view to see the mid, delta and the other Greeks.
 
 ```tool chain
 { underlying: 'ACME', dte: 30, view: 'quote', highlight: [{ strike: 105, type: 'call' }, { strike: 105, type: 'put' }] }

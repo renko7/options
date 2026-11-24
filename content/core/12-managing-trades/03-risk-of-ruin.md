@@ -96,7 +96,7 @@ Setting the derivative to zero,
 
 \[ \frac{pW}{1 + fW} = \frac{qL}{1 - fL} \;\Longrightarrow\; pW(1 - fL) = qL(1 + fW) \;\Longrightarrow\; f^{*} = \frac{p}{L} - \frac{q}{W}, \]
 
-using \( p + q = 1 \). Here \( f^{*} = {{ num(p) }} - {{ num(q) }} / {{ num(W, 1) }} = {{ pct(kelly, 0) }} \).
+using \( p + q = 1 \). Here \( f^{*} = {{ num(p) }} - {{ num(q) }} / {{ num(W, 1) }} = {{ num(kelly) }} \), that is {{ pct(kelly, 0) }} of the account.
 
 Kelly is a ceiling, not a target. At the full Kelly fraction the account grows fastest in the very long run, yet the swings are brutal: in the table, risking {{ pct(0.20, 0) }}, a little above Kelly, halved {{ pct(r(0.20).ruin, 0) }} of the accounts. Near twice Kelly the growth rate falls to almost nothing: the expected log-growth per trade is {{ signed(growth(kelly), 4) }} at Kelly, {{ signed(growth(0.30), 4) }} at {{ pct(0.30, 0) }}, and {{ signed(growth(0.35), 4) }} at {{ pct(0.35, 0) }}. Beyond about twice Kelly, a trader loses money in the long run *with a winning strategy*.
 
@@ -146,7 +146,7 @@ The expected value per trade says whether a strategy makes money; the fraction r
       {{ pct(0.4, 0) }}
   answer: 0
   explain: >-
-    With \( W = L = 1 \), \( f^{*} = p - q = 0.6 - 0.4 = {{ pct(0.2, 0) }} \) of the account. Betting the win rate, 60%, is a common confusion: it is three times Kelly, which in the long run shrinks the account even though each trade has a positive expected value. 40% is the loss rate, which has no special meaning for sizing.
+    With \( W = L = 1 \), \( f^{*} = p - q = 0.6 - 0.4 = {{ num(0.2, 1) }} \), that is {{ pct(0.2, 0) }} of the account. Betting the win rate, 60%, is a common confusion: it is three times Kelly, which in the long run shrinks the account even though each trade has a positive expected value. 40% is the loss rate, which has no special meaning for sizing.
 - q: >-
     You risk 10% of the account per trade and hit six losses in a row. Roughly how much of the account is gone?
   choices:

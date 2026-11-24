@@ -163,7 +163,7 @@ When a trade goes against you, every choice reduces to one question: would you o
       It is deferred until the March spreads expire
   answer: 1
   explain: >-
-    Buying back the January spreads at {{ usd(closeCost) }} after selling them at {{ usd(credit) }} realizes a loss of {{ usd(realized) }}, which shows up in your P&L and on your tax statement. The net credit only says the March spreads brought in more than the January spreads cost to close. It is not offset or deferred; it is a separate trade with a new max loss of {{ usd(newMaxLoss1) }}.
+    Buying back the January spreads at {{ usd(closeCost) }} after selling them at {{ usd(credit) }} realizes a loss of {{ usd(realized) }} in your P&L. The net credit only says the March spreads brought in more than the January spreads cost to close. The roll does not offset or defer that loss; the March spreads are a separate trade with a new max loss of {{ usd(newMaxLoss1) }}. (When the loss is deductible is a separate tax question: wash sale and straddle rules can postpone it, see [US taxes](#core-14).)
 - q: >-
     Adding a January 100/105 call spread to the losing put spreads lowered the break-even and the max loss. Why is that not automatically an improvement?
   choices:

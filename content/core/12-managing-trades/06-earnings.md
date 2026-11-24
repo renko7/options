@@ -46,7 +46,7 @@ The January 100 call costs {{ usd(c100) }} and the January 100 put costs {{ usd(
 
 Traders read the straddle price as the market's [[expected move]] for the announcement: roughly how far, in either direction, the options are priced for ACME to travel by expiration. A second way to get the same idea is to strip out the normal volatility: if 30% is ACME's ordinary level, the extra variance in the January options implies a one-day earnings move with a standard deviation of
 
-\[ \sqrt{ \left( {{ num(ivE) }}^2 - {{ num(ivAfter) }}^2 \right) \times \tfrac{3}{365} } = {{ pct(moveImplied) }}. \]
+\[ \sqrt{ \left( {{ num(ivE) }}^2 - {{ num(ivAfter) }}^2 \right) \times \tfrac{3}{365} } = {{ num(moveImplied * 100, 1) }}\%. \]
 
 Both numbers say the same thing: the options are priced for a move of about 5%.
 :::

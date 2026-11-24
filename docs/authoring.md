@@ -25,6 +25,12 @@ The **Learner** has bought and sold stocks through a broker and has never traded
 
 Risk-free rate `RATE` = 4.00%. The Course's "today" is **Wednesday, November 18, 2026** (`TODAY`). Listed ACME expirations (`EXPIRATIONS`): 2 DTE (Nov 20, the November monthly), 9 DTE (Nov 27), **30 DTE (Dec 18, the December monthly)**, 58 DTE (Jan 15, 2027), 121 DTE (Mar 19), 212 DTE (Jun 18), 394 DTE (Dec 17, 2027, LEAPS). Prefer these expirations in examples. ACME's next earnings report is **after the close on Tuesday, January 12, 2027** (between the December and January monthlies), so the January 15 expiration contains the earnings event (`ACME_EARNINGS`). ACME's next ex-dividend date for its $0.50 dividend is **Thursday, December 10, 2026** (`ACME_EX_DIVIDEND`), inside the December expiration; the one after that is in March. Strikes are $5 apart for ACME ($1 near the money is fine for weeklies if you say so), 25 points for HBR.
 
+## Course conventions
+
+- **Defined vs undefined risk:** a position is *defined risk* when options you own cap its maximum loss. Any uncovered short option is *undefined risk*, including a naked short put whose worst case (strike minus premium) is finite; state the finite worst case, but classify it as undefined.
+- **Fills:** single legs pay the ask or receive the bid unless a Lesson says otherwise; spreads fill with a limit a little worse than the mid.
+- **Market orders on options** are graded poor in Scenario Exercises; a marketable limit is the alternative.
+
 ## Files
 
 ```

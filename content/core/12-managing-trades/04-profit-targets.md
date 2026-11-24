@@ -160,7 +160,7 @@ A profit target is a choice about the shape of your results, not a source of pro
       It became strongly negative
   answer: 1
   explain: >-
-    When the options are fairly priced, no exit rule can make the average trade profitable; it can only move outcomes around. The rule turned some would-be large wins into small wins and left the losers in place, so win rate rose while expected value stayed near zero. A higher win rate does not imply a higher expected value.
+    When the options are fairly priced, no exit rule can make the average trade profitable; it can only move outcomes around. The rule closed some trades as small winners before they could reverse into losers, which raised the win rate, but it also capped every win near half the credit, so expected value stayed near zero. A higher win rate does not imply a higher expected value.
 - q: >-
     Under the 50% rule, winners average {{ usd(edge[1].avgW) }} and losers average {{ usd(edge[1].avgL) }}. What win rate is needed to break even?
   choices:

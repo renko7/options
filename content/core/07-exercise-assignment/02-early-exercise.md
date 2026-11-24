@@ -85,7 +85,7 @@ ACME's next $0.50 dividend goes ex on Thursday, {{ exDate }}. Suppose that on We
 **January 80 call** (deep in the money). After ACME drops to $99.50 tomorrow, the matching put is worth {{ usd(c80.putAfter, 3) }} and the interest on $80 until January's expiration is {{ usd(c80.carry, 3) }}, so the call will have about {{ usd(c80.extrAfter, 3) }} of extrinsic value left. That is less than the {{ usd(D) }} dividend.
 
 - Hold through the ex-date: the call is worth {{ usd(c80.hold, 3) }} today.
-- Exercise today: you capture {{ usd(c80.ex) }} of intrinsic value and you will receive the dividend.
+- Exercise today: you capture {{ usd(c80.ex) }} of intrinsic value. Because you own the shares before the ex-date, that value survives the drop: tomorrow you hold shares worth $99.50 plus the right to the {{ usd(D) }} dividend.
 
 Exercising is worth {{ usd((c80.ex - c80.hold) * 100) }} more per contract. A binomial tree that allows early exercise values this call at {{ usd(c80.amer, 3) }}, essentially its exercise value: the signature of an option that should be exercised now.
 
@@ -184,5 +184,5 @@ Exercise captures only intrinsic value, so exercising an option that still has e
       Hold until the next ex-dividend date to collect the dividend
   answer: 0
   explain: >-
-    When an American option's value equals its intrinsic value, the right to wait is worth nothing, so exercising now (and earning interest on the $12,000) is optimal. At 1% the interest is smaller than the put's remaining extrinsic value, so waiting wins. Dividends do not reward a put holder for waiting to collect them: put holders do not receive dividends, although the ex-date price drop helps the put, which is a reason to wait only when an ex-date is imminent.
+    When an American option's value equals its intrinsic value, the right to wait is worth nothing, so exercising now (and earning interest on the $12,000) is optimal. At 1% the interest is smaller than the put's remaining extrinsic value, so waiting wins. Dividends do not reward a put holder for waiting to collect them: put holders do not receive dividends, although the ex-date price drop helps the put, which is a reason to wait only while an ex-date is still ahead of you; here it has already passed.
 ```

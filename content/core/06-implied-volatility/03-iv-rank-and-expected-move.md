@@ -57,7 +57,7 @@ So the same {{ pct(ivNow, 0) }} has an IV rank of {{ pct(rank, 0) }} and an IV p
 Brokers use both terms, sometimes loosely, and occasionally swap them. Check the definition on your platform before acting on the number.
 
 :::warning What IV rank does not tell you
-High IV rank does not by itself mean options are overpriced, and low IV rank does not mean they are cheap. Both compare implied volatility with *past implied volatility*, not with the volatility the stock will actually deliver. IV rank is always high just before an earnings report, because the market correctly expects a big move; selling options then is a decision about the size of that move, not a free edge. Use IV rank and percentile as context, and compare implied volatility with your own estimate of [realized volatility](#core-06-realized-volatility) before calling options rich or cheap.
+High IV rank does not by itself mean options are overpriced, and low IV rank does not mean they are cheap. Both compare implied volatility with *past implied volatility*, not with the volatility the stock will actually deliver. IV rank is almost always high just before an earnings report, because the market correctly expects a big move; selling options then is a decision about the size of that move, not a free edge. Use IV rank and percentile as context, and compare implied volatility with your own estimate of [realized volatility](#core-06-realized-volatility) before calling options rich or cheap.
 :::
 
 ## The expected move

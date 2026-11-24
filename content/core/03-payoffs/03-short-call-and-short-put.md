@@ -75,8 +75,8 @@ A short option that is not offset by another position is a [[naked option]] (or 
 
 Traders sort positions into two kinds:
 
-- **[[Defined risk]]**: the maximum loss is known and finite when you open the trade. Every long option is defined risk. So is a short put (the stock can only go to zero), and so is any combination where a short option is protected by a long one, such as the spreads in [Directional spreads](#core-10).
-- **[[Undefined risk]]**: the maximum loss is unlimited, or so large that it is not meaningfully capped. A naked short call is the classic example. Many traders also treat a naked short put as undefined risk in practice, because its maximum loss is the whole strike value.
+- **[[Defined risk]]**: the maximum loss is capped by options you own, so it is known when you open the trade and small relative to the stock exposure. Every long option is defined risk, and so is any combination in which every short option is protected by a long one, such as the spreads in [Directional spreads](#core-10).
+- **[[Undefined risk]]**: no option you own caps the loss. A naked short call is the classic example: its loss has no ceiling at all. A naked short put is undefined risk too. Its worst case is finite, the strike minus the premium, {{ usd(-sps.maxLoss) }} for the December 95 put, but that is about {{ num(-sps.maxLoss / (pb * 100), 0) }} times the premium you collect and about {{ num(-sps.maxLoss / reqPut, 0) }} times the minimum margin below, and nothing in the position limits it.
 
 Brokers treat the two very differently.
 
@@ -95,7 +95,7 @@ The builder below shows the short December 95 put. Read the max profit, max loss
 ```
 
 :::key
-A writer's diagram is the holder's turned upside down: maximum profit is the premium, the break-even is the strike plus (call) or minus (put) the premium, and the loss beyond it grows $100 per $1. A naked short call has undefined, unlimited risk; a short put's risk is finite but can be very large. Writers win often and lose big, so size by the bad case, not the premium.
+A writer's diagram is the holder's turned upside down: maximum profit is the premium, the break-even is the strike plus (call) or minus (put) the premium, and the loss beyond it grows $100 per $1. Naked short options are undefined risk: a naked short call's loss is unlimited, and a naked short put's is finite but many times the premium. Writers win often and lose big, so size by the bad case, not the premium.
 :::
 
 ```quiz
@@ -112,7 +112,7 @@ A writer's diagram is the holder's turned upside down: maximum profit is the pre
   explain: >-
     The call is $3 in the money, so it costs you $300 to settle (deliver shares worth $108 at $105), offset by the {{ usd(cb * 100) }} you collected: {{ signedUsd(payoff.pnlAtExpiry(sc, 108)) }}. Keeping the full premium needs ACME at or below $105. −$300 forgets the premium you received.
 - q: >-
-    Which of these positions has undefined (unlimited) risk?
+    Which of these positions has unlimited risk?
   choices:
     - >-
       Long one December 100 put
@@ -124,7 +124,7 @@ A writer's diagram is the holder's turned upside down: maximum profit is the pre
       Long one December 105 call
   answer: 2
   explain: >-
-    A naked short call obliges you to deliver shares at $105 however high ACME goes, so the loss has no ceiling. The short put can lose a lot, up to {{ usd(-sps.maxLoss) }}, but that is finite because ACME cannot fall below zero. Long options can lose only their premium.
+    A naked short call obliges you to deliver shares at $105 however high ACME goes, so the loss has no ceiling. The naked short put is also undefined risk, because no option you own caps it, but its loss is finite: at most {{ usd(-sps.maxLoss) }}, because ACME cannot fall below zero. Long options can lose only their premium.
 - q: >-
     You sell one ACME December 95 put at {{ usd(pb) }}. Where is your break-even at expiration?
   choices:

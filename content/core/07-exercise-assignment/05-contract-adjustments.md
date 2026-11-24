@@ -31,7 +31,7 @@ const adjCall = c(spinValue / 100, 100);
 An option is a promise to deliver something specific: normally 100 shares of the [[underlying]]. When the company does something that changes what a share is, such as splitting it, paying out a large chunk of cash, merging, or spinning off a division, the promise has to be rewritten so that neither the holder nor the writer gains or loses from the event itself. That rewrite is a [[contract adjustment]]. The OCC decides it, publishes it, and every open contract in the affected series changes overnight.
 
 :::rule How contract adjustments work (as of 2026)
-- Adjustments are governed by the OCC's By-Laws and Rules and decided case by case by an OCC adjustment panel. The OCC announces each one in an Information Memo, which brokers and the OCC's website publish before the event takes effect.
+- Adjustments are governed by the OCC's By-Laws and Rules and decided case by case by the OCC itself, following general policies set with the exchanges through its Securities Committee. The OCC announces each one in an Information Memo, which brokers and the OCC's website publish before the event takes effect.
 - Ordinary cash dividends paid under a company's regular policy are not adjusted for; the market prices them in.
 - Special (non-ordinary) cash dividends are generally adjusted for, usually by reducing strike prices by the dividend amount, unless they are less than $0.125 per share.
 - Stock splits, reverse splits, stock dividends, mergers, spin-offs and similar events are adjusted for. When a contract's deliverable becomes cash only (for example in an all-cash takeover), the OCC ordinarily accelerates its expiration to shortly after the deal closes.

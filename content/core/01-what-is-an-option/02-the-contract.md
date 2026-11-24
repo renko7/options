@@ -21,7 +21,7 @@ This Lesson goes through those terms one by one. You will read them on every ord
 
 ## The terms of a listed option
 
-Every listed equity option is defined by six things:
+Every listed equity option is defined by seven things:
 
 | Term | What it fixes | ACME December 100 call |
 |---|---|---|
@@ -31,6 +31,7 @@ Every listed equity option is defined by six things:
 | Expiration | the last day the right exists | {{ longDate(exp) }} |
 | Deliverable | how much underlying one contract covers | 100 shares |
 | Exercise style | when the right can be used | American: any business day up to expiration |
+| Settlement | what changes hands on exercise | physical: the shares themselves |
 
 The premium is the only thing the market decides. Because the other terms are identical for everyone, every ACME December 100 call is interchangeable with every other one. That is what lets you buy from one trader in the morning and sell to a different one in the afternoon.
 

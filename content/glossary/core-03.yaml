@@ -42,12 +42,12 @@
 - term: Defined risk
   aka: [limited risk]
   def: >-
-    A position whose maximum loss is known and finite when it is opened, such as any long option or a spread in which every short option is covered by a long one.
+    A position whose maximum loss is capped by options you own, so it is known when the position is opened and small relative to its stock exposure: any long option, or a spread in which every short option is covered by a long one.
   lesson: core-03-short-call-and-short-put
 - term: Undefined risk
   aka: [unlimited risk]
   def: >-
-    A position whose maximum loss is unlimited or not meaningfully capped, such as a naked short call. Brokers require higher approval levels and margin for it.
+    A position whose loss is not capped by any option you own: a naked short call, whose loss is unlimited, or a naked short put, whose loss is finite (the strike minus the premium, per share) but many times the premium and the margin. Brokers require higher approval levels and margin for it.
   lesson: core-03-short-call-and-short-put
 - term: Profit and loss
   aka: [P&L, PnL]

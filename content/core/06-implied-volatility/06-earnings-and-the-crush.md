@@ -17,7 +17,7 @@ const o = { K: 100, r: RATE, q: ACME.q };
 const cPre = Number(bs.price({ ...o, S: 100, T: 3 / 365, sigma: pre, type: 'call' }).toFixed(2));
 const pPre = Number(bs.price({ ...o, S: 100, T: 3 / 365, sigma: pre, type: 'put' }).toFixed(2));
 const strad = cPre + pPre;
-const after = (S, type) => bs.price({ ...o, S, T: 2 / 365, sigma: sb, type });
+const after = (S, type) => Number(bs.price({ ...o, S, T: 2 / 365, sigma: sb, type }).toFixed(2));
 const outcomes = [94, 97, 100, 102, 104, 106];
 const vegaPre = bs.greeks({ ...o, S: 100, T: 3 / 365, sigma: pre, type: 'call' }).vega;
 const marPre = Math.sqrt((sb * sb * 65 / 365 + m2) / (66 / 365));
@@ -121,12 +121,12 @@ An earnings report adds a one-night jump to every expiration that includes it. T
     - >-
       You made about $200 per contract, because ACME rose $2
     - >-
-      You made about {{ usd((after(102, 'call') - cPre) * 100) }} per contract, because the volatility crush took back most of what the move earned
+      You made about {{ usd((after(102, 'call') - cPre) * 100) }} per contract, because the volatility crush took back a large part of what the move earned
     - >-
       You lost the whole premium, because the call is not yet in the money
   answer: 1
   explain: >-
-    The call is worth {{ usd(after(102, 'call')) }}, so the gain is {{ usd((after(102, 'call') - cPre) * 100) }}. Delta alone would suggest roughly half of $200, and the drop in implied volatility took a large slice of that. A gain of $200 would require the call to move dollar for dollar like stock. The call *is* in the money at $102, which rules out the last answer.
+    The call is worth {{ usd(after(102, 'call')) }}, so the gain is {{ usd((after(102, 'call') - cPre) * 100) }}. Delta alone would suggest roughly half of $200, and the drop in implied volatility took a large slice of that. A gain of $200 would require the call to move dollar for dollar like stock. The call *is* in the money at $102, so it has not lost the whole premium.
 - q: >-
     Using the formula from this Lesson, a stock's ordinary volatility is 30% and an expiration 10 days away that contains earnings shows 45% implied volatility. What earnings move is the market pricing?
   choices:

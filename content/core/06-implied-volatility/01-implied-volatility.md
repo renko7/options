@@ -16,6 +16,7 @@ const ivBid = iv(r100.call.bid, 100, 'call'), ivAsk = iv(r100.call.ask, 100, 'ca
 const ivAt4 = iv(4.00, 100, 'call');
 const p = (s) => bs.price({ S: 100, K: 100, T, r: RATE, q: ACME.q, sigma: s, type: 'call' });
 const g100 = bs.greeks({ S: 100, K: 100, T, r: RATE, q: ACME.q, sigma: 0.30, type: 'call' });
+const extra4 = Number((4 - g100.price).toFixed(2)), vega4 = Number(g100.vega.toFixed(3)), pts4 = Number((extra4 / vega4).toFixed(1));
 const hbrRow = chain(HBR, { dte: 30 }).rows.find((x) => x.strike === 5000);
 ```
 
@@ -38,7 +39,7 @@ ACME is at $100. The December 100 call, 30 days out, is quoted {{ usd(r100.call.
 Narrowing further, the price {{ usd(r100.call.mid) }} corresponds to a volatility of **{{ pct(ivMidC, 2) }}**. That is the call's implied volatility. Doing the same for the December 100 put at its mid of {{ usd(r100.put.mid) }} gives {{ pct(ivMidP, 2) }}: the same number to within rounding, as [put-call parity](#core-04-put-call-parity) requires.
 :::
 
-A quick way to do it in your head: near the money, each vol point is worth one [[vega]]. The December 100 call has a vega of {{ usd(g100.vega, 3) }}, so if someone pays $4.00 for it, about {{ usd(4 - g100.price) }} above its value at 30%, they are paying roughly {{ num((4 - g100.price) / g100.vega, 1) }} vol points more: an implied volatility near {{ pct(0.30 + (4 - g100.price) / g100.vega / 100, 1) }}. The exact answer is {{ pct(ivAt4, 2) }}.
+A quick way to do it in your head: near the money, each vol point is worth one [[vega]]. The December 100 call has a vega of {{ usd(g100.vega, 3) }}, so if someone pays $4.00 for it, about {{ usd(extra4) }} above its value at 30%, they are paying roughly {{ num(pts4, 1) }} vol points more: an implied volatility near {{ pct(0.30 + pts4 / 100, 1) }}. The exact answer is {{ pct(ivAt4, 2) }}.
 
 ## A volatility for every price on the screen
 

@@ -11,7 +11,7 @@ const ks = [80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130];
 const atm = row(100).call.iv;
 const flat = (K, type) => bs.price({ S: 100, K, T, r: RATE, q: ACME.q, sigma: atm, type });
 const put90 = row(90).put, call110 = row(110).call;
-const rr = row(105).call.iv - row(95).put.iv;
+const rr = Number((row(105).call.iv * 100).toFixed(1)) - Number((row(95).put.iv * 100).toFixed(1));
 const hk = [4500, 4750, 5000, 5250, 5500];
 const hIv = (K) => smileIV(HBR, K, T);
 const dtes = [9, 30, 121, 394];
@@ -51,7 +51,7 @@ The December 90 put and the December 110 call are each $10 out of the money. If 
 - the 90 put would be worth {{ usd(flat(90, 'put')) }};
 - the 110 call would be worth {{ usd(flat(110, 'call')) }}.
 
-The call would be worth more, because the forward is above spot (carry, from [Volatility, rates and dividends](#core-04-volatility-and-carry)). On the actual chain the 90 put carries {{ pct(put90.iv, 1) }} and the 110 call {{ pct(call110.iv, 1) }}, so their mids are {{ usd(put90.mid, 3) }} and {{ usd(call110.mid, 3) }}. The skew adds {{ usd(put90.theo - flat(90, 'put')) }} to the put, {{ pct(put90.theo / flat(90, 'put') - 1, 0) }} of its flat-volatility value, and takes {{ usd(flat(110, 'call') - call110.theo) }} off the call. The two now cost almost the same.
+The call would be worth more. Mostly that is because the model works in percentage moves: a $10 rise from $100 is a slightly smaller percentage move than a $10 fall, measured the way the model measures them (in logarithms, +{{ pct(Math.log(110 / 100), 1) }} against {{ pct(Math.log(90 / 100), 1) }}). A little of it is carry: the forward is above spot ([Volatility, rates and dividends](#core-04-volatility-and-carry)). On the actual chain the 90 put carries {{ pct(put90.iv, 1) }} and the 110 call {{ pct(call110.iv, 1) }}, so their mids are {{ usd(put90.mid, 3) }} and {{ usd(call110.mid, 3) }}. The skew adds {{ usd(put90.theo - flat(90, 'put')) }} to the put, {{ pct(put90.theo / flat(90, 'put') - 1, 0) }} of its flat-volatility value, and takes {{ usd(flat(110, 'call') - call110.theo) }} off the call. The two now cost almost the same.
 :::
 
 That has direct consequences for the trades in later Modules:
@@ -65,7 +65,7 @@ That has direct consequences for the trades in later Modules:
 Traders summarise the slope in a single number so they can track it over time and compare stocks. Two common measures:
 
 - **A fixed-moneyness spread**: implied volatility of the 90% strike minus the at-the-money implied volatility. For ACME in December: {{ pct(row(90).put.iv, 1) }} − {{ pct(atm, 1) }} = {{ num((row(90).put.iv - atm) * 100, 1) }} points.
-- **The 25-delta risk reversal**: the implied volatility of the call with a delta of about 0.25 minus that of the put with a delta of about −0.25. On ACME's $5 strikes the closest are the 105 call (delta {{ num(row(105).call.delta, 2) }}) and the 95 put (delta {{ num(row(95).put.delta, 2) }}): {{ pct(row(105).call.iv, 1) }} − {{ pct(row(95).put.iv, 1) }} = {{ signed(rr * 100, 1) }} points. Negative means puts are richer, the normal state for equities.
+- **The 25-delta risk reversal**: the implied volatility of the call with a delta of about 0.25 minus that of the put with a delta of about −0.25. On ACME's $5 strikes the closest are the 105 call (delta {{ num(row(105).call.delta, 2) }}) and the 95 put (delta {{ num(row(95).put.delta, 2) }}): {{ pct(row(105).call.iv, 1) }} − {{ pct(row(95).put.iv, 1) }} = {{ signed(rr, 1) }} points. Negative means puts are richer, the normal state for equities.
 
 When the risk reversal becomes more negative, the market is paying up for downside protection; when it moves toward zero or turns positive, it is paying up for upside, as happens in a stock that is the subject of takeover rumours or a frenzy of call buying.
 
@@ -135,7 +135,7 @@ Implied volatility differs by strike. For stocks and indexes the normal shape is
       No effect: skew only matters for calls
   answer: 1
   explain: >-
-    The 90 strike carries {{ pct(put90.iv, 1) }} instead of {{ pct(atm, 1) }}, which adds {{ usd(put90.theo - flat(90, 'put')) }} a share, {{ usd((put90.theo - flat(90, 'put')) * 100) }} per contract. Out-of-the-money options are cheap in dollars, which is what makes the first answer tempting, but in volatility terms the downside strikes are the most expensive on the chain.
+    The 90 strike carries {{ pct(put90.iv, 1) }} instead of {{ pct(atm, 1) }}, which adds {{ usd(put90.theo - flat(90, 'put'), 3) }} a share, {{ usd((put90.theo - flat(90, 'put')) * 100) }} per contract. Out-of-the-money options are cheap in dollars, which is what makes "it lowers the cost" tempting, but in volatility terms the downside strikes are the most expensive on the chain.
 - q: >-
     The 25-delta risk reversal on a stock moves from −4 points to +1 point over a week. What does that suggest?
   choices:

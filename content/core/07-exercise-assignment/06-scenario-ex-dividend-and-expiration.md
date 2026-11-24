@@ -63,7 +63,7 @@ steps:
           Leave the calls; they are only four cents in the money.
         grade: poor
         feedback: >-
-          Four cents is above the $0.01 exercise-by-exception threshold. If ACME closes here, the calls are exercised automatically unless holders opt out, and you may be assigned on some, all or none of the five: you will not know until Monday. Any assignment sells shares you want to keep, at $100, realizing the gain. If ACME jumps to $103 in after-hours trading, holders will certainly exercise and you lose shares worth {{ usd(fridayUp) }} more than the $100 you receive.
+          Four cents is above the $0.01 exercise-by-exception threshold. If ACME closes here, the calls are exercised automatically unless holders opt out, and you may be assigned on some, all or none of the five: you will not know until Monday. Any assignment sells shares you want to keep, at $100, realizing the gain. If ACME jumps to $103 in after-hours trading, holders will certainly exercise and you give up shares worth {{ usd(fridayUp) }} more than the $100 a share you receive.
       - text: >-
           Buy back the 5 calls at {{ usd(lateAsk) }}, and leave the puts, which are about $5 out of the money.
         grade: best
