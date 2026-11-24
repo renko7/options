@@ -65,7 +65,7 @@ On {{ longDate(TODAY) }} you buy one HBR December 5000 call at {{ usd(cost1) }},
 The 1256 treatment saves {{ usd(taxEq - tax1256) }}, about {{ pct(1 - blended / ST, 0) }} of the tax, on a twelve-day trade.
 :::
 
-The rule cuts both ways. A Section 1256 *loss* is also 60% long-term, so it offsets less valuable long-term gains first. For a trader who expects to lose money on index options, the treatment is less helpful than it looks.
+The rule cuts both ways. A Section 1256 *loss* is also 60% long-term, so that 60% is netted first against any long-term gains, which are taxed at the lower rate, rather than against short-term gains. For a trader who expects to lose money on index options, the treatment is less helpful than it looks.
 
 ## Mark-to-market at year end
 
