@@ -68,7 +68,7 @@ Two refinements matter as soon as you hold more than one position.
 
 ## Undefined risk: margin is not your risk
 
-A [[naked|naked option]] short put or a short [[strangle]] has [[undefined risk]]. There is no max loss to divide by, and beginners reach for the next available number: the margin the broker requires. That is a mistake, and an expensive one.
+A [[naked|naked option]] short put or a short [[strangle]] has [[undefined risk]]: no option you own caps the loss. The strangle's short call has no max loss at all. The naked put's worst case is finite, the strike less the premium if the stock goes to zero ({{ usd((90 - putPrem) * 100) }} for the January 90 put below), but sizing by it would allow almost nothing, and most real losses come from gaps well short of zero. So beginners reach for the next available number: the margin the broker requires. That is a mistake, and an expensive one.
 
 :::rule Margin on a short equity option (as of 2026)
 Under FINRA Rule 4210 and the exchanges' rules, the minimum initial and maintenance margin for an uncovered equity option in a [[margin account]] is the option's current market value (at entry, the premium received) plus 20% of the underlying's value, minus any amount by which the option is out of the money, but not less than the option's value plus 10% of the underlying's value (for a call) or 10% of the strike (for a put). Brokers may require more. Details are in [Accounts and orders](#core-08).
@@ -118,7 +118,7 @@ Then apply the same percentage rule you use for defined-risk trades, usually wit
 :::
 
 :::key
-Size every trade so that a bad outcome costs a small, preset fraction of the account: divide the risk budget by the max loss and round down. Undefined-risk short premium has no max loss, so size it by the loss in a severe but possible move, not by margin, which measures the broker's comfort and grows exactly when the stock gaps against you.
+Size every trade so that a bad outcome costs a small, preset fraction of the account: divide the risk budget by the max loss and round down. Undefined-risk short premium has no max loss (or, for a naked put, only the stock going to zero), so size it by the loss in a severe but possible move, not by margin, which measures the broker's comfort and grows exactly when the stock gaps against you.
 :::
 
 ```quiz

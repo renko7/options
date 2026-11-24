@@ -24,6 +24,11 @@ const gap = 84;
 const d2 = 37;
 const c2 = bs.price({ S: 112, K: 105, T: d2 / 365, r: RATE, q: ACME.q, sigma: smileIV(ACME, 105, d2 / 365), type: 'call' });
 const tv2 = c2 - 7;
+// time value left after the ex-date: the January 105 put plus interest on $105 (core-07's test)
+const tDiv = 0.5 / 365, T2a = d2 / 365 - tDiv;
+const put2 = bs.price({ S: 112 - ACME.dividend, K: 105, T: T2a, r: RATE, q: 0, sigma: smileIV(ACME, 105, d2 / 365), type: 'put' });
+const carry2 = 105 * (1 - Math.exp(-RATE * T2a));
+const extr2 = put2 + carry2;
 // step 3: Jan 14, ACME at 93, one day left
 const p3 = bs.price({ S: 93, K: 95, T: 1 / 365, r: RATE, q: ACME.q, sigma: smileIV(ACME, 95, 1 / 365), type: 'put' });
 const colAt93 = payoff.pnlAtExpiry(col, 93);
@@ -68,10 +73,10 @@ steps:
         feedback: >-
           It removes the cap and the assignment risk, but it costs about {{ usd(c2 * 100 * n) }} to buy back calls you sold for {{ usd(c105.bid * 100 * n) }}, and it was unnecessary. Your goal is a floor, not upside; buying back the calls spends money to change something you did not need changed.
       - text: >-
-          Do nothing. The calls' time value is larger than the dividend, so early exercise is unlikely; and if it happened, you would simply sell at $105 a little early.
+          Do nothing. The time value the calls will keep after the ex-date is larger than the dividend, so early exercise is unlikely; and if it happened, you would simply sell at $105 a little early.
         grade: best
         feedback: >-
-          Right. A holder who exercises today gives up {{ usd(tv2) }} of time value to collect $0.50, a bad trade, so rational holders will not. With 37 days left, early assignment is unlikely. Even if some calls were assigned, you would sell at $105, which is better than the price you need. Check the time value against the dividend; do not react to the dividend date alone.
+          Right. A holder who exercises today collects $0.50 but gives up the time value the call would still have after the ex-date: about the January 105 put ({{ usd(put2) }}) plus the interest on $105 to expiration ({{ usd(carry2) }}), {{ usd(extr2) }} in all. That is a bad trade, so rational holders will not exercise. With 37 days left, early assignment is unlikely. Even if some calls were assigned, you would sell at $105, which is better than the price you need. Compare the dividend with the same-strike put plus the interest on the strike; do not react to the dividend date alone.
       - text: >-
           Sell the 500 shares in the market at $112 and keep the options open.
         grade: poor
@@ -96,7 +101,7 @@ steps:
         feedback: >-
           This removes the floor at the moment you need it. Your shares are worth {{ usd(93 * sh) }} plus the {{ usd(p3 * 100 * n) }} from the puts, and from here every further dollar ACME falls comes out of money you need. Waiting for a bounce turns a hedge into a speculation.
 wrap: >-
-  A hedge starts from what you need, not from what is cheapest or most popular. Here the need was a floor under a sale already planned, so a zero-cost collar fit: it bought protection with upside you were never going to keep. Covered calls and stop orders looked like protection but would have failed in the earnings gap that the January expiration had to cover. When the stock rallied, the right check was time value against the dividend, not the calendar alone. And at the end, the put was simply the tool for the job it was bought for.
+  A hedge starts from what you need, not from what is cheapest or most popular. Here the need was a floor under a sale already planned, so a zero-cost collar fit: it bought protection with upside you were never going to keep. Covered calls and stop orders looked like protection but would have failed in the earnings gap that the January expiration had to cover. When the stock rallied, the right check was the dividend against the time value the calls would keep after the ex-date (the put plus interest on the strike), not the calendar alone. And at the end, the put was simply the tool for the job it was bought for.
 ```
 
 ```tool position-builder

@@ -35,6 +35,11 @@ const b = { S: 108, left: 9 };
 const ivB = smileIV(ACME, 100, b.left / 365);
 const cB = bs.price({ S: b.S, K: 100, T: b.left / 365, r: RATE, q: ACME.q, sigma: ivB, type: 'call' });
 const tvB = cB - (b.S - 100);
+// time value left after the ex-date: the 100 put plus interest on $100 (core-07's test)
+const tDiv = 0.5 / 365, TBa = b.left / 365 - tDiv;
+const putB = bs.price({ S: b.S - ACME.dividend, K: 100, T: TBa, r: RATE, q: 0, sigma: ivB, type: 'put' });
+const carryB = 100 * (1 - Math.exp(-RATE * TBa));
+const extrB = putB + carryB;
 // C. bull call 100/105 at expiration
 const bcFill = fillD(c100.mid - c105.mid);
 const bc = [
@@ -65,10 +70,10 @@ The trouble is practical. A trader running a {{ usd(-bups.maxLoss) }}-risk sprea
 :::example Assigned on a bear call spread
 You sold the December 100/105 bear call spread for {{ usd(becFill) }}. ACME rallies to ${{ int(b.S) }}, and its ex-dividend date ($0.50) is tomorrow, with {{ int(b.left) }} days to expiration. Your short 100 call is worth {{ usd(cB) }}: $8 of intrinsic value and only {{ usd(tvB) }} of time value.
 
-As in [the covered call Lesson](#core-09-choosing-the-call), the dividend is worth more than the time value, so the call's holders are likely to exercise tonight. If you are assigned, you are **short 100 ACME** at $100 the next morning, plus long the 105 call. Your upside risk is still capped by the 105 call. But you are short the stock on the ex-date, so you owe the $0.50 dividend: {{ usd(50) }} added to the loss.
+As in [the covered call Lesson](#core-09-choosing-the-call), compare the dividend with the time value the call will still have after the ex-date: the 100 put, about {{ usd(putB) }}, plus the interest on $100 until expiration, {{ usd(carryB) }}, about {{ usd(extrB) }} in all. The $0.50 dividend is larger, so the call's holders are likely to exercise tonight. If you are assigned, you are **short 100 ACME** at $100 the next morning, plus long the 105 call. Your upside risk is still capped by the 105 call. But you are short the stock on the ex-date, so you owe the $0.50 dividend: {{ usd(50) }} added to the loss.
 :::
 
-On a covered call, early assignment just ends the trade at max profit. On a spread it creates a short stock position, a dividend debit and borrowing costs. Before every ex-dividend date, check any short call that is in the money: if its time value is less than the dividend, close or roll the spread the day before.
+On a covered call, early assignment just ends the trade at max profit. On a spread it creates a short stock position, a dividend debit and borrowing costs. Before every ex-dividend date, check any short call that is in the money: if the dividend is larger than the same-strike put plus the interest on the strike to expiration, expect assignment and close or roll the spread the day before. If the numbers are close, or you cannot check them, treat a deep in-the-money short call as likely to be assigned.
 
 ## 3. Expiration with one leg in the money
 
@@ -120,7 +125,7 @@ A spread's legs live separate lives. Deep in-the-money short puts and in-the-mon
   explain: >-
     Assignment on a short put makes you buy 100 shares at the strike. The 95 put is not exercised automatically before expiration, so you now hold stock plus a put: a protective put, still capped at the same {{ usd(-bups.maxLoss) }} loss. Short stock comes from assignment on a short call, not a short put.
 - q: >-
-    You are short the 100 call in a 100/105 bear call spread. ACME is at ${{ int(b.S) }}, ex-dividend ($0.50) tomorrow, and the call's time value is {{ usd(tvB) }}. What should you expect, and what is the usual fix?
+    You are short the 100 call in a 100/105 bear call spread. ACME is at ${{ int(b.S) }}, ex-dividend ($0.50) tomorrow. After the ex-date the 100 put plus the interest on $100 to expiration will be worth only about {{ usd(extrB) }}. What should you expect, and what is the usual fix?
   choices:
     - >-
       Likely assignment tonight, leaving you short stock that owes the dividend; close or roll the spread today
@@ -130,7 +135,7 @@ A spread's legs live separate lives. Deep in-the-money short puts and in-the-mon
       Assignment, which you fix by exercising the 105 call tomorrow after the ex-date
   answer: 0
   explain: >-
-    The dividend exceeds the remaining time value, so holders gain by exercising before the ex-date. You would be short 100 shares on the ex-date and owe the $0.50 dividend. Closing the spread today avoids it. Waiting until after the ex-date is too late: you would already owe the dividend.
+    The dividend exceeds the time value the call would keep after the ex-date (the put plus the interest on the strike, about {{ usd(extrB) }}), so holders gain by exercising before the ex-date. You would be short 100 shares on the ex-date and owe the $0.50 dividend. Closing the spread today avoids it. Waiting until after the ex-date is too late: you would already owe the dividend.
 - q: >-
     ACME closes at $103 on expiration day. You hold a December 100/105 bull call spread and do nothing. What do you have on Monday?
   choices:
