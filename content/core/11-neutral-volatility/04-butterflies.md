@@ -95,7 +95,7 @@ Compare the two examples: same strikes, same max profit, same max loss, same bre
 | Theta | {{ signedUsd(fg.theta) }}/day | {{ signedUsd(ig.theta) }}/day |
 | Vega | {{ signedUsd(fg.vega) }} | {{ signedUsd(ig.vega) }} |
 
-With ACME at the body, both versions are [[short premium]]: short gamma, short vega, collecting theta. They are short straddles whose wings cap the loss. Unlike a short straddle, the Greeks are small at the start and grow as expiration approaches, because the tent only takes its sharp shape in the final days:
+With ACME at the body, both versions are [[short premium]]: short gamma, short vega, collecting theta. They are short straddles whose wings cap the loss. Compared with a short straddle, the Greeks start much smaller and grow as expiration approaches, because the tent only takes its sharp shape in the final days:
 
 | ACME | After 10 days | After 25 days | After 29 days |
 |---|---|---|---|

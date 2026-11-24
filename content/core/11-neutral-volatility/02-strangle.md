@@ -134,7 +134,7 @@ A strangle is an out-of-the-money put plus an out-of-the-money call. Long, it is
       They make the same
   answer: 0
   explain: >-
-    At $110 the straddle makes {{ usd(payoff.pnlAtExpiry(lstr.legs, 110)) }} and the strangle {{ usd(payoff.pnlAtExpiry(lsg.legs, 110)) }}. The strangle is cheaper, but its call only starts paying at $105, so a moderate move is worth less to it. It does better only when nothing happens (it loses less) or on very large moves relative to its cost.
+    At $110 the straddle makes {{ usd(payoff.pnlAtExpiry(lstr.legs, 110)) }} and the strangle {{ usd(payoff.pnlAtExpiry(lsg.legs, 110)) }}. The strangle is cheaper, but its call only starts paying at $105, so a moderate move is worth less to it. It does better only when ACME stays between the strikes (it loses less). On a very large move it earns a bigger return on its smaller cost, but in dollars the straddle makes more on any move beyond either strike.
 - q: >-
     Which is true of the short 95/105 strangle compared with the short 100 straddle?
   choices:

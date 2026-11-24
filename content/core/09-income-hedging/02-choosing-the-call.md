@@ -93,6 +93,8 @@ Because you paid {{ usd(net) }}, returns are measured on that amount:
 - **Static return** (ACME unchanged at $100): ($100 − {{ usd(net) }}) / {{ usd(net) }} = {{ pct(bwStatic, 2) }} in 58 days.
 - **Return if called** (ACME above $105): ($105 − {{ usd(net) }}) / {{ usd(net) }} = {{ pct(bwCalled, 2) }}, a profit of {{ usd(bws.maxProfit) }}.
 - **Break-even**: {{ usd(bws.breakevens[0]) }}. Everything below that is a loss, up to {{ usd(-bws.maxLoss) }} if ACME went to zero.
+
+These figures leave out the $0.50 dividend that goes ex on {{ longDate(ACME_EX_DIVIDEND) }}, inside the January expiration: if you have not been assigned early, you also collect {{ usd(ACME.dividend * 100) }} per 100 shares.
 :::
 
 The net price is what matters. If the buy-write fills at {{ usd(net) }}, it makes no difference whether you think of it as "bought the stock at $100 and sold the call at {{ usd(jc.bid) }}" or "bought the stock at $99 and sold the call at {{ usd(jc.bid - 1) }}". Brokers report the legs separately, but your risk is set by the net.

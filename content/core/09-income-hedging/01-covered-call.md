@@ -40,6 +40,8 @@ At expiration:
 - **ACME at or below $105.** The call expires worthless. You keep your shares and the {{ usd(prem * 100) }}. At exactly $100, your profit is {{ usd(payoff.pnlAtExpiry(cc, 100)) }}: the premium.
 - **ACME above $105.** The call is exercised and your shares are [[called away|call away]] at $105. You collect $500 of gain on the stock plus the premium: {{ usd(s.maxProfit) }}, the [[max profit]]. It is the same at $106 as at $160.
 - **ACME falls.** The premium offsets the first {{ usd(prem) }} of the decline, so you [[break even|break-even]] at {{ usd(s.breakevens[0]) }}. Below that you lose dollar for dollar, like any shareholder. If ACME went to zero you would lose {{ usd(-s.maxLoss) }}.
+
+These figures leave out ACME's $0.50 dividend, which goes ex on {{ longDate(ACME_EX_DIVIDEND) }}, inside this expiration. If you still own the shares that day (you have not been assigned early), you also collect {{ usd(ACME.dividend * 100) }} per 100 shares.
 :::
 
 Written as a formula, with \(S_T\) the stock price at expiration, \(S_0\) what you paid for the shares and \(c\) the premium:

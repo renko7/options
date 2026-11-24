@@ -28,7 +28,7 @@ Suppose you would happily buy ACME, but at $95, not at today's $100. You could l
 
 ## The position
 
-You sell to open one put and keep enough cash in the account to buy the shares if you are assigned: the strike times 100. Because the cash is there, the worst case is that you buy 100 shares at the strike, which you said you were willing to do. A put sold without that cash behind it is a naked put, which needs a [[margin account]] and can force you to borrow.
+You sell to open one put and keep enough cash in the account to buy the shares if you are assigned: the strike times 100. Because the cash is there, the worst case is that you buy 100 shares at the strike, which you said you were willing to do. That worst case is still large (ACME going to zero costs the strike less the premium), so a cash-secured put counts as [[undefined risk]], like any short option no long option protects; the difference from a naked put is that the cash set aside funds the worst case in full. A put sold without that cash behind it is a naked put, which needs a [[margin account]] and can force you to borrow.
 
 :::example Selling the December 95 put
 ACME is at $100. The December 95 put, expiring {{ longDate(exp) }}, is bid at {{ usd(prem) }}. You sell one and receive {{ usd(prem * 100) }}, and you set aside {{ usd(cash) }} of cash.

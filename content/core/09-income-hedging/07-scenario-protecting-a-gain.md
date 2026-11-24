@@ -63,7 +63,7 @@ steps:
           Put on a January 95/105 collar: buy five 95 puts and sell five 105 calls as one order, for a net {{ colNet < 0 ? usd(-colNet) + ' credit' : usd(colNet) + ' debit' }} per share.
         grade: best
         feedback: >-
-          The collar guarantees you can sell at $95 or better, so the sale raises at least $47,500, and it costs nothing: the net is a {{ colNet < 0 ? usd(-colNet * sh) + ' credit' : usd(colNet * sh) + ' debit' }} on 500 shares. You give up gains above $105, but you were selling in January in any case. Your worst case is {{ usd(payoff.pnlAtExpiry(col, 50)) }} against today's value; the best is {{ usd(payoff.pnlAtExpiry(col, 130)) }}.
+          The collar guarantees you can sell at $95 or better, so the sale raises at least $47,500, and it costs nothing: the net is a {{ colNet < 0 ? usd(-colNet * sh) + ' credit' : usd(colNet * sh) + ' debit' }} on 500 shares. You give up gains above $105, but you were selling in January in any case. Your worst case is {{ usd(payoff.pnlAtExpiry(col, 50)) }} against today's value; the best is {{ usd(payoff.pnlAtExpiry(col, 130)) }}. One tax caveat: stock plus a long put is a tax straddle, and a tight collar on stock with a large unrealized gain like this one can raise constructive-sale questions; check them before you trade (see [US taxes](#core-14)).
   - prompt: >-
       You put on the collar. In early December ACME rallies on a well-received product launch. On Wednesday, December 9, the day before the ex-dividend date, it is at $112. Your January 105 calls are worth about {{ usd(c2) }}: $7.00 of intrinsic value and {{ usd(tv2) }} of time value. A friend warns that your calls are about to be assigned for the dividend. What do you do?
     choices:

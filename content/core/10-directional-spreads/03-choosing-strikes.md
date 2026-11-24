@@ -135,7 +135,7 @@ Strikes, width and expiration set a spread's payoff, probability and Greeks, and
     - >-
       January options have lower implied volatility
     - >-
-      Its max profit is lower
+      Its max profit is much lower
   answer: 0
   explain: >-
     Both spreads have the same $5 width and nearly the same max profit at their own expiration. On December expiration day the January spread still has 28 days left; the 105 call it is short is at the money and full of time value, so the spread is worth well under $5. In this chain January implied volatility is slightly higher, not lower.

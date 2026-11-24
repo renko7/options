@@ -38,7 +38,7 @@ This Scenario Exercise is one trading day with HBR same-day options. You trade a
 
 ```scenario
 setup: >-
-  It is 9:45 a.m. on a quiet Wednesday with no scheduled economic news. HBR is at 5,000 and you expect a range-bound day. Today's HBR options expire at the close. The 4,975 put is quoted {{ num(p4975.bid) }} by {{ num(p4975.ask) }}, the 4,950 put {{ num(p4950.bid) }} by {{ num(p4950.ask) }}, the 5,025 call {{ num(c5025.bid) }} by {{ num(c5025.ask) }} and the 5,050 call {{ num(c5050.bid) }} by {{ num(c5050.ask) }}.
+  It is shortly after the 9:30 a.m. open on a quiet Wednesday with no scheduled economic news. HBR is at 5,000 and you expect a range-bound day. Today's HBR options expire at the close. The 4,975 put is quoted {{ num(p4975.bid) }} by {{ num(p4975.ask) }}, the 4,950 put {{ num(p4950.bid) }} by {{ num(p4950.ask) }}, the 5,025 call {{ num(c5025.bid) }} by {{ num(c5025.ask) }} and the 5,050 call {{ num(c5050.bid) }} by {{ num(c5050.ask) }}.
 steps:
   - prompt: >-
       What position do you put on?
