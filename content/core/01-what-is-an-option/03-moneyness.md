@@ -76,7 +76,7 @@ Only one moment makes moneyness final: the close on expiration day. An option th
 "Out of the money" covers both an option one dollar away and one forty dollars away, which behave nothing alike. Traders measure the distance in three ways:
 
 - **In dollars.** The 110 call is $10 out of the money.
-- **In percent of the stock price.** The 110 call is 10% out of the money; the 90 put is also 10% out of the money. Percent lets you compare a $20 stock with a $2,000 one.
+- **In percent of the stock price.** The 110 call is {{ pct((110 - S) / S, 0) }} out of the money; the 90 put is also {{ pct((S - 90) / S, 0) }} out of the money. Percent lets you compare a $20 stock with a $2,000 one.
 - **By delta.** A number between 0 and 1 for calls (0 and −1 for puts) that every chain shows. Deep ITM options have deltas near 1, ATM near 0.5, far OTM near 0. Traders say "the 30-delta call" instead of naming a strike. [Reading an options chain](#core-02) introduces the column and [The Greeks in practice](#core-05) explains it fully.
 
 Distance matters because it decides how likely the option is to finish in the money. Option prices themselves imply a rough probability for this. For the December options, they put the chance of the 90 call finishing in the money at about {{ pct(pITM(90, 'call'), 0) }}, the 100 call at about {{ pct(pITM(100, 'call'), 0) }}, and the 110 call at about {{ pct(pITM(110, 'call'), 0) }}. These are market-implied figures, not forecasts, and [What drives an option's price](#core-04) explains where they come from. The pattern is what matters here: the further out of the money, the less likely, and the cheaper.
@@ -91,7 +91,7 @@ Moneyness is the first dial you turn when choosing an option.
 
 [Payoffs at expiration](#core-03) works through the trade-off between strikes in detail.
 
-Drag the stock price below across the 105 strike and watch the call change from out of the money to in the money; its value at expiration is zero on one side and grows dollar for dollar on the other.
+In the pricer below, drag the stock price across the 105 strike and watch the call go from out of the money to in the money. Then drag the days to expiration down toward zero: below $105 the price collapses toward nothing, and above it the price settles at the stock price minus $105.
 
 ```tool pricer
 { S: 100, K: 105, dte: 30, iv: smileIV(ACME, 105, 30 / 365), type: 'call' }

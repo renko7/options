@@ -39,7 +39,7 @@ Time value is largest [[at the money]]. That is where the outcome is most uncert
 
 ## Time value grows with the square root of time
 
-Here is the ACME 100 call, with ACME at $100, at each listed expiration. Because it is at the money, its whole price is time value.
+Here is the ACME 100 call, with ACME at $100, at each listed expiration. To isolate the effect of time, every row uses the same 30% volatility. (On the real chain, longer expirations carry slightly different volatilities; [Term structure and VIX](#core-06-term-structure-and-vix) explains why.) Because the option is at the money, its whole price is time value.
 
 | Days to expiration | 100 call | \(0.4 \times S \times \sigma \times \sqrt{T}\) | Price per day of life |
 |---|---|---|---|
@@ -87,7 +87,7 @@ You expect ACME to rally over the next three weeks and compare two at-the-money 
 - the December 100 call, 30 days, at {{ usd(dec) }} ({{ usd(dec * 100) }} per contract);
 - the March 100 call, 121 days, at {{ usd(mar) }} ({{ usd(mar * 100) }} per contract).
 
-Suppose you are wrong about the timing: 21 days later ACME is still at $100 and nothing else has changed.
+Both are valued at 30% volatility so that only time differs. Suppose you are wrong about the timing: 21 days later ACME is still at $100 and nothing else has changed.
 
 - The December call has 9 days left and is worth {{ usd(decAfter) }}. You lost {{ usd((dec - decAfter) * 100) }} per contract, {{ pct((dec - decAfter) / dec, 0) }} of what you paid.
 - The March call has 100 days left and is worth {{ usd(marAfter) }}. You lost {{ usd((mar - marAfter) * 100) }} per contract, {{ pct((mar - marAfter) / mar, 0) }} of what you paid.
