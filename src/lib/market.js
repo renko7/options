@@ -102,6 +102,9 @@ export const EXPIRATIONS = Object.freeze([
   { dte: 394, date: '2027-12-17', type: 'LEAPS' },
 ]);
 
+/** ACME's next earnings report: after the close on this date (inside the January expiration). */
+export const ACME_EARNINGS = '2027-01-12';
+
 /** ISO date `dte` calendar days after TODAY. */
 export function expiryDate(dte) {
   const d = new Date(TODAY + 'T12:00:00Z');

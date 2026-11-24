@@ -13,12 +13,14 @@ const after80 = bs.price({ S: 100 - D, K: 80, T: 29 / 365, r: RATE, q: 0, sigma:
 const extr80 = after80 - (100 - D - 80);
 const buyback = c80.ask * 500;
 const aboveIntrinsic = (c80.ask - 20) * 500;
-const q2 = chain(ACME, { dte: 2 });
-const c100bid = q2.rows.find((r) => r.strike === 100).call.bid;
+const q9 = chain(ACME, { dte: 9 });
+const c100bid = q9.rows.find((r) => r.strike === 100).call.bid;
+const fri = longDate(expiryDate(9));
+const mon = longDate(expiryDate(12));
 const late = bs.price({ S: 100.04, K: 100, T: 0.25 / 24 / 365, r: RATE, q: ACME.q, sigma: ACME.iv, type: 'call' });
 const lateAsk = Math.ceil((late + 0.01) * 100) / 100;
 const lateCost = lateAsk * 500;
-const p98 = Math.floor(bs.price({ S: 100, K: 98, T: 2 / 365, r: RATE, q: ACME.q, sigma: smileIV(ACME, 98, 2 / 365), type: 'put' }) * 100) / 100;
+const p98 = Math.floor(bs.price({ S: 100, K: 98, T: 9 / 365, r: RATE, q: ACME.q, sigma: smileIV(ACME, 98, 9 / 365), type: 'put' }) * 100) / 100;
 const putIncome = p98 * 500;
 const assigned = 4;
 const buyCost = 98 * 100 * assigned;
@@ -27,7 +29,7 @@ const assignLoss = (openPx - 98) * 100 * assigned + putIncome;
 const fridayUp = (103 - 100) * 500;
 ```
 
-This Scenario Exercise follows one account through the week of {{ longDate(TODAY) }}. Every decision uses something from this Module: dividend risk, pin risk, after-hours exercise and assignment.
+This Scenario Exercise follows one account through the next week and a half, starting {{ longDate(TODAY) }}. Every decision uses something from this Module: dividend risk, pin risk, after-hours exercise and assignment.
 
 ```scenario
 setup: >-
@@ -52,13 +54,13 @@ steps:
         feedback: >-
           Assignment happens overnight. By tomorrow's open the exercises are done, and any calls assigned have already turned into a sale of your shares at $80. The only time to act on dividend risk is before the close on the day before the ex-date.
   - prompt: >-
-      You bought the December calls back. To earn some income this week, on Wednesday you also sold 5 ACME November 20 100 calls at {{ usd(c100bid) }} against the shares, collecting {{ usd(c100bid * 500) }}, and sold 5 November 20 98 puts at {{ usd(p98) }} (weekly strikes are $1 apart near the money), collecting {{ usd(putIncome) }}; you have the cash to buy 500 more shares at $98 if you must. It is now 3:45 p.m. on Friday, {{ longDate(expiryDate(2)) }}. ACME is at $100.04. The November 20 100 calls are offered at {{ usd(lateAsk) }}.
+      You bought the December calls back. For some income, the same afternoon you also sold 5 ACME November 27 weekly 100 calls at {{ usd(c100bid) }} against the shares, collecting {{ usd(c100bid * 500) }}, and sold 5 November 27 98 puts at {{ usd(p98) }} (weekly strikes are $1 apart near the money), collecting {{ usd(putIncome) }}; you have the cash to buy 500 more shares at $98 if you must. It is now 12:45 p.m. on Friday, {{ fri }}, the day after Thanksgiving: the exchanges close at 1:00 p.m. today. ACME is at $100.04. The November 27 100 calls are offered at {{ usd(lateAsk) }}.
     choices:
       - text: >-
           Leave the calls; they are only four cents in the money.
         grade: poor
         feedback: >-
-          Four cents is above the $0.01 exercise-by-exception threshold. If ACME closes here, the calls are exercised automatically unless holders opt out, and you may be assigned on some, all or none of the five: you will not know until Monday. Any assignment sells shares you want to keep, at $100, realizing the gain. If ACME jumps to $103 after hours, holders will certainly exercise and you lose shares worth {{ usd(fridayUp) }} more than the $100 you receive.
+          Four cents is above the $0.01 exercise-by-exception threshold. If ACME closes here, the calls are exercised automatically unless holders opt out, and you may be assigned on some, all or none of the five: you will not know until Monday. Any assignment sells shares you want to keep, at $100, realizing the gain. If ACME jumps to $103 in after-hours trading, holders will certainly exercise and you lose shares worth {{ usd(fridayUp) }} more than the $100 you receive.
       - text: >-
           Buy back the 5 calls at {{ usd(lateAsk) }}, and leave the puts, which are about $2 out of the money.
         grade: best
@@ -70,18 +72,18 @@ steps:
         feedback: >-
           Do-not-exercise instructions are for holders. You are the writer: you have no say over whether the calls are exercised. The only way a writer controls expiration risk is to close the position before trading ends.
   - prompt: >-
-      ACME closes at $100.04. At 4:40 p.m. ACME announces that its chief executive has resigned, and the stock trades at $96 after hours. On Monday morning your broker reports that you were assigned on {{ int(assigned) }} of your 5 November 20 98 puts: you bought {{ int(assigned * 100) }} shares at $98, a {{ usd(buyCost) }} cash outflow. ACME is indicated to open at {{ usd(openPx) }}. What do you do?
+      ACME closes at $100.04 at 1:00 p.m. At 1:40 p.m. ACME announces that its chief executive has resigned, and the stock trades at $96 after hours. On Monday morning, {{ mon }}, your broker reports that you were assigned on {{ int(assigned) }} of your 5 November 27 98 puts: you bought {{ int(assigned * 100) }} shares at $98, a {{ usd(buyCost) }} cash outflow. ACME is indicated to open at {{ usd(openPx) }}. What do you do?
     choices:
       - text: >-
           Call your broker and ask for the assignment to be reversed, since the puts were out of the money at the close.
         grade: poor
         feedback: >-
-          The assignment is valid. Holders may exercise out-of-the-money options until their broker's cut-off, up to 5:30 p.m. ET, and with ACME at $96 after hours, exercising a $98 put was worth $2 a share. Nobody will reverse it. The closing price only sets the automatic default.
+          The assignment is valid. Holders may exercise out-of-the-money options until their broker's cut-off, which on this half day can be no later than 2:30 p.m. ET, and with ACME at $96 after hours, exercising a $98 put was worth $2 a share. Nobody will reverse it. The closing price only sets the automatic default.
       - text: >-
           Sell all 900 shares at the open to get out of ACME after the bad news.
         grade: poor
         feedback: >-
-          Selling the 400 new shares may be reasonable, but selling your original 500 realizes the gain you have worked all week to defer, as a reaction to one headline. The assignment did not create a reason to change your long-term holding; treat the two blocks of shares separately.
+          Selling the 400 new shares may be reasonable, but selling your original 500 realizes the gain you have been working to defer, as a reaction to one headline. The assignment did not create a reason to change your long-term holding; treat the two blocks of shares separately.
       - text: >-
           Confirm the cash and margin position, then decide on the 400 new shares as a fresh trade: keep them if 900 shares fits your plan and account, otherwise sell them.
         grade: best

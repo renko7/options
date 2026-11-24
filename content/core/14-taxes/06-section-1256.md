@@ -80,7 +80,7 @@ On {{ longDate(TODAY) }} you buy one HBR March 5000 call at {{ usd(cost2) }}. On
 
 **2027:** on February 10, with HBR at 5,050, you sell at {{ usd(sale2) }}. Your 2027 result is measured from the year-end mark: {{ usd(sale2) }} − {{ usd(fmvDec31) }} = {{ usd(y2027 / 100) }} a share, a {{ y2027 < 0 ? 'loss' : 'gain' }} of {{ usd(Math.abs(y2027)) }}, also 60/40.
 
-Over the two years the total is {{ usd(y2026 + y2027) }}, exactly the trade's real P&L, but you paid tax on the 2026 part in 2026.
+Over the two years the total is {{ usd(y2026 + y2027) }}, exactly the trade's real P&L. The timing, though, is lopsided: you owe tax for 2026 on a {{ usd(y2026) }} gain from a trade that ended up losing money, and the loss only helps on the 2027 return (or, with the election below, by carrying back).
 :::
 
 [[Mark-to-market]] removes the year-end games that the straddle and wash sale rules exist to police. That is why the straddle loss deferral rules do not apply to a straddle made entirely of Section 1256 contracts: an HBR iron condor's legs are all marked each year end anyway.

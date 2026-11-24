@@ -52,7 +52,7 @@ A wash sale does not destroy the loss in most cases. It postpones it.
 The disallowed loss is added to the cost of the new stock or securities, which becomes their basis, and the holding period of the shares you sold is added to the holding period of the new ones. If the replacement was bought in an IRA or Roth IRA, the loss is not added to any basis.
 :::
 
-The IRA case is the one where the loss is effectively lost for good: the replacement is inside an account that is not taxed this way, so there is nothing for the basis adjustment to attach to.
+The IRA case is the one where the loss is effectively lost for good: it is disallowed now and never added back anywhere.
 
 :::example Harvesting a stock loss and buying a call
 You bought {{ int(sharesSold) }} ACME shares at ${{ int(buyPx) }} in March 2026. On {{ longDate(TODAY) }}, with ACME at ${{ int(sellPx) }}, you sell them all to realize a loss of {{ usd(lossTotal, 0) }}. You still like ACME, so a week later you buy one ACME January 100 call at {{ usd(callPx) }}.

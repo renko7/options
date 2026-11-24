@@ -25,7 +25,7 @@ Expiration day compresses everything in this Module into a few hours. Options th
 
 ## The timetable
 
-Take the ACME November 20 weekly, which expires on Friday, {{ fri }}. All times are Eastern.
+Take the ACME November 20 options, the November monthly series, which expire on Friday, {{ fri }}. All times are Eastern.
 
 | When | What happens |
 |---|---|
