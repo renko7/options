@@ -19,14 +19,20 @@ const putReq0 = 100 * Math.max(p95bid + 0.20 * 100 - 5, p95bid + 0.10 * 95);
 const cashAfter = startEq + p95bid * 100 - 9500;
 const eqAfter = cashAfter + 88 * 100;
 const halfStock = 0.5 * 88 * 100;
-// dividend risk on the December 80 call
-const sig80 = smileIV(ACME, 80, 30 / 365);
-const after80 = bs.price({ S: 100 - D, K: 80, T: 29 / 365, r: RATE, q: 0, sigma: sig80, type: 'call' });
-const extr80 = after80 - (100 - D - 80);
-const sig90 = smileIV(ACME, 90, 30 / 365);
-const after90 = bs.price({ S: 100 - D, K: 90, T: 29 / 365, r: RATE, q: 0, sigma: sig90, type: 'call' });
-const extr90 = after90 - (100 - D - 90);
-const assignCost = (D - extr80) * 100;
+// dividend risk: decision at the close on Wed Dec 9, ACME opens ex-dividend Thu Dec 10
+const exDate = longDate(ACME_EX_DIVIDEND);
+const decDay = longDate(expiryDate(21));
+const tDiv = 0.5 / 365;
+const extrAfter = (K, dte) => {
+  const T = dte / 365 - tDiv;
+  const sigma = smileIV(ACME, K, dte / 365);
+  return bs.price({ S: 100 - D, K, T, r: RATE, q: 0, sigma, type: 'put' }) + K * (1 - Math.exp(-RATE * T));
+};
+const extr85 = extrAfter(85, 9);
+const extr100 = extrAfter(100, 9);
+const extr80 = extrAfter(80, 37);
+const extr90 = extrAfter(90, 37);
+const assignCost = (D - extr85) * 100;
 const spreads = 20;
 ```
 
@@ -89,12 +95,12 @@ The usual fixes are to buy (or sell) the shares in the market to flatten the sto
 
 The most predictable early assignment is on in-the-money calls the day before an [[ex-dividend date]]. As the previous Lesson showed, a holder should exercise when the dividend is larger than the extrinsic value the call will keep after the stock goes ex. Professional holders run that check every time. If you are short such a call, you should expect to be assigned. This is [[dividend risk]].
 
-:::example Short the December 80 call the day before the ex-date
-ACME goes ex-dividend tomorrow with a {{ usd(D) }} dividend. You are short one ACME December 80 call. After the stock goes ex, the call would keep only about {{ usd(extr80, 3) }} of extrinsic value, less than the dividend, so holders will exercise tonight.
+:::example Short the December 85 call the day before the ex-date
+ACME goes ex-dividend on Thursday, {{ exDate }}, with a {{ usd(D) }} dividend. It is Wednesday, {{ decDay }}, ACME is at $100, and you are short one ACME December 85 call, nine days from expiration. After the stock goes ex, the call would keep only about {{ usd(extr85, 3) }} of extrinsic value, far less than the dividend, so holders will exercise tonight.
 
 If you are assigned, you are short 100 shares when ACME opens ex-dividend, and you owe the {{ usd(D * 100) }} dividend. Compared with staying short the call, assignment costs you the dividend minus the extrinsic value you would have kept: about {{ usd(assignCost) }} per contract.
 
-Now multiply it. A trader short {{ int(spreads) }} of these calls, as the short legs of spreads against long December 90 calls, should expect to be short {{ int(spreads * 100) }} shares at tomorrow's open and to owe {{ usd(D * 100 * spreads) }} in dividends, ending about {{ usd(assignCost * spreads) }} worse off than if the calls had stayed open. And the long 90 calls do not help: they keep {{ usd(extr90, 3) }} of extrinsic value after the ex-date, more than the dividend, so exercising them to collect it would cost more than it pays.
+Now multiply it. A trader short {{ int(spreads) }} of these calls, as the short legs of spreads against long December 100 calls, should expect to be short {{ int(spreads * 100) }} shares at tomorrow's open and to owe {{ usd(D * 100 * spreads) }} in dividends, ending about {{ usd(assignCost * spreads) }} worse off than if the calls had stayed open. And the long 100 calls do not help: they are at the money, with no intrinsic value to capture, so nobody would exercise them for a dividend.
 :::
 
 The defence is simple and must happen before the close on the day before the ex-date:
@@ -143,19 +149,19 @@ Assignment is random: the OCC picks clearing firms at random and your broker all
   explain: >-
     Assignment on a call means you sell 100 shares at the $105 strike. With no shares to deliver, you are now short 100 shares and have received {{ usd(105 * 100) }}. Long shares result from assignment on a short put. A cash-only debit would be cash settlement, which applies to index options, not to ACME.
 - q: >-
-    ACME goes ex-dividend tomorrow with a {{ usd(D) }} dividend. Which short call is most likely to be assigned tonight?
+    It is {{ decDay }}, ACME is at $100 and it goes ex-dividend tomorrow with a {{ usd(D) }} dividend. Which short call is most likely to be assigned tonight?
   choices:
     - >-
-      A December 80 call, with about {{ usd(extr80) }} of extrinsic value after the ex-date
+      A January 80 call, with about {{ usd(extr80) }} of extrinsic value after the ex-date
     - >-
-      A December 90 call, with about {{ usd(extr90) }} of extrinsic value after the ex-date
+      A January 90 call, with about {{ usd(extr90) }} of extrinsic value after the ex-date
     - >-
-      A December 105 call, out of the money
+      A January 105 call, out of the money
   answer: 0
   explain: >-
     A holder exercises when the dividend exceeds the extrinsic value the call will keep after the ex-date. That holds for the 80 call ({{ usd(D) }} against {{ usd(extr80) }}) but not for the 90 call ({{ usd(extr90) }} is more than the dividend). An out-of-the-money call has no intrinsic value to capture, so nobody exercises it.
 - q: >-
-    You are short 20 ACME December 80 calls as part of spreads, and ACME goes ex-dividend tomorrow. What is the standard defence?
+    On {{ decDay }} you are short 20 ACME December 85 calls as the short legs of spreads, and ACME goes ex-dividend tomorrow. What is the standard defence?
   choices:
     - >-
       Do nothing; the long legs cover any assignment
@@ -165,5 +171,5 @@ Assignment is random: the OCC picks clearing firms at random and your broker all
       Exercise all the long calls tomorrow morning
   answer: 1
   explain: >-
-    The long calls cap the spread's loss at expiration but do not pay you the dividend you will owe if the short calls are assigned tonight, about {{ usd(assignCost * spreads) }} across 20 contracts. Closing or rolling the short calls before the close removes the risk. Exercising the longs tomorrow is too late: exercise must happen by the day before the ex-date to collect the dividend.
+    The long calls cap the spread's loss at expiration but do not pay the {{ usd(D * 100 * spreads) }} of dividends you will owe if the short calls are assigned tonight and you open tomorrow short {{ int(spreads * 100) }} shares, about {{ usd(assignCost * spreads) }} worse off than staying short the calls. Closing or rolling the short calls before the close removes the risk. Exercising the longs tomorrow is too late: exercise must happen by the day before the ex-date to collect the dividend.
 ```

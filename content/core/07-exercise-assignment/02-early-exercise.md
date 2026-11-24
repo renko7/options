@@ -4,26 +4,31 @@ summary: Decide whether to exercise an American option early by comparing what e
 ---
 
 ```calc
-const T30 = 30 / 365;
 const D = ACME.dividend;
-const exDate = longDate(expiryDate(1));
+const exDate = longDate(ACME_EX_DIVIDEND);
+const decDay = longDate(expiryDate(21));
 const q30 = chain(ACME, { dte: 30 });
 const row = (k) => q30.rows.find((r) => r.strike === k);
 const c95q = row(95).call;
 const c80q = row(80).call;
 const sellGain95 = c95q.bid - 5;
-const mk = (K) => {
-  const sigma = smileIV(ACME, K, T30);
-  const base = { S: 100, K, T: T30, r: RATE, q: 0, sigma, type: 'call', steps: 600, dividends: [{ t: 1 / 365, amount: D }] };
+// Decision at the close on Wed Dec 9; ACME opens ex-dividend on Thu Dec 10 (modeled as half a day later).
+const tDiv = 0.5 / 365;
+const mk = (K, dte) => {
+  const T = dte / 365;
+  const sigma = smileIV(ACME, K, T);
+  const base = { S: 100, K, T, r: RATE, q: 0, sigma, type: 'call', steps: 800, dividends: [{ t: tDiv, amount: D }] };
   const hold = binomial.price({ ...base, american: false }).price;
   const amer = binomial.price({ ...base, american: true }).price;
-  const after = { S: 100 - D, K, T: 29 / 365, r: RATE, q: 0, sigma };
+  const after = { S: 100 - D, K, T: T - tDiv, r: RATE, q: 0, sigma };
   const putAfter = bs.price({ ...after, type: 'put' });
-  const carry = K * (1 - Math.exp(-RATE * 29 / 365));
+  const carry = K * (1 - Math.exp(-RATE * (T - tDiv)));
   return { K, sigma, hold, amer, ex: 100 - K, putAfter, carry, extrAfter: putAfter + carry };
 };
-const c80 = mk(80);
-const c95 = mk(95);
+const janDte = 58 - 21;
+const c80 = mk(80, janDte);
+const c90 = mk(90, janDte);
+const d90 = mk(90, 30 - 21);
 const T58 = 58 / 365;
 const sig130 = smileIV(ACME, 130, T58);
 const putAt = (r, american) => binomial.price({ S: 100, K: 130, T: T58, r, q: ACME.q, sigma: sig130, type: 'put', american, steps: 800 }).price;
@@ -69,17 +74,19 @@ Subtract the call's intrinsic value \( S - K \) from both sides of \( C = P + S 
 The call's extrinsic value is the price of the put with the same strike plus the interest on the strike until expiration. For a deep in-the-money call the put is nearly worthless, so the extrinsic value is little more than that interest. The rule follows: exercise the day before the ex-date when the dividend \( D \) is larger than \( P + K(1 - e^{-rT}) \), both measured just after the stock goes ex.
 :::
 
-:::example ACME goes ex-dividend tomorrow
-ACME's next $0.50 dividend goes ex on {{ exDate }}, tomorrow. Today, {{ longDate(TODAY) }}, is the last day to exercise and collect it. Compare two December calls with ACME at $100.
+:::example The day before ACME goes ex-dividend
+ACME's next $0.50 dividend goes ex on Thursday, {{ exDate }}. Suppose that on Wednesday, {{ decDay }}, the last day to exercise and collect it, ACME is at $100. Compare two January calls, which have {{ int(janDte) }} days left.
 
-**December 80 call** (deep in the money). After ACME drops to $99.50 tomorrow, the matching put is worth {{ usd(c80.putAfter, 3) }} and the interest on $80 for the remaining 29 days is {{ usd(c80.carry, 3) }}, so the call will have about {{ usd(c80.extrAfter, 3) }} of extrinsic value left. That is less than the {{ usd(D) }} dividend.
+**January 80 call** (deep in the money). After ACME drops to $99.50 tomorrow, the matching put is worth {{ usd(c80.putAfter, 3) }} and the interest on $80 until January's expiration is {{ usd(c80.carry, 3) }}, so the call will have about {{ usd(c80.extrAfter, 3) }} of extrinsic value left. That is less than the {{ usd(D) }} dividend.
 
 - Hold through the ex-date: the call is worth {{ usd(c80.hold, 3) }} today.
 - Exercise today: you capture {{ usd(c80.ex) }} of intrinsic value and you will receive the dividend.
 
 Exercising is worth {{ usd((c80.ex - c80.hold) * 100) }} more per contract. A binomial tree that allows early exercise values this call at {{ usd(c80.amer, 3) }}, essentially its exercise value: the signature of an option that should be exercised now.
 
-**December 95 call** (closer to the money). Its put is worth {{ usd(c95.putAfter, 3) }} after the ex-date and the interest on $95 adds {{ usd(c95.carry, 3) }}, so it keeps about {{ usd(c95.extrAfter, 3) }} of extrinsic value, more than the dividend. Holding is worth {{ usd(c95.hold, 3) }} against {{ usd(c95.ex) }} from exercising, and the tree with early exercise agrees at {{ usd(c95.amer, 3) }}. Do not exercise this one.
+**January 90 call** (less deep). Its put is worth {{ usd(c90.putAfter, 3) }} after the ex-date and the interest on $90 adds {{ usd(c90.carry, 3) }}, so it keeps about {{ usd(c90.extrAfter, 3) }} of extrinsic value, more than the dividend. Holding is worth {{ usd(c90.hold, 3) }} against {{ usd(c90.ex) }} from exercising, and the tree with early exercise agrees at {{ usd(c90.amer, 3) }}. Do not exercise this one.
+
+The **December 90 call** is different. With only {{ int(30 - 21) }} days to the December 18 expiration, its put and the interest on its strike add up to just {{ usd(d90.extrAfter, 3) }} after the ex-date, so the same strike that should be held in January should be exercised in December.
 :::
 
 Note the direction: the deeper in the money and the closer to expiration, the smaller the put and the interest, and the more likely the dividend wins. Calls near the money almost never qualify.
@@ -136,19 +143,19 @@ Exercise captures only intrinsic value, so exercising an option that still has e
   explain: >-
     Exercising buys the shares at $95, a $5 per share advantage over the market. Selling the call brings in {{ usd(c95q.bid) }} per share, which more than covers the extra $5 you pay for the shares at $100. The difference, {{ usd(sellGain95 * 100) }} per contract, is the extrinsic value that exercise would have thrown away.
 - q: >-
-    ACME goes ex-dividend tomorrow with a {{ usd(D) }} dividend. Which December call is the strongest candidate for exercise today?
+    It is {{ decDay }} and ACME goes ex-dividend tomorrow with a {{ usd(D) }} dividend. ACME is at $100. Which January call is the strongest candidate for exercise today?
   choices:
     - >-
       The 80 call, whose extrinsic value after the ex-date is about {{ usd(c80.extrAfter) }}
     - >-
-      The 95 call, whose extrinsic value after the ex-date is about {{ usd(c95.extrAfter) }}
+      The 90 call, whose extrinsic value after the ex-date is about {{ usd(c90.extrAfter) }}
     - >-
       The 105 call, because it is cheapest
     - >-
       None; American calls should never be exercised early
   answer: 0
   explain: >-
-    Exercise wins when the dividend exceeds the extrinsic value the call will still have after the stock goes ex. For the 80 call, {{ usd(D) }} beats {{ usd(c80.extrAfter) }}; for the 95 call, it does not. The 105 call is out of the money and has no intrinsic value to capture. "Never exercise early" is the right default, but dividends are the standard exception.
+    Exercise wins when the dividend exceeds the extrinsic value the call will still have after the stock goes ex. For the 80 call, {{ usd(D) }} beats {{ usd(c80.extrAfter) }}; for the 90 call, it does not. The 105 call is out of the money and has no intrinsic value to capture. "Never exercise early" is the right default, but dividends are the standard exception.
 - q: >-
     Why does a deep in-the-money call's extrinsic value shrink to roughly the interest on its strike?
   choices:
