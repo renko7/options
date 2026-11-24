@@ -33,6 +33,12 @@ const exS = 112, left = 9;
 const exIV = smileIV(ACME, 105, left / 365);
 const exCall = bs.price({ S: exS, K: 105, T: left / 365, r: RATE, q: ACME.q, sigma: exIV, type: 'call' });
 const exTV = exCall - (exS - 105);
+// the call's extrinsic value after the stock goes ex: same-strike put plus interest on the strike (core-07)
+const D = ACME.dividend, tDiv = 0.5 / 365;
+const exAfter = { S: exS - D, K: 105, T: left / 365 - tDiv, r: RATE, q: 0, sigma: exIV };
+const exPut = bs.price({ ...exAfter, type: 'put' });
+const exCarry = 105 * (1 - Math.exp(-RATE * (left / 365 - tDiv)));
+const exExtr = exPut + exCarry;
 ```
 
 The [previous Lesson](#core-09-covered-call) fixed the strike at 105 and the expiration at December. In practice those are the two decisions that make or break a covered call, and professionals make them with the Greeks rather than by feel.
@@ -99,12 +105,12 @@ The net price is what matters. If the buy-write fills at {{ usd(net) }}, it make
 
 ACME calls are [[American-style|American-style option]]: the holder can exercise any business day, not only at expiration. Holders almost never exercise early, because exercising throws away the call's remaining time value. The main exception is the day before an [[ex-dividend date]].
 
-A call holder does not receive dividends; a shareholder does. If a call is deep in the money and its remaining time value is smaller than the coming dividend, the holder does better by exercising, owning the shares before the ex-date and collecting the dividend.
+A call holder does not receive dividends; a shareholder does. If a call is deep in the money, the holder compares the dividend with the time value the call will still have *after* the stock goes ex. By put-call parity that is about the price of the put with the same strike plus the interest on the strike until expiration (the derivation is in [Exercise, assignment and expiration](#core-07)). If the dividend is larger, the holder does better by exercising, owning the shares before the ex-date and collecting the dividend.
 
 :::example Assigned before the dividend
 Suppose ACME has rallied to $112 and goes ex-dividend for its $0.50 quarterly dividend on Thursday, December 10. You are short the December 105 call. On Wednesday, December 9, with {{ int(left) }} days to expiration, the call is worth about {{ usd(exCall) }}: {{ usd(exS - 105) }} of intrinsic value and only {{ usd(exTV) }} of time value.
 
-A holder who keeps the call loses about $0.50 of value when the stock drops by the dividend on the ex-date. A holder who exercises gives up {{ usd(exTV) }} of time value and collects $0.50. Exercising is worth about {{ usd(0.5 - exTV) }} a share to them, so many will do it.
+A holder who keeps the call loses about $0.50 of value when the stock drops by the dividend on the ex-date. A holder who exercises collects $0.50 and gives up the time value the call would still have after the ex-date: the 105 put, worth about {{ usd(exPut) }} once ACME trades ex-dividend, plus {{ usd(exCarry) }} of interest on $105 until expiration, about {{ usd(exExtr) }} in all. The dividend is larger by about {{ usd(D - exExtr) }} a share, so many holders will exercise. (Today's quoted time value, {{ usd(exTV) }}, already has the coming price drop priced in, so it is not the number to compare.)
 
 If you are assigned, you find out on Thursday morning: your shares were sold at $105 under Wednesday's exercise. You keep the premium and the $500 gain to the strike, which is your full max profit, just earlier than planned. You do not receive the dividend, because you no longer own the shares on the ex-date.
 :::
@@ -116,7 +122,7 @@ US stock trades settle one business day after the trade (T+1), so the ex-dividen
 :::
 
 :::key
-Choose the strike by delta: the call's delta is roughly the chance of being called away, and 100 shares minus 100 × that delta is how much stock you still effectively own. Shorter expirations earn more per day but need more trading. A deep in-the-money short call whose time value is less than the next dividend is likely to be exercised the day before the ex-date.
+Choose the strike by delta: the call's delta is roughly the chance of being called away, and 100 shares minus 100 × that delta is how much stock you still effectively own. Shorter expirations earn more per day but need more trading. A deep in-the-money short call is likely to be exercised the day before the ex-date when the dividend is larger than the same-strike put plus the interest on the strike; if in doubt, expect assignment.
 :::
 
 ```quiz
@@ -145,7 +151,7 @@ Choose the strike by delta: the call's delta is roughly the chance of being call
   explain: >-
     If called, you sell at $105 shares that cost you a net {{ usd(net) }}: ($105 − {{ usd(net) }}) / {{ usd(net) }} = {{ pct(bwCalled, 2) }}. The {{ pct(0.05, 2) }} ignores the premium. {{ pct(bwStatic, 2) }} is the static return, what you make if ACME stays at $100.
 - q: >-
-    You are short a December 105 covered call. ACME is at $112 and goes ex-dividend ($0.50) tomorrow. The call's time value is {{ usd(exTV) }}. What is most likely?
+    You are short a December 105 covered call. ACME is at $112 and goes ex-dividend ($0.50) tomorrow. After the ex-date the 105 put plus the interest on $105 to expiration will be worth only about {{ usd(exExtr) }}. What is most likely?
   choices:
     - >-
       Nothing happens until expiration, because holders never exercise early
@@ -155,7 +161,7 @@ Choose the strike by delta: the call's delta is roughly the chance of being call
       You will receive the dividend and then be assigned at expiration
   answer: 1
   explain: >-
-    The dividend ($0.50) is worth more than the time value the holder gives up by exercising ({{ usd(exTV) }}), so exercising today is the better choice for many holders. You would deliver the shares at $105 and miss the dividend. Early exercise is rare in general, but this is the classic case where it happens.
+    The dividend ($0.50) is worth more than the time value the holder gives up by exercising, about {{ usd(exExtr) }} (the put plus the interest on the strike), so exercising today is the better choice for many holders. You would deliver the shares at $105 and miss the dividend. Early exercise is rare in general, but this is the classic case where it happens.
 - q: >-
     Why does a shorter-dated call usually earn more premium per day than a longer-dated call at the same strike?
   choices:
