@@ -100,6 +100,15 @@ function makeRenderer(glossary, where) {
 }
 
 // ---------- one lesson ----------
+function shuffledOrder(n, seedText) {
+  let h = 2166136261;
+  for (let i = 0; i < seedText.length; i++) { h ^= seedText.charCodeAt(i); h = Math.imul(h, 16777619); }
+  const rand = () => { h = (h + 0x6d2b79f5) | 0; let t = Math.imul(h ^ (h >>> 15), 1 | h); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const a = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
 const LIB_NAMES = Object.keys(lib);
 const LIB_VALUES = LIB_NAMES.map((k) => lib[k]);
 
@@ -162,12 +171,17 @@ function compileLesson(file, id, glossary) {
       else if (item.choices.length < 2 || item.choices.length > 5) fail(where, `${w} needs 2–5 choices`);
       else if (!(Number.isInteger(item.answer) && item.answer >= 0 && item.answer < item.choices.length)) fail(where, `${w} answer must be a 0-based index into choices`);
     });
-    quiz = q.filter((x) => x.q && Array.isArray(x.choices)).map((item) => ({
-      q: render(String(item.q), { inline: true }),
-      choices: item.choices.map((c) => render(String(c), { inline: true })),
-      answer: item.answer,
-      explain: render(String(item.explain ?? '')),
-    }));
+    quiz = q.filter((x) => x.q && Array.isArray(x.choices)).map((item, qi) => {
+      // Shuffle choices deterministically (seeded by lesson id and question) so the right
+      // answer's position carries no signal, but stays stable across rebuilds.
+      const order = shuffledOrder(item.choices.length, `${id}#${qi}`);
+      return {
+        q: render(String(item.q), { inline: true }),
+        choices: order.map((k) => render(String(item.choices[k]), { inline: true })),
+        answer: order.indexOf(item.answer),
+        explain: render(String(item.explain ?? '')),
+      };
+    });
     return '';
   });
   const scenarios = [];
@@ -182,9 +196,9 @@ function compileLesson(file, id, glossary) {
     });
     scenarios.push({
       setup: sc.setup ? render(String(sc.setup)) : '',
-      steps: sc.steps.map((st) => ({
+      steps: sc.steps.map((st, si) => ({
         prompt: render(String(st.prompt ?? '')),
-        choices: (st.choices || []).map((c) => ({ text: render(String(c.text), { inline: true }), grade: c.grade, feedback: render(String(c.feedback ?? '')) })),
+        choices: shuffledOrder((st.choices || []).length, `${id}@${scenarios.length}:${si}`).map((k) => st.choices[k]).map((c) => ({ text: render(String(c.text), { inline: true }), grade: c.grade, feedback: render(String(c.feedback ?? '')) })),
       })),
       wrap: sc.wrap ? render(String(sc.wrap)) : '',
     });

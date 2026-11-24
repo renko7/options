@@ -8,5 +8,5 @@ export * as varswap from './varswap.js';
 export * as surface from './surface.js';
 export * as fmt from './fmt.js';
 export * as market from './market.js';
-export { ACME, HBR, RATE, TODAY, EXPIRATIONS, ACME_EARNINGS, chain, occSymbol, smileIV, expiryDate, longDate } from './market.js';
+export { ACME, HBR, RATE, TODAY, EXPIRATIONS, ACME_EARNINGS, ACME_EX_DIVIDEND, chain, occSymbol, smileIV, expiryDate, longDate } from './market.js';
 export { usd, signedUsd, pct, num, signed, int } from './fmt.js';
