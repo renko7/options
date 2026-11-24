@@ -71,7 +71,7 @@ Two refinements matter as soon as you hold more than one position.
 A [[naked|naked option]] short put or a short [[strangle]] has [[undefined risk]]. There is no max loss to divide by, and beginners reach for the next available number: the margin the broker requires. That is a mistake, and an expensive one.
 
 :::rule Margin on a short equity option (as of 2026)
-Under FINRA Rule 4210 and the exchanges' rules, the minimum initial and maintenance margin for an uncovered equity option in a [[margin account]] is the premium received plus 20% of the underlying's value, minus any amount by which the option is out of the money, but not less than the premium plus 10% of the underlying's value (for a call) or 10% of the strike (for a put). Brokers may require more. Details are in [Accounts and orders](#core-08).
+Under FINRA Rule 4210 and the exchanges' rules, the minimum initial and maintenance margin for an uncovered equity option in a [[margin account]] is the option's current market value (at entry, the premium received) plus 20% of the underlying's value, minus any amount by which the option is out of the money, but not less than the option's value plus 10% of the underlying's value (for a call) or 10% of the strike (for a put). Brokers may require more. Details are in [Accounts and orders](#core-08).
 :::
 
 :::example Margin versus stress loss on a naked ACME put
