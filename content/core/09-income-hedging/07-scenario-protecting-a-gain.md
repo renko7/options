@@ -34,7 +34,7 @@ This exercise uses everything in the Module: covered calls, protective puts, col
 
 ```scenario
 setup: >-
-  It is Wednesday, November 18. You own 500 ACME shares, bought years ago at $60; ACME is at $100, so the position is worth $50,000. You plan to sell all 500 shares in mid-January to fund a purchase, and you cannot afford for the sale to raise less than $45,000. ACME reports earnings after the close on Thursday, December 3, and goes ex-dividend for its $0.50 quarterly dividend on Thursday, December 10. In the January expiration (Jan 15, 58 days), the 95 put is offered at {{ usd(p95.ask) }} and the 105 call is bid at {{ usd(c105.bid) }}.
+  It is Wednesday, November 18. You own 500 ACME shares, bought years ago at $60; ACME is at $100, so the position is worth $50,000. You plan to sell all 500 shares in mid-January to fund a purchase, and you cannot afford for the sale to raise less than $45,000. ACME goes ex-dividend for its $0.50 quarterly dividend on Thursday, December 10, and reports earnings after the close on Tuesday, {{ longDate(ACME_EARNINGS) }}, three days before the January expiration. In the January expiration (Jan 15, 58 days), the 95 put is offered at {{ usd(p95.ask) }} and the 105 call is bid at {{ usd(c105.bid) }}.
 steps:
   - prompt: >-
       How do you protect the $45,000 you need through mid-January?
@@ -60,7 +60,7 @@ steps:
         feedback: >-
           The collar guarantees you can sell at $95 or better, so the sale raises at least $47,500, and it costs nothing: the net is a {{ colNet < 0 ? usd(-colNet * sh) + ' credit' : usd(colNet * sh) + ' debit' }} on 500 shares. You give up gains above $105, but you were selling in January in any case. Your worst case is {{ usd(payoff.pnlAtExpiry(col, 50)) }} against today's value; the best is {{ usd(payoff.pnlAtExpiry(col, 130)) }}.
   - prompt: >-
-      You put on the collar. ACME beats earnings and jumps to $112. On Wednesday, December 9, the day before the ex-dividend date, it is still at $112. Your January 105 calls are worth about {{ usd(c2) }}: $7.00 of intrinsic value and {{ usd(tv2) }} of time value. A friend warns that your calls are about to be assigned for the dividend. What do you do?
+      You put on the collar. In early December ACME rallies on a well-received product launch. On Wednesday, December 9, the day before the ex-dividend date, it is still at $112. Your January 105 calls are worth about {{ usd(c2) }}: $7.00 of intrinsic value and {{ usd(tv2) }} of time value. A friend warns that your calls are about to be assigned for the dividend. What do you do?
     choices:
       - text: >-
           Buy back the five calls at once to prevent assignment.
@@ -78,7 +78,7 @@ steps:
         feedback: >-
           That leaves you short five January 105 calls with no shares behind them: naked calls, with unlimited risk if ACME keeps rising, and a margin requirement you may not have approval for. If you want out at $112, close the whole collar and the shares together.
   - prompt: >-
-      The rally fades. On Thursday, January 14, the day before expiration, ACME is at $93. Your 105 calls are worthless; your 95 puts are worth about {{ usd(p3) }}. You still need to sell the shares this week. What do you do?
+      The rally fades into earnings, and on January 12 ACME reports a disappointing quarter. On Thursday, January 14, the day before expiration, ACME is at $93. Your 105 calls are worthless; your 95 puts are worth about {{ usd(p3) }}. You still need to sell the shares this week. What do you do?
     choices:
       - text: >-
           Hold the puts through expiration; they are in the money and will be exercised automatically, selling your 500 shares at $95.
@@ -96,7 +96,7 @@ steps:
         feedback: >-
           This removes the floor at the moment you need it. Your shares are worth {{ usd(93 * sh) }} plus the {{ usd(p3 * 100 * n) }} from the puts, and from here every further dollar ACME falls comes out of money you need. Waiting for a bounce turns a hedge into a speculation.
 wrap: >-
-  A hedge starts from what you need, not from what is cheapest or most popular. Here the need was a floor under a sale already planned, so a zero-cost collar fit: it bought protection with upside you were never going to keep. Covered calls and stop orders looked like protection but would have failed in an earnings gap. When the stock rallied, the right check was time value against the dividend, not the calendar alone. And at the end, the put was simply the tool for the job it was bought for.
+  A hedge starts from what you need, not from what is cheapest or most popular. Here the need was a floor under a sale already planned, so a zero-cost collar fit: it bought protection with upside you were never going to keep. Covered calls and stop orders looked like protection but would have failed in the earnings gap that the January expiration had to cover. When the stock rallied, the right check was time value against the dividend, not the calendar alone. And at the end, the put was simply the tool for the job it was bought for.
 ```
 
 ```tool position-builder

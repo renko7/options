@@ -1,0 +1,48 @@
+- term: Index option
+  def: >-
+    An option on the level of a stock index rather than on shares. US index options such as SPX are cash-settled and usually European-style, and are large: the index level times the multiplier.
+  lesson: core-13-index-options
+- term: SPX
+  aka: [SPXW, S&P 500 index options]
+  def: >-
+    Cboe's options on the S&P 500 Index: $100 times the index, European-style and cash-settled. Standard monthly SPX options are AM-settled; the SPXW series (weeklies, dailies and end-of-month) are PM-settled. Expirations exist every weekday.
+  lesson: core-13-spx-spy-xsp
+- term: SPY
+  aka: [SPY options]
+  def: >-
+    Options on the SPDR S&P 500 ETF: ordinary ETF options covering 100 shares, American-style and physically settled, so they carry early-assignment, dividend and pin risk. Expirations exist every weekday.
+  lesson: core-13-spx-spy-xsp
+- term: XSP
+  aka: [Mini-SPX]
+  def: >-
+    Cboe's Mini-SPX options, on an index set at one tenth of the S&P 500: European-style, cash-settled and PM-settled, with a $100 multiplier, so each contract is one tenth the size of an SPX option.
+  lesson: core-13-spx-spy-xsp
+- term: AM settlement
+  aka: [AM-settled]
+  def: >-
+    Settlement of an index option on a value calculated from the opening prices of the index's components on the expiration morning. AM-settled options stop trading the business day before, so holders carry an overnight gap they cannot trade out of.
+  lesson: core-13-am-pm-settlement
+- term: PM settlement
+  aka: [PM-settled]
+  def: >-
+    Settlement of an index option on the index's official closing value on the expiration day. PM-settled options trade until the close on that day.
+  lesson: core-13-am-pm-settlement
+- term: Special opening quotation
+  aka: [SOQ, SET]
+  def: >-
+    The settlement value for AM-settled index options, calculated from each component stock's opening price on expiration morning, whenever that stock opens. It is not a level the index ever printed in real time and can differ from both the prior close and the early-morning index level.
+  lesson: core-13-am-pm-settlement
+- term: 0DTE
+  aka: [zero days to expiration, same-day option]
+  def: >-
+    An option traded on its expiration day ("zero days to expiration"). Index products such as SPX and XSP have expirations every weekday, so same-day options exist every trading day; their gamma and hourly time decay are extreme.
+  lesson: core-13-0dte-greeks
+- term: Notional value
+  aka: [notional]
+  def: >-
+    The value of the underlying an option controls: the underlying price times the multiplier. One HBR option at 5,000 has a notional value of $500,000; one ACME option at $100 has $10,000.
+  lesson: core-13-index-options
+- term: Index multiplier
+  def: >-
+    The dollar amount per index point used to convert an index option's premium and settlement into dollars; $100 for SPX, XSP and the Course's HBR.
+  lesson: core-13-index-options

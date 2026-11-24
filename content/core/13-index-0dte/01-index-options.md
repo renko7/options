@@ -35,7 +35,7 @@ An ACME option is a claim on 100 shares of one company. An [[index option]] is a
 
 An index option's strike is an index level, and its premium is quoted in index points. The [[index multiplier]], $100 for HBR, turns points into dollars: both the premium and the settlement are points × $100.
 
-At expiration there is no stock to deliver. The OCC calculates an official [[settlement value]] for the index, and every in-the-money option is settled by [[cash settlement]]:
+At expiration there is no stock to deliver. The exchange publishes an official [[settlement value]] for the index, calculated by the index provider, and every in-the-money option is settled by [[cash settlement]] through the OCC:
 
 \[ \text{Call pays} = \max(\text{settlement value} - K,\ 0) \times \$100 \qquad \text{Put pays} = \max(K - \text{settlement value},\ 0) \times \$100 \]
 

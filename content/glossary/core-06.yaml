@@ -1,0 +1,50 @@
+- term: Implied volatility
+  aka: [IV, implied vol]
+  def: >-
+    The volatility that, put into the Black-Scholes model with the other known inputs, reproduces an option's market price. It is the market's price for an option expressed as an annualized volatility, and includes a risk premium rather than being a pure forecast.
+  lesson: core-06-implied-volatility
+- term: Realized volatility
+  aka: [historical volatility, HV, statistical volatility]
+  def: >-
+    The volatility a stock actually delivered over a past period: the standard deviation of its daily log returns, annualized by multiplying by \(\sqrt{252}\).
+  lesson: core-06-realized-volatility
+- term: IV rank
+  aka: [implied volatility rank, IVR]
+  def: >-
+    Where today's implied volatility sits within its 52-week range: (IV now − 52-week low) ÷ (52-week high − 52-week low). A single spike in the past year can distort it.
+  lesson: core-06-iv-rank-and-expected-move
+- term: IV percentile
+  aka: [implied volatility percentile, IVP]
+  def: >-
+    The percentage of trading days in the past year on which implied volatility closed below today's level. It uses every day rather than only the high and low, so it is less distorted by brief spikes than IV rank.
+  lesson: core-06-iv-rank-and-expected-move
+- term: Volatility skew
+  aka: [skew, vol skew, put skew]
+  def: >-
+    The pattern of implied volatility across strikes for one expiration. For stocks and indexes it normally slopes down, so low strikes (out-of-the-money puts) carry higher implied volatility than high strikes.
+  lesson: core-06-skew-and-smile
+- term: Volatility smile
+  aka: [smile, vol smile]
+  def: >-
+    A pattern of implied volatility across strikes in which both low and high strikes carry more implied volatility than the at-the-money strike, so the curve curves up at both ends.
+  lesson: core-06-skew-and-smile
+- term: Term structure
+  aka: [volatility term structure, vol term structure]
+  def: >-
+    At-the-money implied volatility plotted against time to expiration. It normally slopes upward in calm markets (contango) and inverts in stress, when short-dated implied volatility jumps above long-dated.
+  lesson: core-06-term-structure-and-vix
+- term: Volatility crush
+  aka: [IV crush, vol crush]
+  def: >-
+    The sharp fall in implied volatility after a scheduled event such as an earnings report, as the premium the market charged for the event leaves the options. It hits the expiration closest after the event hardest.
+  lesson: core-06-earnings-and-the-crush
+- term: Expected move
+  aka: [implied move]
+  def: >-
+    The size of move the options market is pricing over a period, usually one standard deviation, about \(S\,\sigma\sqrt{T}\). The at-the-money straddle price, about 0.8 times that, measures the average move and is often quoted instead.
+  lesson: core-06-iv-rank-and-expected-move
+- term: VIX
+  aka: [Cboe Volatility Index, fear index]
+  def: >-
+    Cboe's index of the 30-day implied volatility of the S&P 500, calculated from a strip of out-of-the-money SPX option prices. It is not directly tradable; exposure comes through VIX futures, VIX options and products built on them.
+  lesson: core-06-term-structure-and-vix
