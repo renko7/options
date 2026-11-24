@@ -61,6 +61,16 @@ Both legs settle in cash on the same number, so there is never a stock position 
 - Most US index options, including SPX and XSP, are European-style. A few are American-style (S&P 100 options under the symbol OEX are an example), so check each product's specifications.
 :::
 
+## What index options are used for
+
+Index options let you trade the market as a whole in one position. The main uses:
+
+- **Hedging a diversified portfolio.** An investor holding many stocks can buy index puts to protect the whole portfolio at once, instead of buying a put on each holding. The hedge pays when the market falls, though not for a stock that falls on its own news.
+- **Views on the market rather than a company.** A trader who expects the market to rise, fall or stay in a range can express it without the earnings, takeover and other single-company risks that come with stock options.
+- **Volatility trading.** Index options are the main way to trade expectations of market-wide volatility, which [Implied volatility](#core-06) introduced and the Advanced Track develops.
+
+Because one index option covers hundreds of stocks, index implied volatility is usually lower than the implied volatility of most of the individual stocks in it: their separate moves partly cancel out. That is why HBR's options are priced at {{ pct(HBR.iv, 0) }} volatility while ACME's are at {{ pct(ACME.iv, 0) }}.
+
 ## European style: no early assignment
 
 Because SPX-style index options are European, they can be exercised only at expiration. A writer of an HBR put cannot be assigned early, however deep in the money it goes. That removes the two early-assignment problems of [Exercise, assignment and expiration](#core-07): there is no [[dividend risk]] on short calls, and no early exercise of deep in-the-money puts. You know, on the day you open a short index option, that the only settlement date is expiration.

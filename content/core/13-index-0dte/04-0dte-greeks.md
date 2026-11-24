@@ -74,6 +74,12 @@ Its "theta per day" at the open is {{ num(a0.theta) }} points, more than the who
 
 The decay accelerates as the close approaches, because theta for an at-the-money option grows like \( 1/\sqrt{T} \). For a buyer, every hour without a move costs more than the hour before. For a seller, the last hours pay the most, in exchange for carrying the largest gamma.
 
+## Vega: small on the last day
+
+Vega scales with \( \sqrt{T} \), so it shrinks as expiration approaches, the opposite of gamma and theta. The at-the-money HBR call's vega is {{ num(a7.vega) }} points per volatility point with a week left, but only {{ num(a0.vega) }} on the last morning. A five-point jump in implied volatility would add about {{ num(5 * a0.vega) }} points to the same-day option, against the {{ num(up0.price - a0.price) }} points a 25-point index move adds.
+
+So a same-day option is mostly a bet on how far the index actually moves in the next few hours (realized volatility) against how much decay you pay for it. Implied volatility still matters, because it sets the price you pay or receive at entry, but once you hold the position, changes in it move your profit and loss far less than moves in the index do. That is very different from a 30-day option, whose value can swing on a change in implied volatility with the index standing still, as [Implied volatility](#core-06) showed.
+
 ## A caveat on the clock
 
 Counting the session's 6.5 hours as calendar time is one convention. Many desks instead measure options in *trading time*, treating each trading day as an equal share of the year's volatility (\( 1/252 \) of a year for a full session) because most price movement happens while markets are open. On that convention, the same call at the same {{ pct(iv0) }} volatility is worth {{ num(tradingT) }} points at the open instead of {{ num(a0.price) }}. Neither is "right"; what matters is that you compare implied volatilities measured the same way. Quoted 0DTE implied volatilities depend heavily on the time convention a platform uses, which is why the same option can show very different implied volatilities on two platforms.

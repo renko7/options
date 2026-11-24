@@ -1,0 +1,48 @@
+- term: Straddle
+  def: >-
+    A call and a put at the same strike and expiration, bought together (long straddle) or sold together (short straddle). An at-the-money straddle's price is the market's expected move; the long side profits from a larger move, the short side from a smaller one.
+  lesson: core-11-straddle
+- term: Strangle
+  def: >-
+    An out-of-the-money put and an out-of-the-money call in the same expiration, bought or sold together. Cheaper than a straddle to buy and less lucrative to sell, it needs a bigger move to matter.
+  lesson: core-11-strangle
+- term: Iron condor
+  aka: [condor]
+  def: >-
+    A bull put spread plus a bear call spread in the same expiration: a short strangle with long wings that cap the loss. Max profit is the credit; max loss is one spread's width minus the credit.
+  lesson: core-11-iron-condor
+- term: Iron butterfly
+  aka: [iron fly]
+  def: >-
+    A short at-the-money straddle plus a long out-of-the-money put and call as wings. It has the same payoff as a long butterfly on the same strikes, and collects a credit equal to the width minus that butterfly's debit.
+  lesson: core-11-butterflies
+- term: Butterfly spread
+  aka: [butterfly, long butterfly]
+  def: >-
+    Three equally spaced strikes in one expiration: long one option at each outer strike and short two at the middle. It costs a small debit and pays most if the stock finishes at the middle strike.
+  lesson: core-11-butterflies
+- term: Calendar spread
+  aka: [calendar, time spread, horizontal spread]
+  def: >-
+    A short near-term option and a long longer-dated option at the same strike. It earns time decay and gains from rising implied volatility, and pays most if the stock is at the strike when the near-term option expires.
+  lesson: core-11-calendars-and-diagonals
+- term: Diagonal spread
+  aka: [diagonal]
+  def: >-
+    A short near-term option and a long longer-dated option at a different strike: a calendar spread with a directional tilt.
+  lesson: core-11-calendars-and-diagonals
+- term: Wings
+  aka: [wing]
+  def: >-
+    The outer, long options of an iron condor or butterfly, which cap the loss of the short options in the middle.
+  lesson: core-11-iron-condor
+- term: Short premium
+  aka: [premium selling]
+  def: >-
+    A position that has sold more option value than it owns: positive theta, negative gamma and usually negative vega. It wins often and small, and loses less often but larger.
+  lesson: core-11-choosing-a-structure
+- term: Long premium
+  aka: [premium buying]
+  def: >-
+    A position that owns more option value than it has sold: positive gamma and usually positive vega, paid for with negative theta. It loses often and small, and wins less often but larger.
+  lesson: core-11-choosing-a-structure

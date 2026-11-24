@@ -60,7 +60,7 @@ steps:
         feedback: >-
           The collar guarantees you can sell at $95 or better, so the sale raises at least $47,500, and it costs nothing: the net is a {{ colNet < 0 ? usd(-colNet * sh) + ' credit' : usd(colNet * sh) + ' debit' }} on 500 shares. You give up gains above $105, but you were selling in January in any case. Your worst case is {{ usd(payoff.pnlAtExpiry(col, 50)) }} against today's value; the best is {{ usd(payoff.pnlAtExpiry(col, 130)) }}.
   - prompt: >-
-      You put on the collar. In early December ACME rallies on a well-received product launch. On Wednesday, December 9, the day before the ex-dividend date, it is still at $112. Your January 105 calls are worth about {{ usd(c2) }}: $7.00 of intrinsic value and {{ usd(tv2) }} of time value. A friend warns that your calls are about to be assigned for the dividend. What do you do?
+      You put on the collar. In early December ACME rallies on a well-received product launch. On Wednesday, December 9, the day before the ex-dividend date, it is at $112. Your January 105 calls are worth about {{ usd(c2) }}: $7.00 of intrinsic value and {{ usd(tv2) }} of time value. A friend warns that your calls are about to be assigned for the dividend. What do you do?
     choices:
       - text: >-
           Buy back the five calls at once to prevent assignment.

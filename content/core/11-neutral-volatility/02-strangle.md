@@ -66,6 +66,12 @@ The strangle costs less than half as much, so it loses less when nothing happens
 
 As a rule: a straddle fits a view that the stock will move a fair amount; a strangle fits a view that a large move is possible and you want to pay less for being wrong. Strangle buyers are buying a cheaper lottery ticket on a big move.
 
+## The long strangle before expiration
+
+Because both options start out of the money, the long strangle's value is all time value, and it is very sensitive to time and to implied volatility. Ten days in, with ACME unchanged, it shows {{ usd(payoff.pnlAt(lsg.legs, 100, 10, env)) }}, already a large share of its {{ usd(lsg.fill * 100) }} cost. A quick move helps far more than a slow one: a jump to $110 in ten days shows {{ usd(payoff.pnlAt(lsg.legs, 110, 10, env)) }}, and the same jump with implied volatility 5 points higher shows {{ usd(payoff.pnlAt(lsg.legs, 110, 10, { ...env, ivShift: 0.05 })) }}. If ACME drifts to $110 only on expiration day, the strangle makes {{ usd(payoff.pnlAtExpiry(lsg.legs, 110)) }}.
+
+So a strangle buyer is really betting on a fast move, ideally one that also lifts implied volatility, such as a takeover rumor or a market shock. Buying strangles before scheduled events has the same problem as buying straddles: the event is already in the price, and implied volatility falls once it has passed.
+
 ## The short strangle
 
 The short strangle is one of the most widely traded premium-selling structures. It gives the stock room to move before losing anything.
@@ -83,6 +89,10 @@ Position Greeks at entry: delta {{ signed(ssg.g.delta, 1) }} shares, gamma {{ si
 Compared with the [short straddle](#core-11-straddle), which brings in {{ usd(sstr.fill * 100) }}, the short strangle collects less but keeps its full credit across a $10 range instead of at a single price. The tail is the same shape: beyond the break-evens, it loses as fast as a naked option, because that is what each leg is.
 
 Before expiration, the short strangle earns its theta slowly and loses quickly on a move or a rise in implied volatility. Ten days in, with ACME unchanged, it shows {{ usd(payoff.pnlAt(ssg.legs, 100, 10, env)) }}. If ACME has jumped to $108 instead, it shows {{ usd(payoff.pnlAt(ssg.legs, 108, 10, env)) }}, and with implied volatility 5 points higher, {{ usd(payoff.pnlAt(ssg.legs, 108, 10, { ...env, ivShift: 0.05 })) }}.
+
+:::rule Margin for short strangles (as of 2026)
+Both legs of a short strangle are naked. As with the short straddle, the standard minimum is the naked requirement on the side with the larger requirement plus the premium of the other side, and it rises as the stock moves toward either strike. Short strangles need the highest options approval level at most brokers and a margin account; they are not allowed in IRAs.
+:::
 
 :::practice How premium sellers choose strangle strikes
 Professional premium sellers usually choose strikes by delta rather than by dollar distance. A common choice is roughly the 16-delta put and call, about one standard deviation away, or tighter (25 to 30 delta, like the 95/105 here) for more credit and less room. Wider strikes, such as the 90/110 strangle for {{ usd(ssg90.fill) }}, win more often and collect much less. They also size the position by its loss in a large move, not by its credit, and usually close or adjust it well before expiration. Management is covered in [Managing trades](#core-12).
