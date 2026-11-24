@@ -46,6 +46,14 @@ _Avoid_: Dictionary, index
 The made-up stock or index that all Worked Examples use, with fixed, hand-chosen prices, so no example depends on live market data.
 _Avoid_: Sample stock, demo ticker, real ticker
 
+**Fictional Index**:
+The made-up cash-settled index (the Harbor 100, HBR) used for index-option and dispersion examples. Its components are also fictional.
+_Avoid_: Sample index, using SPX for the numbers
+
+**Rule Note**:
+A dated statement ("as of 2026") of a regulatory, exchange or tax rule. Rule Notes are the only part of the Course that can go out of date.
+_Avoid_: Disclaimer, footnote
+
 **Worked Example**:
 A fixed, step-by-step calculation on the Fictional Underlying whose numbers never change.
 _Avoid_: Sample, demo, case study

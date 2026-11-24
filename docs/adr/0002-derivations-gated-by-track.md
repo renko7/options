@@ -1,0 +1,3 @@
+# Derivations are inline, but each one sits in the first Track the Learner has the math for
+
+The Course derives results in full and inline rather than in collapsible blocks. The Learner starts with stock-trading experience only, so the Core Track contains only Derivations that need algebra (payoffs, break-evens, put-call parity by no-arbitrage, spread bounds). Black-Scholes and other results that need calculus are stated and used in Core and derived in the Advanced Track after its Math Foundations Module. Putting Math Foundations at the start of Core was rejected because it would put stochastic calculus between the Learner and their first trade.
