@@ -69,7 +69,7 @@ Traders summarise the slope in a single number so they can track it over time an
 
 When the risk reversal becomes more negative, the market is paying up for downside protection; when it moves toward zero or turns positive, it is paying up for upside, as happens in a stock that is the subject of takeover rumours or a frenzy of call buying.
 
-## Index skew is steeper
+## Index skew is steeper in relative terms
 
 The Harbor 100 index, HBR, shows the same pattern, more strongly. Its December implied volatilities, 30 days out with HBR at 5,000:
 

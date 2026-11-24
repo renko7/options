@@ -136,7 +136,7 @@ Always trade options with limit orders: start near the mid and step toward the f
   explain: >-
     The stock's price is liquid and is what you actually care about; triggering on it avoids stops fired by a momentary wide option quote. A stop on the option's own price can trigger with the stock unchanged and then sells at market. A GTC market order would execute immediately, not on a condition.
 - q: >-
-    Three weeks ago you placed a GTC order to sell to close your ACME puts at $4.00. Since then ACME has reported earnings and the situation has changed. What should you do?
+    Three weeks ago you placed a GTC order to sell to close your ACME puts at $4.00. Since then ACME has announced an unexpected acquisition and the situation has changed. What should you do?
   choices:
     - >-
       Nothing; GTC orders cancel themselves after news

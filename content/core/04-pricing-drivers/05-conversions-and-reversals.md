@@ -79,6 +79,8 @@ You would pay {{ usd(convCost) }} for something worth {{ usd(fair, 3) }}, a loss
 The quotes are *consistent* with parity, and the cost of crossing three bid-ask spreads is several times larger than any small gap between them.
 :::
 
+One simplification sits under these numbers. The Course's chain prices ACME's dividend as a 2% continuous yield, and the fair value above uses the same yield, so within the Course's market the conversion is fairly priced and there is no free arbitrage. In a real market ACME's actual $0.50 dividend goes ex on December 10, inside the December expiration, and a desk would price the December conversion off that discrete dividend instead; [the Advanced Track](#advanced-02) shows how.
+
 Here is the conversion in the position builder. The expiration line is flat: whatever ACME does, you get the same result. The chart counts only the stock and the options, so the line sits at {{ usd(payoff.pnlAtExpiry(convLegs, 100)) }}. Add the dividends you collect and subtract the interest your money would have earned in Treasury bills, and you arrive at the loss of {{ usd(-convEdge * 100) }} worked out above.
 
 ```tool position-builder

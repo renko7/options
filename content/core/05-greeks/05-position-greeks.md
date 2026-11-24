@@ -31,7 +31,7 @@ For an option leg, the position Greek is
 with contracts positive for long legs and negative for short ones. For a stock leg, delta is the number of shares (positive long, negative short) and the other Greeks are zero.
 
 :::example A collar on ACME
-You own 300 ACME shares. To protect them, you have sold 3 December 105 calls at {{ usd(c105.bid) }} and bought 3 January 90 puts at {{ usd(p90.ask) }}: a [[collar]]. With ACME at $100:
+You own 300 ACME shares. To protect them, you have sold 3 December 105 calls at {{ usd(c105.bid) }} and bought 3 January 90 puts at {{ usd(p90.ask) }}: a [[collar]]. (The January options contain ACME's January 12 earnings report, so in a real market their implied volatility would carry an event premium; [Earnings and the volatility crush](#core-06-earnings-and-the-crush) explains it. The numbers here leave it out.) With ACME at $100:
 
 | Leg | Delta (shares) | Gamma (shares per $1) | Theta ($ per day) | Vega ($ per vol point) |
 |---|---|---|---|---|

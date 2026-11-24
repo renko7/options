@@ -5,7 +5,7 @@
 - term: SPX
   aka: [SPXW, S&P 500 index options]
   def: >-
-    Cboe's options on the S&P 500 Index: $100 times the index, European-style and cash-settled. Standard monthly SPX options are AM-settled; the SPXW series (weeklies, dailies and end-of-month) are PM-settled. Expirations exist every weekday.
+    Cboe's options on the S&P 500 Index: $100 times the index, European-style and cash-settled. Standard monthly SPX options are AM-settled; the SPXW series (weeklies, dailies and end-of-month) are PM-settled. Since November 2026 some non-monthly AM-settled series also trade, under the symbol SPXO. Expirations exist every weekday.
   lesson: core-13-spx-spy-xsp
 - term: SPY
   aka: [SPY options]

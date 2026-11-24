@@ -121,7 +121,7 @@ You own ACME, which closed at ${{ int(asp) }} yesterday, and consider writing on
 |---|---|---|---|
 {{ calls.map(qccRow).join('\n') }}
 
-The December monthly fails for a reason that catches many writers: 30 days is not *more than* 30 days. The January 95 call qualifies even though it is in the money, while the January 90 call is deep in the money. The longer March expiration allows one more strike, so the March 90 call qualifies where the January 90 does not. The December 2027 call has more than 12 months to run, so its strikes are counted down from {{ usd(adjAsp) }}, the $100 price adjusted by 1.08; its 110 strike is well above that benchmark.
+The December monthly fails for a reason that catches many writers: 30 days is not *more than* 30 days. The January 95 call qualifies even though it is in the money, while the January 90 call is deep in the money. The longer March expiration allows one more strike, so the March 90 call qualifies where the January 90 does not. The December 2027 call has more than 12 months to run, so its strikes are counted down from {{ usd(adjAsp) }}, the $100 price adjusted by 1.08: the second-highest strike below that is {{ usd(lqbLong(110), 0) }}, and the 110 strike is above it.
 :::
 
 Qualifying is not the end of it if the call is in the money.

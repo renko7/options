@@ -23,6 +23,8 @@ const be = payoff.breakevens(C)[0];
 
 This Scenario Exercise uses every input from the Module: the stock price, time, volatility, and the link between calls and puts.
 
+One simplification: the January options contain ACME's earnings report on January 12, so in a real market their implied volatility would carry an event premium above the 30% used here ([Earnings and the volatility crush](#core-06-earnings-and-the-crush) explains it).
+
 ```scenario
 setup: >-
   It is Wednesday, November 18. ACME is at $100 and its options trade at about 30% implied volatility. ACME holds an investor day on December 1, 13 days from now, and you expect the stock to rally on it. You are willing to risk about $1,000 and no more. The relevant asks are: December 100 call (30 days) {{ usd(dec100) }}, December 110 call {{ usd(dec110) }}, January 100 call (58 days) {{ usd(jan100) }}; the January 100 put is bid {{ usd(jan100p) }}.
