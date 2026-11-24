@@ -31,9 +31,10 @@ export const HBR = Object.freeze({
  */
 export function smileIV(u, K, T) {
   const x = Math.log(K / u.spot) / Math.sqrt(Math.max(T, 1 / 365) / 0.25);
-  const skew = u === HBR ? -0.55 : -0.35;
-  const curve = u === HBR ? 0.9 : 0.6;
-  const term = u === HBR ? 1 + 0.06 * Math.log(Math.max(T, 1 / 365) / 0.25) : 1;
+  const skew = u.symbol === 'HBR' ? -0.55 : -0.35;
+  const curve = u.symbol === 'HBR' ? 0.9 : 0.6;
+  // gentle upward-sloping term structure, anchored so the 30-day ATM vol equals u.iv
+  const term = 1 + (u.symbol === 'HBR' ? 0.06 : 0.04) * Math.log(Math.max(T, 1 / 365) / (30 / 365));
   return Math.max(0.05, u.iv * term * (1 + skew * x + curve * x * x));
 }
 

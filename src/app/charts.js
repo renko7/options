@@ -25,6 +25,7 @@ export function niceTicks(min, max, count = 5) {
 
 function interp(points, x) {
   if (!points.length) return NaN;
+  if (points.length > 1 && points[0][0] > points[points.length - 1][0]) points = [...points].reverse();
   if (x <= points[0][0]) return points[0][1];
   for (let i = 1; i < points.length; i++) {
     if (x <= points[i][0]) {
@@ -86,7 +87,7 @@ export function lineChart(container, opts) {
     el('rect', { x: m.l, y: m.t, width: pw, height: ph }, clip);
 
     const yt = niceTicks(ymin, ymax, Math.max(3, Math.round(ph / 55)));
-    const xt = niceTicks(o.x.min, o.x.max, Math.max(3, Math.round(pw / 90)));
+    const xt = niceTicks(Math.min(o.x.min, o.x.max), Math.max(o.x.min, o.x.max), Math.max(3, Math.round(pw / 90)));
     const g = el('g', { class: 'grid' }, svg);
     for (const t of yt) {
       el('line', { x1: m.l, x2: m.l + pw, y1: ys(t), y2: ys(t) }, g);
@@ -112,7 +113,7 @@ export function lineChart(container, opts) {
       el('path', { d, fill: 'var(--loss-wash)', 'clip-path': `url(#${fillId}l)` }, body);
     }
     for (const mk of o.markers || []) {
-      if (mk.x < o.x.min || mk.x > o.x.max) continue;
+      if (mk.x < Math.min(o.x.min, o.x.max) || mk.x > Math.max(o.x.min, o.x.max)) continue;
       el('line', { class: 'marker-line', x1: xs(mk.x), x2: xs(mk.x), y1: m.t, y2: m.t + ph }, svg);
       if (mk.label) {
         const right = xs(mk.x) > m.l + pw - 90;
@@ -128,7 +129,7 @@ export function lineChart(container, opts) {
       el('path', { class: 'line', d, stroke: s.color, 'stroke-dasharray': s.dash ? '6 5' : null, 'stroke-width': s.width || 2, opacity: s.opacity ?? 1 }, sg);
     }
     for (const d of o.dots || []) {
-      if (d.x < o.x.min || d.x > o.x.max) continue;
+      if (d.x < Math.min(o.x.min, o.x.max) || d.x > Math.max(o.x.min, o.x.max)) continue;
       el('circle', { class: 'dot', cx: xs(d.x), cy: ys(d.y), r: 5, fill: d.color || 'var(--ink)' }, svg);
       if (d.label) { const t = el('text', { class: 'marker-label', x: xs(d.x) + 8, y: ys(d.y) - 8 }, svg); t.textContent = d.label; }
     }

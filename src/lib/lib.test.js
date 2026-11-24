@@ -8,7 +8,7 @@ import * as sim from './sim.js';
 import * as varswap from './varswap.js';
 import * as surface from './surface.js';
 import * as fmt from './fmt.js';
-import { ACME, HBR, RATE, chain, occSymbol } from './market.js';
+import { ACME, HBR, RATE, chain, occSymbol, smileIV } from './market.js';
 
 const close = (a, b, tol, msg) => assert.ok(Math.abs(a - b) <= tol, `${msg ?? ''} expected ${b}, got ${a} (tol ${tol})`);
 
@@ -171,6 +171,12 @@ test('chain is deterministic, has sane quotes and obeys parity on theo values', 
   }
   assert.equal(a.rows.length, 13);
   assert.equal(chain(HBR, { dte: 7 }).rows[6].strike, 5000);
+});
+
+test('smile is anchored: 30-day ATM vol equals the documented vol', () => {
+  close(smileIV(ACME, 100, 30 / 365), 0.30, 1e-12);
+  close(smileIV(HBR, 5000, 30 / 365), 0.18, 1e-12);
+  assert.ok(smileIV(ACME, 100, 1) > smileIV(ACME, 100, 30 / 365));
 });
 
 test('OCC symbol', () => {
