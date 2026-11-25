@@ -51,3 +51,9 @@
   def: >-
     The distance between the strikes of a vertical spread. Max profit plus max loss always equals the width (times the multiplier).
   lesson: core-10-debit-spreads
+
+- term: Stock replacement
+  aka: [LEAPS stock replacement]
+  def: >-
+    Buying a deep in-the-money, long-dated call (usually a LEAPS) instead of 100 shares, to get most of the stock's upside for less capital. The price is the call's time value, which by put-call parity is roughly a put plus interest on the strike, less the dividends you give up.
+  lesson: core-10-leaps

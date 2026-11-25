@@ -9,7 +9,7 @@ core-06: [Implied volatility, Realized volatility, IV rank, IV percentile, Volat
 core-07: [American-style option, European-style option, Early exercise, Exercise by exception, Physical settlement, Cash settlement, Pin risk, Contract adjustment, Dividend risk, Ex-dividend date, Do-not-exercise instruction, Settlement value]
 core-08: [Options approval level, Margin account, Reg T margin, Buying power, Pattern day trader, Limit order, Market order, Stop order, Complex order, Legging, Fill, Slippage, Portfolio margin, Good-til-canceled order]
 core-09: [Covered call, Cash-secured put, The wheel, Protective put, Collar, Married put, Buy-write, Call away]
-core-10: [Vertical spread, Bull call spread, Bear put spread, Bull put spread, Bear call spread, Debit spread, Credit spread, Risk reversal, Ratio spread, Backspread, Spread width]
+core-10: [Stock replacement, Vertical spread, Bull call spread, Bear put spread, Bull put spread, Bear call spread, Debit spread, Credit spread, Risk reversal, Ratio spread, Backspread, Spread width]
 core-11: [Straddle, Strangle, Iron condor, Iron butterfly, Butterfly spread, Calendar spread, Diagonal spread, Wings, Short premium, Long premium]
 core-12: [Position sizing, Rolling, Adjustment, Profit target, Stop-loss, Earnings announcement, Probability of profit, Risk of ruin, Trading plan]
 core-13: [Index option, SPX, SPY, XSP, AM settlement, PM settlement, Special opening quotation, 0DTE, Notional value, Index multiplier]
